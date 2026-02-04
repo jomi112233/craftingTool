@@ -1,0 +1,48 @@
+{
+
+    "itemClass": "weapons/",
+    "mods": [
+        {
+            "id": "inc_attack_speed",
+            "suffix": true,
+            "name": "% increased Attack Speed",
+            "tags": ["Attack", "Speed"],
+            "tiers": [
+            { "tier": 8, "ivl": 11, "weight": 1000, "stats": { "attack_speed": { "min": 8,  "max": 10 } } },
+            { "tier": 6, "ilvl": 22, "weight": 1000, "stats": { "attack_speed": { "min": 11, "max": 13 } } },
+            { "tier": 5, "ilvl": 30, "weight": 1000, "stats": { "attack_speed": { "min": 14, "max": 16 } } },
+            { "tier": 4, "ilvl": 37, "weight": 500,  "stats": { "attack_speed": { "min": 17, "max": 19 } } },
+            { "tier": 3, "ilvl": 45, "weight": 500,  "stats": { "attack_speed": { "min": 20, "max": 22 } } },
+            { "tier": 2, "ilvl": 60, "weight": 200,  "stats": { "attack_speed": { "min": 2,"max": 25 } } },
+            { "tier": 1, "ilvl": 77, "weight": 100,  "stats": { "attack_speed": { "min": 26, "max": 28 } } }
+            ]
+        },
+
+        {
+            "id": "light_radius_accuracy",
+            "suffix": true,
+            "name": "% increased Light Radius, +# Accuracy Rating",
+            "tags": ["Attack"],
+            "tiers": [
+            { "tier": 3, "ilvl": 8,  "weight": 1000, "stas": { "light_radius": { "min": 5,  "max": 7  }, "accuracy": { "min": 10, "max": 20 } } },
+            { "tier": 2, "ilvl": 15, "weight": 1000, "stats": { "light_radius": { "min": 10, "max": 10 }, "accuracy": { "min": 21, "max": 40 } } },
+            { "tier": 1, "ilvl": 30, "weight": 1000, "stats": { "light_radius": { "min": 15, "max": 15 }, "accuracy": { "min": 41, "max": 60 } } }
+            ]
+        },
+
+        {
+            "id": "inc_stun_duration",
+            "suffix": true,
+            "name": "% increased Stun Duration",
+            "tags": [""],
+            "tiers": [
+            { "tier": 6, "ilvl": 5,  "weight": 1000, "stats": { "stun_duration": { "min": 11, "max": 13 } } },
+            { "tier": 5, "ilvl": 18, "weight": 1000, "stats": { "st_duration": { "min": 14, "max": 16 } } },
+            { "tier": 4, "ilvl": 30, "weight": 1000, "stats": { "stun_duration": { "min": 17, "max": 19 } } },
+            { "tier": 3, "ilvl": 44, "weight": 1000, "stats": { "stun_duration": { "min": 20, "max": 22 } } },
+            { "tier": 2, "ilvl": 58, "weight": 1000, "stats": { "stun_duration": { "min":23, "max": 26 } } },
+            { "tier": 1, "ilvl": 71, "weight": 1000, "stats": { "stun_duration": { "min": 27, "max": 30 } } }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+{
+    "itemClass": "weapons/warStaff",
+    "mods": [
+        {
+            "id": "inc_ele_dmg_attacks",
+            "prefix": true,
+            "name": "% increased Elemental Damage with Attacks",
+            "tags": ["Damage", "Elemental", "Attack"],
+            "tiers": [
+            { "tier": 6, "ilvl": 4,  "weight": 500, "stats": { "ele_inc": { "min": 34,  "max": 47  } } },
+            { "tier": 5, "ilvl": 16, "weight": 500, "stats": { "ele_inc": { "min": 48,  "max": 71  } } },
+            { "tier": 4, "ilvl": 33, "weight": 500, "stats": { "ele_inc": { "min": 72,  "max": 85  } } },
+            { "tier": 3, "ilvl": 46, "weight": 500, "stats": { "ele_inc": { "min": 86,  "max": 99  } } },
+            { "tier": 2, "ilvl": 60, "weight": 500, "stats": { "ele_inc": { "min": 100, "max": 119 } } },
+            { "tier": 1, "ilvl": 81, "weight": 500, "stats": { "ele_inc": { "min": 120, "max": 139 } } }
+            ]
+        },
+
+        {
+            "id": "inc_phys_dmg",
+            "prefix": true,
+            "name": "% increased Physical Damage",
+            "tags": ["Damage", "Physical", "Attack"],
+            "tiers": [
+            { "tier": 8, "ilvl": 1,  "weight": 1000, "stats": { "phys_inc": { "min": 40,  "max": 49  } } },
+            { "tier": 7, "ilvl": 8,  "weight": 1000, "stats": { "phys_inc": { "min": 50,  "max": 64  } } },
+            { "tier": 6, "ilvl": 16, "weight": 1000, "stats": { "phys_inc": { "min": 65,  "max": 84  } } },
+            { "tier": 5, "ilvl": 33, "weight": 400,  "stats": { "phys_inc": { "min": 85,  "max": 109 } } },
+            { "tier": 4, "ilvl": 46, "weight": 200,  "stats": { "phys_inc": { "min": 110, "max": 134 } } },
+            { "tier": 3, "ilvl": 60, "weight": 100,  "stats": { "phys_inc": { "min": 135, "max": 154 } } },
+            { "tier": 2, "ilvl": 75, "weight": 50,   "stats": { "phys_inc": { "min": 155, "max": 169 } } },
+            { "tier": 1, "ilvl": 82, "weight": 25,   "stats": { "phys_inc": { "min": 170, "max": 179 } } }
+            ]
+        },
+
+        {
+            "id": "inc_phys_acc",
+            "prefix": true,
+            "name": "% increased Physical Damage, +# to Accuracy Rating",
+            "tags": ["Damage", "Physical", "Attack"],
+            "tiers": [
+            { "tier": 8, "ilvl": 1,  "weight": 1000, "stats": { "phys_inc": { "min": 15, "max": 19 }, "accuracy": { "min": 16, "max": 20 } } },
+            { "tier": 7, "ilvl": 11, "weight": 1000, "stats": { "phys_inc": { "min": 20, "max": 24 }, "accuracy": { "min": 21, "max": 46 } } },
+            { "tier": 6, "ilvl": 23, "weight": 1000, "stats": { "phys_inc": { "min": 25, "max": 34 }, "accuracy": { "min": 47, "max": 72 } } },
+            { "tier": 5, "ilvl": 38, "weight": 1000, "stats": { "phys_inc": { "min": 35, "max": 44 }, "accuracy": { "min": 73, "max": 97 } } },
+            { "tier": 4, "ilvl": 54, "weight": 600,  "stats": { "phys_inc": { "min": 45, "max": 54 }, "accuracy": { "min": 98, "max": 123 } } },
+            { "tier": 3, "ilvl": 65, "weight": 400,  "stats": { "phys_inc": { "min": 55, "max": 64 }, "accuracy": { "min": 124, "max": 149 } } },
+            { "tier": 2, "ilvl": 70, "weight": 200,  "stats": { "phys_inc": { "min": 65, "max": 74 }, "accuracy": { "min": 150, "max": 174 } } },
+            { "tier": 1, "ilvl": 81, "weight": 100,  "stats": { "phys_inc": { "min": 75, "max": 79 }, "accuracy": { "min": 175, "max": 200 } } }
+            ]
+        }
+    ]
+}

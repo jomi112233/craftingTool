@@ -1,0 +1,151 @@
+{
+    "itemClass": "weapons/warStaff",
+    "mods": [
+    {
+        "id": "inc_ele_dmg_attacks",
+        "prefix": true,
+        "name": "% increased Elemental Damage with Attacks",
+        "tags": ["Damage", "Elemental", "Attack"],
+        "tiers": [
+        { "tier": 6, "ilvl": 4,  "weight": 500, "stats": { "ele_inc": { "min": 34,  "max": 47  } } },
+        { "tier": 5, "ilvl": 16, "weight": 500, "stats": { "ele_inc": { "min": 48,  "max": 71  } } },
+        { "tier": 4, "ilvl": 33, "weight": 500, "stats": { "ele_inc": { "min": 72,  "max": 85  } } },
+        { "tier": 3, "ilvl": 46, "weight": 500, "stats": { "ele_inc": { "min": 86,  "max": 99  } } },
+        { "tier": 2, "ilvl": 60, "weight": 500, "stats": { "ele_inc": { "min": 100, "max": 119 } } },
+        { "tier": 1, "ilvl": 81, "weight": 500, "stats": { "ele_inc": { "min": 120, "max": 139 } } }
+        ]
+    },
+
+    {
+        "id": "inc_phys_dmg",
+        "prefix": true,
+        "name": "% increased Physical Damage",
+        "tags": ["Damage", "Physical", "Attack"],
+        "tiers": [
+        { "tier": 8, "ilvl": 1,  "weight": 1000, "stats": { "phys_inc": { "min": 40,  "max": 49  } } },
+        { "tier": 7, "ilvl": 8,  "weight": 1000, "stats": { "phys_inc": { "min": 50,  "max": 64  } } },
+        { "tier": 6, "ilvl": 16, "weight": 1000, "stats": { "phys_inc": { "min": 65,  "max": 84  } } },
+        { "tier": 5, "ilvl": 33, "weight": 400,  "stats": { "phys_inc": { "min": 85,  "max": 109 } } },
+        { "tier": 4, "ilvl": 46, "weight": 200,  "stats": { "phys_inc": { "min": 110, "max": 134 } } },
+        { "tier": 3, "ilvl": 60, "weight": 100,  "stats": { "phys_inc": { "min": 135, "max": 154 } } },
+        { "tier": 2, "ilvl": 75, "weight": 50,   "stats": { "phys_inc": { "min": 155, "max": 169 } } },
+        { "tier": 1, "ilvl": 82, "weight": 25,   "stats": { "phys_inc": { "min": 170, "max": 179 } } }
+        ]
+    },
+
+    {
+        "id": "inc_phys_acc",
+        "prefix": true,
+        "name": "% increased Physical Damage, +# to Accuracy Rating",
+        "tags": ["Damage", "Physical", "Attack"],
+        "tiers": [
+        { "tier": 8, "ilvl": 1,  "weight": 1000, "stats": { "phys_inc": { "min": 15, "max": 19 }, "accuracy": { "min": 16, "max": 20 } } },
+        { "tier": 7, "ilvl": 11, "weight": 1000, "stats": { "phys_inc": { "min": 20, "max": 24 }, "accuracy": { "min": 21, "max": 46 } } },
+        { "tier": 6, "ilvl": 23, "weight": 1000, "stats": { "phys_inc": { "min": 25, "max": 34 }, "accuracy": { "min": 47, "max": 72 } } },
+        { "tier": 5, "ilvl": 38, "weight": 1000, "stats": { "phys_inc": { "min": 35, "max": 44 }, "accuracy": { "min": 73, "max": 97 } } },
+        { "tier": 4, "ilvl": 54, "weight": 600,  "stats": { "phys_inc": { "min": 45, "max": 54 }, "accuracy": { "min": 98, "max": 123 } } },
+        { "tier": 3, "ilvl": 65, "weight": 400,  "stats": { "phys_inc": { "min": 55, "max": 64 }, "accuracy": { "min": 124, "max": 149 } } },
+        { "tier": 2, "ilvl": 70, "weight": 200,  "stats": { "phys_inc": { "min": 65, "max": 74 }, "accuracy": { "min": 150, "max": 174 } } },
+        { "tier": 1, "ilvl": 81, "weight": 100,  "stats": { "phys_inc": { "min": 75, "max": 79 }, "accuracy": { "min": 175, "max": 200 } } }
+        ]
+    },
+
+    {
+        "id": "flat_accuracy",
+        "prefix": true,
+        "name": "+# to Accuracy Rating",
+        "tags": ["Attack"],
+        "tiers": [
+        { "tier": 9, "ilvl": 1,  "weight": 800, "stats": { "accuracy": { "min": 11,  "max": 32  } } },
+        { "tier": 8, "ilvl": 11, "weight": 800, "stats": { "accuracy": { "min": 33,  "max": 60  } } },
+        { "tier": 7, "ilvl": 18, "weight": 800, "stats": { "accuracy": { "min": 61,  "max": 84  } } },
+        { "tier": 6, "ilvl": 26, "weight": 800, "stats": { "accuracy": { "min": 85,  "max": 123 } } },
+        { "tier": 5, "ilvl": 36, "weight": 800, "stats": { "accuracy": { "min": 124, "max": 167 } } },
+        { "tier": 4, "ilvl": 48, "weight": 600, "stats": { "accuracy": { "min": 168, "max": 236 } } },
+        { "tier": 3, "ilvl": 58, "weight": 600, "stats": { "accuracy": { "min": 237, "max": 346 } } },
+        { "tier": 2, "ilvl": 67, "weight": 300, "stats": { "accuracy": { "min": 347, "max": 450 } } },
+        { "tier": 1, "ilvl": 76, "weight": 200, "stats": { "accuracy": { "min": 451, "max": 550 } } }
+        ]
+    },
+
+    {
+        "id": "flat_cold_damage",
+        "prefix": true,
+        "name": "Adds # to # Cold Damage",
+        "tags": ["Damage", "Elemental", "Cold", "Attack"],
+        "tiers": [
+        { "tier": 10, "ilvl": 1,  "weight": 900, "stats": { "cold_min": { "min": 2,  "max": 3  }, "cold_max": { "min": 4,  "max": 6  } } },
+        { "tier": 9,  "ilvl": 8,  "weight": 900, "stats": { "cold_min": { "min": 5,  "max": 8  }, "cold_max": { "min": 9,  "max": 14 } } },
+        { "tier": 8,  "ilvl": 16, "weight": 900, "stats": { "cold_min": { "min": 10, "max": 14 }, "cold_max": { "min": 15, "max": 23 } } },
+        { "tier": 7,  "ilvl": 33, "weight": 900, "stats": { "cold_min": { "min": 16, "max": 23 }, "cold_max": { "min": 25, "max": 35 } } },
+        { "tier": 6,  "ilvl": 46, "weight": 900, "stats": { "cold_min": { "min": 25, "max": 30 }, "cold_max": { "min": 38, "max": 46 } } },
+        { "tier": 5,  "ilvl": 54, "weight": 900, "stats": { "cold_min": { "min": 32, "max": 43 }, "cold_max": { "min": 49, "max": 66 } } },
+        { "tier": 4,  "ilvl": 60, "weight": 540, "stats": { "cold_min": { "min": 46, "max": 57 }, "cold_max": { "min": 70, "max": 88 } } },
+        { "tier": 3,  "ilvl": 65, "weight": 360, "stats": { "cold_min": { "min": 60, "max": 80 }, "cold_max": { "min": 92, "max": 121 } } },
+        { "tier": 2,  "ilvl": 75, "weight": 225, "stats": { "cold_min": { "min": 84, "max": 107 }, "cold_max": { "min": 126, "max": 161 } } },
+        { "tier": 1,  "ilvl": 81, "weight": 90,  "stats": { "cold_min": { "min": 112, "max": 124 }, "cold_max": { "min": 168, "max": 189 } } }
+        ]
+    },
+
+    {
+        "id": "flat_fire_damage",
+        "prefix": true,
+        "name": "Adds # to # Fire Damage",
+        "tags": ["Damage", "Elemental", "Fire", "Attack"],
+        "tiers": [
+        { "tier": 10, "ilvl": 1,  "weight": 800, "stats": { "fire_min": { "min": 2,  "max": 4  }, "fire_max": { "min": 5,  "max": 7  } } },
+        { "tier": 9,  "ilvl": 8,  "weight": 800, "stats": { "fire_min": { "min": 6,  "max": 9  }, "fire_max": { "min": 10, "max": 16 } } },
+        { "tier": 8,  "ilvl": 16, "weight": 800, "stats": { "fire_min": { "min": 11, "max": 17 }, "fire_max": { "min": 19, "max": 28 } } },
+        { "tier": 7,  "ilvl": 33, "weight": 800, "stats": { "fire_min": { "min": 19, "max": 27 }, "fire_max": { "min": 30, "max": 42 } } },
+        { "tier": 6,  "ilvl": 46, "weight": 800, "stats": { "fire_min": { "min": 30, "max": 37 }, "fire_max": { "min": 45, "max": 56 } } },
+        { "tier": 5,  "ilvl": 54, "weight": 800, "stats": { "fire_min": { "min": 39, "max": 53 }, "fire_max": { "min": 59, "max": 80 } } },
+        { "tier": 4,  "ilvl": 60, "weight": 480, "stats": { "fire_min": { "min": 56, "max": 70 }, "fire_max": { "min": 84, "max": 107 } } },
+        { "tier": 3,  "ilvl": 65, "weight": 320, "stats": { "fire_min": { "min": 73, "max": 97 }, "fire_max": { "min": 112, "max": 149 } } },
+        { "tier": 2,  "ilvl": 75, "weight": 200, "stats": { "fire_min": { "min": 102, "max": 130 }, "fire_max": { "min": 155, "max": 198 } } },
+        { "tier": 1,  "ilvl": 81, "weight": 80,  "stats": { "fire_min": { "min": 135, "max": 156 }, "fire_max": { "min": 205, "max": 236 } } }
+        ]
+    },
+
+    {
+        "id": "flat_lightning_damage",
+        "prefix": true,
+        "name": "Adds # to # Lightning Damage",
+        "tags": ["Damage", "Elemental", "Lightning", "Attack"],
+        "tiers": [
+        { "tier": 10, "ilvl": 1,  "weight": 1100, "stats": { "light_min": { "min": 1, "max": 1 }, "light_max": { "min": 7,  "max": 10 } } },
+        { "tier": 9,  "ilvl": 8,  "weight": 1100, "stats": { "light_min": { "min": 1, "max": 2 }, "light_max": { "min": 19, "max": 27 } } },
+        { "tier": 8,  "ilvl": 16, "weight": 1100, "stats": { "light_min": { "min": 1, "max": 3 }, "light_max": { "min": 31, "max": 43 } } },
+        { "tier": 7,  "ilvl": 33, "weight": 1100, "stats": { "light_min": { "min": 1, "max": 4 }, "light_max": { "min": 53, "max": 76 } } },
+        { "tier": 6,  "ilvl": 46, "weight": 1100, "stats": { "light_min": { "min": 1, "max": 4 }, "light_max": { "min": 80, "max": 88 } } },
+        { "tier": 5,  "ilvl": 54, "weight": 1100, "stats": { "light_min": { "min": 1, "max": 6 }, "light_max": { "min": 93, "max": 122 } } },
+        { "tier": 4,  "ilvl": 60, "weight": 660,  "stats": { "light_min": { "min": 1, "max": 8 }, "light_max": { "min": 128, "max": 162 } } },
+        { "tier": 3,  "ilvl": 65, "weight": 440,  "stats": { "light_min": { "min": 1, "max": 13 }, "light_max": { "min": 168, "max": 231 } } },
+        { "tier": 2,  "ilvl": 75, "weight": 275,  "stats": { "light_min": { "min": 1, "max": 16 }, "light_max": { "min": 239, "max": 300 } } },
+        { "tier": 1,  "ilvl": 81, "weight": 110,  "stats": { "light_min": { "min": 1, "max": 19 }, "light_max": { "min": 310, "max": 358 } } }
+        ]
+    },
+
+    {
+        "id": "flat_phys_damage",
+        "prefix": true,
+        "name": "Adds # to # Physical Damage",
+        "tags": ["Damage", "Physical", "Attack"],
+        "tiers": [
+        { "tier": 9, "ilvl": 1,  "weight": 1000, "stats": { "phys_min": { "min": 2,  "max": 3  }, "phys_max": { "min": 5,  "max": 7  } } },
+        { "tier": 8, "ilvl": 8,  "weight": 1000, "stats": { "phys_min": { "min": 5,  "max": 8  }, "phys_max": { "min": 10, "max": 15 } } },
+        { "tier": 7, "ilvl": 16, "weight": 1000, "stats": { "phys_min": { "min": 8,  "max": 12 }, "phys_max": { "min": 15, "max": 22 } } },
+        { "tier": 6, "ilvl": 33, "weight": 1000, "stats": { "phys_min": { "min": 11, "max": 17 }, "phys_max": { "min": 20, "max": 30 } } },
+        { "tier": 5, "ilvl": 46, "weight": 1000, "stats": { "phys_min": { "min": 14, "max": 21 }, "phys_max": { "min": 25, "max": 37 } } },
+        { "tier": 4, "ilvl": 54, "weight": 600,  "stats": { "phys_min": { "min": 19, "max": 29 }, "phys_max": { "min": 33, "max": 49 } } },
+        { "tier": 3, "ilvl": 60, "weight": 400,  "stats": { "phys_min": { "min": 23, "max": 35 }, "phys_max": { "min": 39, "max": 59 } } },
+        { "tier": 2, "ilvl": 65, "weight": 200,  "stats": { "phys_min": { "min": 29, "max": 44 }, "phys_max": { "min": 50, "max": 75 } } },
+        { "tier": 1, "ilvl": 75, "weight": 100,  "stats": { "phys_min": { "min": 37, "max": 55 }, "phys_max": { "min": 63, "max": 94 } } }
+        ]
+    }
+]
+
+
+}
+
+
+
