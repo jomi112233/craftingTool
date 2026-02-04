@@ -25,4 +25,5 @@ jobs:
 
       - name: Run JUnit tests
         run: mvn --batch-mode --no-transfer-progress test
+        working-directory: craftingTool/craftingTool/craftingtool
 
