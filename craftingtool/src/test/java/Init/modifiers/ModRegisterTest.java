@@ -2,7 +2,9 @@ package Init.modifiers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -15,16 +17,26 @@ public class ModRegisterTest {
 
     @Test
     void registerIndexesCorrectly() {
-        List<ModFile> modFiles = ModLoader.loadAll("modifiers/");
+        Path testPath = Path.of("src/test/resources/modifiers");
+        List<ModFile> modFiles = ModLoader.loadAll(testPath);
 
-        ModRegistry.ModRegistrySummary register = ModRegistry.registerAll(modFiles);
-                            //12
-        assertEquals(8, register.modCount());
-        assertEquals(2, register.itemClassCount());
+        ModRegistry.ModRegistrySummary summary = ModRegistry.registerAll(modFiles);
 
-        assertNotNull(ModRegistry.getById("inc_ele_dmg_attacks"));
+        assertEquals(8, summary.modCount());
+        assertEquals(2, summary.itemClassCount());
+
+
+        assertTrue(ModRegistry.getItemByClass("weapons/warStaff") != null);
+        assertTrue(ModRegistry.getItemByClass("weapons/talisman") != null);
+
+
         assertEquals(6, ModRegistry.getItemByClass("weapons/warStaff").size());
         assertEquals(6, ModRegistry.getItemByClass("weapons/talisman").size());
+        
+
+        assertNotNull(ModRegistry.getById("inc_ele_dmg_attacks"));
+        assertNotNull(ModRegistry.getById("inc_phys_dmg"));
     }
-    
+
+
 }

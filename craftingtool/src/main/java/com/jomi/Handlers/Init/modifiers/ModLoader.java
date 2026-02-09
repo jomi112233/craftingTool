@@ -1,24 +1,20 @@
 package com.jomi.Handlers.Init.modifiers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class ModLoader {
+
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public static List<ModFile> loadAll(String folder) {
-    List<ModFile> result = new ArrayList<>();
+    public static List<ModFile> loadAll(Path folder) {
+        List<ModFile> result = new ArrayList<>();
 
-    try {
-        var uri = ModLoader.class.getClassLoader().getResource(folder).toURI();
-        Path path = Paths.get(uri);
-
-        try (var stream = Files.walk(path)) {
+        try (var stream = Files.walk(folder)) {
             stream
                 .filter(Files::isRegularFile)
                 .filter(p -> p.toString().endsWith(".json"))
@@ -30,13 +26,10 @@ public class ModLoader {
                         System.err.println("Failed to parse " + p + ": " + e.getMessage());
                     }
                 });
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load folder: " + folder, e);
         }
 
-    } catch (Exception e) {
-        throw new RuntimeException("Failed to load resources folder: " + folder, e);
+        return result;
     }
-
-    return result;
-}
-
 }

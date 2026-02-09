@@ -1,5 +1,6 @@
 package com.jomi.Handlers.Init;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,6 @@ import com.jomi.Handlers.Init.modifiers.ModFile;
 import com.jomi.Handlers.Init.modifiers.ModLoader;
 import com.jomi.Handlers.registry.ModRegistry;
 import com.jomi.Handlers.registry.OrbRegistry;
-import com.jomi.Handlers.registry.ModRegistry.ModRegistrySummary;
 
 public class ProgramLoader {
 
@@ -17,8 +17,9 @@ public class ProgramLoader {
         long start = System.nanoTime();
 
         
-        List<ModFile> modFiles = ModLoader.loadAll("modifiers/");
-        ModRegistrySummary register = ModRegistry.registerAll(modFiles);
+        List<ModFile> modFiles = ModLoader.loadAll(Path.of("resources/modifiers"));
+        ModRegistry.registerAll(modFiles);
+
 
 
         OrbFile orbFile = OrbLoader.load("craftingMaterial/basicCurrency/basicOrbs.json");
@@ -33,11 +34,6 @@ public class ProgramLoader {
 
 
 
-
-
-        System.out.println("Registered " + register.itemClassCount() + " items");
-
-        System.out.println("_________________________________");
 
 
         Map<String, Integer> counts = ModRegistry.getModCountPerItemClass();
