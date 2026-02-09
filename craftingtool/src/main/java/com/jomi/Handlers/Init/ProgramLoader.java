@@ -1,15 +1,15 @@
 package com.jomi.Handlers.Init;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import com.jomi.Handlers.Init.basicCurrency.OrbFile;
+
 import com.jomi.Handlers.Init.basicCurrency.OrbLoader;
 import com.jomi.Handlers.Init.modifiers.ModFile;
 import com.jomi.Handlers.Init.modifiers.ModLoader;
 import com.jomi.Handlers.registry.ModRegistry;
-import com.jomi.Handlers.registry.OrbRegistry;
 
 public class ProgramLoader {
 
@@ -22,8 +22,9 @@ public class ProgramLoader {
 
 
 
-        OrbFile orbFile = OrbLoader.loadFromResources("data/craftingMaterial/basicOrbs.json");
-        OrbRegistry.registerAll(orbFile);
+        Path orbPath = Paths.get("data/craftingMaterial/basicOrbs.json");
+        OrbLoader.loadFromFile(orbPath);
+
 
 
         long end = System.nanoTime();

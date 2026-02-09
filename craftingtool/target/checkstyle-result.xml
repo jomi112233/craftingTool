@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="9.3">
-<file name="C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\basicCurrency\OrbLoader.java">
+<file name="C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\ModRegistry.java">
+</file>
+<file name="C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Main.java">
 </file>
 </checkstyle>
