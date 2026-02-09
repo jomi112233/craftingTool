@@ -1,5 +1,5 @@
 {
-    "itemClass": "warStaff",
+    "itemClass": "weapons/warStaff",
     "mods": [
         {
             "id": "inc_ele_dmg_attacks",
@@ -8,7 +8,7 @@
             "tags": ["Damage", "Elemental", "Attack"],
             "tiers": [
             { "tier": 6, "ilvl": 4,  "weight": 500, "stats": { "ele_inc": { "min": 34,  "max": 47  } } },
-            
+            { "tier": 5, "ilvl": 16, "weight": 500, "stats": { "ele_inc": { "min": 48,  "max": 71  } } },
             { "tier": 4, "ilvl": 33, "weight": 500, "stats": { "ele_inc": { "min": 72,  "max": 85  } } },
             { "tier": 3, "ilvl": 46, "weight": 500, "stats": { "ele_inc": { "min": 86,  "max": 99  } } },
             { "tier": 2, "ilvl": 60, "weight": 500, "stats": { "ele_inc": { "min": 100, "max": 119 } } },
@@ -29,7 +29,7 @@
             { "tier": 4, "ilvl": 46, "weight": 200,  "stats": { "phys_inc": { "min": 110, "max": 134 } } },
             { "tier": 3, "ilvl": 60, "weight": 100,  "stats": { "phys_inc": { "min": 135, "max": 154 } } },
             { "tier": 2, "ilvl": 75, "weight": 50,   "stats": { "phys_inc": { "min": 155, "max": 169 } } },
-            { "tier": 1, "ilvl": 82, "weight": "e",   "stats": { "phys_inc": { "min": 170, "max": 179 } } }
+            { "tier": 1, "ilvl": 82, "weight": 25,   "stats": { "phys_inc": { "min": 170, "max": 179 } } }
             ]
         },
 

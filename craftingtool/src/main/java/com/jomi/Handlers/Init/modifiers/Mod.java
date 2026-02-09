@@ -9,7 +9,5 @@ public class Mod {
     public String name;
     public String[] tags;
     public List<ModTier> tiers;
-
-    public String itemClass;
 }
 

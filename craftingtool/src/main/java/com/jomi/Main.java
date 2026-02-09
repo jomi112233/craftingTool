@@ -7,6 +7,5 @@ public class Main {
         ProgramLoader programLoader = new ProgramLoader();
         programLoader.start();
 
-        
     }
 }

@@ -1,48 +1,42 @@
 package com.jomi.Handlers.Init.modifiers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModLoader {
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+public class ModLoader {
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public static List<Mod> loadDirectory(String rootPath) {
-        List<Mod> allMods = new ArrayList<>();
-        File root = new File(rootPath);
+    public static List<ModFile> loadAll(String folder) {
+    List<ModFile> result = new ArrayList<>();
 
-        walk(root, allMods);
+    try {
+        var uri = ModLoader.class.getClassLoader().getResource(folder).toURI();
+        Path path = Paths.get(uri);
 
-        return allMods;
-    }
-
-    private static void walk(File file, List<Mod> allMods) {
-        if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
-                walk(f, allMods);
-            }
-            return;
+        try (var stream = Files.walk(path)) {
+            stream
+                .filter(Files::isRegularFile)
+                .filter(p -> p.toString().endsWith(".json"))
+                .forEach(p -> {
+                    try {
+                        ModFile mf = mapper.readValue(p.toFile(), ModFile.class);
+                        result.add(mf);
+                    } catch (Exception e) {
+                        System.err.println("Failed to parse " + p + ": " + e.getMessage());
+                    }
+                });
         }
 
-        String name = file.getName().toLowerCase();
-        if (!name.equals("prefix.json") && !name.equals("suffix.json"))
-            return;
-
-        try {
-            // Load wrapper object
-            ModFile wrapper = mapper.readValue(file, ModFile.class);
-
-            for (Mod m : wrapper.mods) {
-                m.itemClass = wrapper.itemClass;
-                allMods.add(m);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load: " + file.getAbsolutePath(), e);
-        }
+    } catch (Exception e) {
+        throw new RuntimeException("Failed to load resources folder: " + folder, e);
     }
+
+    return result;
+}
 
 }
