@@ -20,6 +20,6 @@ public class ModLoadertest {
         List<ModFile> modFiles = ModLoader.loadAll(testPath);
 
         assertFalse(modFiles.isEmpty());
-        assertEquals("weapons/talisman", modFiles.get(0).itemClass);
+        assertEquals("weapons/talisman", modFiles.get(0).itemClass());
     }
 }

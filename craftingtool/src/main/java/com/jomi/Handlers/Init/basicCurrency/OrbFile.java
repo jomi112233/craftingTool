@@ -2,7 +2,7 @@ package com.jomi.Handlers.Init.basicCurrency;
 
 import java.util.List;
 
-public class OrbFile {
-    public String currencyType;
-    public List<Orb> orbs;
-}
+public record OrbFile(String currencyType, List<Orb> orbs) {
+    public OrbFile { orbs = List.copyOf(orbs); }
+} 
+

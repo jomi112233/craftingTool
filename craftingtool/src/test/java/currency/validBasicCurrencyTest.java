@@ -18,37 +18,37 @@ public class validBasicCurrencyTest {
     @Test
     void loadAllbasicCurrency(){
         assertNotNull(file);
-        assertEquals("basic", file.currencyType);
-        assertNotNull(file.orbs);
-        assertFalse(file.orbs.isEmpty());
-        assertEquals(6, file.orbs.size());
+        assertEquals("basic", file.currencyType());
+        assertNotNull(file.orbs());
+        assertFalse(file.orbs().isEmpty());
+        assertEquals(6, file.orbs().size());
     }
 
     @Test
     void orbFieldtest(){
-        Orb exalt = file.orbs.stream().filter(o -> o.id.equals("exalted_orb")).findFirst().orElse(null);
+        Orb exalt = file.orbs().stream().filter(o -> o.id().equals("exalted_orb")).findFirst().orElse(null);
 
         assertNotNull(exalt);
-        assertEquals("exalted orb", exalt.name);
-        assertEquals("rare", exalt.minRarity); 
-        assertEquals("rare", exalt.newRarity); 
-        assertEquals(0, exalt.removeModifierCount); 
-        assertEquals(1, exalt.addedModifierCount); 
-        assertEquals("any", exalt.target);
+        assertEquals("exalted orb", exalt.name());
+        assertEquals("rare", exalt.minRarity()); 
+        assertEquals("rare", exalt.newRarity()); 
+        assertEquals(0, exalt.removeModifierCount()); 
+        assertEquals(1, exalt.addedModifierCount()); 
+        assertEquals("any", exalt.target());
     }
 
 
     @Test
     void testAllOrbsHaveValidFields() {
-        for (Orb orb : file.orbs) {
-            assertNotNull(orb.id);
-            assertNotNull(orb.name);
-            assertNotNull(orb.minRarity);
-            assertNotNull(orb.newRarity);
-            assertNotNull(orb.target);
+        for (Orb orb : file.orbs()) {
+            assertNotNull(orb.id());
+            assertNotNull(orb.name());
+            assertNotNull(orb.minRarity());
+            assertNotNull(orb.newRarity());
+            assertNotNull(orb.target());
 
-            assertTrue(orb.removeModifierCount >= 0);
-            assertTrue(orb.addedModifierCount >= 0);
+            assertTrue(orb.removeModifierCount() >= 0);
+            assertTrue(orb.addedModifierCount() >= 0);
         }
     }
 

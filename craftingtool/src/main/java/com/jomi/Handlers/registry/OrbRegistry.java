@@ -10,8 +10,8 @@ public class OrbRegistry {
     private static final Map<String, Orb> ORBS = new HashMap<>();
 
     public static void registerAll(OrbFile file) {
-        for (Orb orb : file.orbs) {
-            ORBS.put(orb.id, orb);
+        for (Orb orb : file.orbs()) {
+            ORBS.put(orb.id(), orb);
         }
     }
 

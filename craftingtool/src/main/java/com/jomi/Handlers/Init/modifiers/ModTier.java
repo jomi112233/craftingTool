@@ -2,10 +2,9 @@ package com.jomi.Handlers.Init.modifiers;
 
 import java.util.Map;
 
-public class ModTier {
-    public int tier;
-    public int ilvl;
-    public int weight;
-    public Map<String, StatRange> stats;
-}
-
+public record ModTier( 
+    int tier,
+    int ilvl,
+    int weight,
+    Map<String, StatRange> stats
+) { }

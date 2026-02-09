@@ -1,13 +1,13 @@
 package com.jomi.Handlers.Init.basicCurrency;
 
-public class Orb {
-    public String id;
-    public String name;
-    public String minRarity;
-    public String newRarity;
-    public int removeModifierCount;
-    public int addedModifierCount;
-    public String target;
+public record Orb(
+    String id,
+    String name,
+    String minRarity,
+    String newRarity,
+    int removeModifierCount,
+    int addedModifierCount,
+    String target,
 
-    public String currencyType;
-}
+    String currencyType
+) { }

@@ -19,12 +19,12 @@ public class ModRegistry {
 
     public static ModRegistrySummary registerAll(List<ModFile> files) {
         for (ModFile mf : files) {
-            for (Mod mod : mf.mods) {
+            for (Mod mod : mf.mods()) {
 
-                modsById.put(mod.id, mod);
+                modsById.put(mod.id(), mod);
 
                 modsByItemClass
-                    .computeIfAbsent(mf.itemClass, k -> new ArrayList<>())
+                    .computeIfAbsent(mf.itemClass(), k -> new ArrayList<>())
                     .add(mod);
             }
         }

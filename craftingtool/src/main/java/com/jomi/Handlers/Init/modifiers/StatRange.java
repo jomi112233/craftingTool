@@ -1,7 +1,7 @@
 package com.jomi.Handlers.Init.modifiers;
 
-public class StatRange {
-    public double min;
-    public double max;
-}
+public record StatRange (
+    double min,
+    double max
+) { }
 

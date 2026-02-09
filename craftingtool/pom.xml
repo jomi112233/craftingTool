@@ -22,11 +22,14 @@
                 <version>3.1.2</version>
             </plugin>
 
-            <!-- SpotBugs -->
             <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.3.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.21.2</version>
+                <configuration>
+                    <printFailingErrors>true</printFailingErrors>
+                    <failOnViolation>true</failOnViolation>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -36,7 +39,7 @@
                 </executions>
             </plugin>
 
-            <!-- Checkstyle -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -57,11 +60,16 @@
             </plugin>
 
 
-            <!-- PMD -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.21.2</version>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.8.3.0</version>
+                <configuration>
+                    <effort>max</effort>
+                    <threshold>low</threshold>
+                    <failOnError>false</failOnError>
+                    <excludeFilterFile>config/spotbugs/spotbugExclude.xml</excludeFilterFile>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -70,7 +78,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 
