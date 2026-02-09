@@ -13,7 +13,7 @@ import com.jomi.Handlers.Init.basicCurrency.OrbFile;
 import com.jomi.Handlers.Init.basicCurrency.OrbLoader;
 
 public class validBasicCurrencyTest {
-    OrbFile file = OrbLoader.load("validTest/currency/basicOrbs.json");
+    OrbFile file = OrbLoader.loadFromResources("validTest/currency/basicOrbs.json");
 
     @Test
     void loadAllbasicCurrency(){
@@ -55,7 +55,7 @@ public class validBasicCurrencyTest {
     @Test
     void MissingFileError(){
         assertThrows(RuntimeException.class, 
-            () -> {OrbLoader.load("validTest/currency/noReal.json");
+            () -> {OrbLoader.loadFromResources("validTest/currency/noReal.json");
         });
     }
 }

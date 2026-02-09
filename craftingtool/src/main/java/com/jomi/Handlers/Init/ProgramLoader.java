@@ -17,12 +17,12 @@ public class ProgramLoader {
         long start = System.nanoTime();
 
         
-        List<ModFile> modFiles = ModLoader.loadAll(Path.of("resources/modifiers"));
+        List<ModFile> modFiles = ModLoader.loadAll(Path.of("data/modifiers"));
         ModRegistry.registerAll(modFiles);
 
 
 
-        OrbFile orbFile = OrbLoader.load("craftingMaterial/basicCurrency/basicOrbs.json");
+        OrbFile orbFile = OrbLoader.loadFromResources("data/craftingMaterial/basicOrbs.json");
         OrbRegistry.registerAll(orbFile);
 
 
