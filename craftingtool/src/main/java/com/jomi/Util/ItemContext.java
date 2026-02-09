@@ -10,7 +10,7 @@ public class ItemContext {
     public List<ModifierInstance> prefixes = new ArrayList<>();
     public List<ModifierInstance> suffixes = new ArrayList<>();
 
-    public boolean hasMod(String modID){
+    public boolean hasMod(String modID) {
         return prefixes.stream().anyMatch(m -> m.mod.id.equals(modID)) ||
                 suffixes.stream().anyMatch(m -> m.mod.id.equals(modID));
     }

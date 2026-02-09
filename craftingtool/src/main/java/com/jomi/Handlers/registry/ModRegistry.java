@@ -15,7 +15,7 @@ public class ModRegistry {
     private static final Map<String, Mod> modsById = new HashMap<>();
     private static final Map<String, List<Mod>> modsByItemClass = new HashMap<>();
 
-    public record ModRegistrySummary(int modCount, int itemClassCount) {}
+    public record ModRegistrySummary(int modCount, int itemClassCount) { }
 
     public static ModRegistrySummary registerAll(List<ModFile> files) {
         for (ModFile mf : files) {
