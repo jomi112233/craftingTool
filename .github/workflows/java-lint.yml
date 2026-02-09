@@ -15,9 +15,9 @@ jobs:
     # OSA 1: Vakavat virheet (Koodi ei käänny ilman tätä)
     - name: Käännä koodi (Vakavat virheet)
       run: mvn compile
-      orking-directory: craftingtool
+      working-directory: craftingtool
 
     # OSA 2: Tyylivirheet (Google Checks -säännöt)
     - name: Aja Checkstyle (Tyylivirheet)
       run: mvn checkstyle:check
-      orking-directory: craftingtool
+      working-directory: craftingtool
