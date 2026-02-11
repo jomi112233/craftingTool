@@ -20,7 +20,7 @@ public class Main {
 
         System.out.println(weight);
 
-        for (int x = 0 ; x < 6 ; x++) {
+        for (int x = 0 ; x < 1 ; x++) {
             System.out.println(ModRoller.rollRandomTier("weapons/talisman", 81, ModType.PREFIX));
         }
         
