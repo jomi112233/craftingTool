@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.jomi.Handlers.Init.basicCurrency.OrbFile;
 import com.jomi.Handlers.Init.basicCurrency.OrbLoader;
 
-public class OrbLoadertest {
+public class OrbLoaderTest {
     
     @Test
     void orbFileLoader(){
