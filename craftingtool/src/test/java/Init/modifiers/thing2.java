@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import com.jomi.Handlers.Init.modifiers.ModFile;
 import com.jomi.Handlers.Init.modifiers.ModLoader;
 
-public class ModLoaderTest {
-    
+public class thing2 {
+    //ModLoaderTest
     @Test
     void LoadJsonFiles() {
 
