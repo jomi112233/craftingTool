@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.jomi.Handlers.Init.basicCurrency.OrbFile;
 import com.jomi.Handlers.Init.basicCurrency.OrbLoader;
 
-public class thing {
-    //OrbLoaderTest
+public class OrbLoaderTest {
     @Test
     void orbFileLoader(){
         Path path = Path.of("src/test/resources/currency/basicOrbs.json");
