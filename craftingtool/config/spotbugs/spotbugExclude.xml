@@ -27,4 +27,13 @@
      <Match>
         <Class name="com.jomi.Handlers.Item.LoadedItem"/>
     </Match>
+
+    <Match> 
+        <Bug code="EI"/> 
+    </Match>
+
+    <Match> 
+        <Bug code="EI2"/> 
+    </Match>
+
 </FindBugsFilter>

@@ -27,7 +27,7 @@ public class Node {
     }
 
     public List<Action> geActions() {
-        return actions;
+        return List.copyOf(actions);
     }
 
     public void run() {

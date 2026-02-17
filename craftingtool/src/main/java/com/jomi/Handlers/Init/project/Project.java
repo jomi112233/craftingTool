@@ -33,7 +33,7 @@ public class Project {
     }
 
     public List<Node> getNodes() {
-        return nodes;
+        return List.copyOf(nodes);
     }
 
     public int getNodeSize() {
@@ -41,7 +41,7 @@ public class Project {
     }
 
     public List<Connection> getConnections() {
-        return connections;
+        return List.copyOf(connections);
     }
 
     public void addNode(Node node) {

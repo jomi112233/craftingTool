@@ -1,7 +1,6 @@
 package com.jomi.Util;
 
 import com.jomi.App;
-import com.jomi.Handlers.registry.ProjectManager;
 
 public class ProjectActions {
 
@@ -9,9 +8,9 @@ public class ProjectActions {
     public static void createNewProject() {
         System.out.println("Creating new project...");
 
-        try { 
-            ProjectManager.newProject();
-            App.getGui().showSimulator();
+        try {
+            App.getInstance().getProjectManager().newProject();
+            App.getInstance().getGui().showSimulator();
 
             System.out.println("New project created successfully.");
 
@@ -19,6 +18,7 @@ public class ProjectActions {
             System.err.println("Failed to create new project: " + e.getMessage());
         }
     }
+
 
 
     public static void loadProject() {

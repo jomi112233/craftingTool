@@ -4,21 +4,21 @@ import com.jomi.Handlers.Init.project.Project;
 
 public class ProjectManager {
 
-    private static Project currentProject;
+    private Project currentProject;
 
-    public static void newProject() {
+    public void newProject() {
         currentProject = new Project();
     }
 
-    public static void setProject(Project project) {
+    public void setProject(Project project) {
         currentProject = project;
     }
 
-    public static Project getProject() {
+    public Project getProject() {
         return currentProject;
     }
 
-    public static boolean hasproject() {
+    public boolean hasproject() {
         return currentProject != null;
     }
 }

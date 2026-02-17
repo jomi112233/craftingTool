@@ -11,9 +11,10 @@ public class ConfigLoader {
     private static Path dataFolder;
 
     public static void loadConfig() {
-        try {
+        try (var in = Files.newInputStream(Path.of("config.properties"))) {
+
             Properties properties = new Properties();
-            properties.load(Files.newInputStream(Path.of("config.properties")));
+            properties.load(in);
 
             String folder = properties.getProperty("dataFolder");
             if (folder == null || folder.isBlank()) {
@@ -24,9 +25,10 @@ public class ConfigLoader {
             System.out.println("using data folder: " + dataFolder);
 
         } catch (IOException e) {
-            throw new RuntimeException("failed to lead config.properties", e);
+            throw new RuntimeException("failed to load config.properties", e);
         }
     }
+
 
     public static Path getDataFolder() {
         return dataFolder;
