@@ -18,4 +18,13 @@ public class OrbRegistry {
     public static Orb get(String id) {
         return ORBS.get(id);
     }
+
+
+    public static int size() { 
+        return ORBS.size(); 
+    }
+
+    public static void clear() {
+        ORBS.clear();
+    }
 }

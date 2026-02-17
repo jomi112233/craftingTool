@@ -1,29 +1,32 @@
-package com.jomi.Handlers.Init;
+package com.jomi.Handlers;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-
+import com.jomi.Handlers.Init.basicCurrency.OrbFile;
 import com.jomi.Handlers.Init.basicCurrency.OrbLoader;
 import com.jomi.Handlers.Init.modifiers.ModFile;
 import com.jomi.Handlers.Init.modifiers.ModLoader;
 import com.jomi.Handlers.registry.ModRegistry;
+import com.jomi.Handlers.registry.OrbRegistry;
 
 public class ProgramLoader {
 
-    public void start() {
+    public static void loadProgramData() {
         long start = System.nanoTime();
 
-        
-        List<ModFile> modFiles = ModLoader.loadAll(Path.of("data/modifiers"));
+        Path root = ConfigLoader.getDataFolder();
+
+
+        Path modifierPath = root.resolve("modifiers");
+        List<ModFile> modFiles = ModLoader.loadAll(modifierPath);
         ModRegistry.registerAll(modFiles);
 
 
-
-        Path orbPath = Paths.get("data/craftingMaterial/basicOrbs.json");
-        OrbLoader.loadFromFile(orbPath);
+        Path orbPath = root.resolve("craftingMaterial/basicOrbs.json");
+        OrbFile orbFile = OrbLoader.loadFromFile(orbPath);
+        OrbRegistry.registerAll(orbFile);
 
 
 
@@ -32,16 +35,12 @@ public class ProgramLoader {
 
 
 
-
-
-
-
-
         Map<String, Integer> counts = ModRegistry.getModCountPerItemClass();
         counts.forEach((itemClass, count) ->
             System.out.println(itemClass + ": " + count + " mods")
         );
 
+        System.out.println("Loaded orbs: " + OrbRegistry.size());
         
         System.out.println("Program Loader took: " + duration + " ns");
         System.out.println("Program Loader took: " + duration / 1_000_000 + " ms");

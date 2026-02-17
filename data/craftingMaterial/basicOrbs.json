@@ -8,7 +8,7 @@
             "newRarity": "magic",
             "removeModifierCount": 0,
             "addedModifierCount": 1,
-            "target": "any"
+            "target": "BOTH"
         },
 
         {
@@ -18,7 +18,7 @@
             "newRarity": "magic",
             "removeModifierCount": 0,
             "addedModifierCount": 1,
-            "target": "any"
+            "target": "BOTH"
         },
 
         {
@@ -28,7 +28,7 @@
             "newRarity": "rare",
             "removeModifierCount": 0,
             "addedModifierCount": 1,
-            "target": "any"
+            "target": "BOTH"
         },
 
         {
@@ -38,7 +38,7 @@
             "newRarity": "rare",
             "removeModifierCount": 0,
             "addedModifierCount": 1,
-            "target": "any"
+            "target": "BOTH"
         },
 
         {
@@ -48,7 +48,7 @@
             "newRarity": "rare",
             "removeModifierCount": 1,
             "addedModifierCount": 1,
-            "target": "any"
+            "target": "BOTH"
         },
 
         {
@@ -58,7 +58,7 @@
             "newRarity": "any",
             "removeModifierCount": 1,
             "addedModifierCount": 0,
-            "target": "any"
+            "target": "BOTH"
         }
     ]
 }

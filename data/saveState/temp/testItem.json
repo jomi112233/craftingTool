@@ -1,0 +1,14 @@
+{
+    "itemLevel" : 55,
+    "itemRarity" : "rare",
+    "loadedItemClass": "weapons/warStaff",
+
+    "prefix" : [
+
+    ],
+
+    "suffix" : [
+        
+    ]
+
+}

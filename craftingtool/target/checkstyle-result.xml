@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="9.3">
-<file name="C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Main.java">
+<file name="C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\App.java">
+</file>
+<file name="C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\GUILoader.java">
+</file>
+<file name="C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\ProjectActions.java">
 </file>
 </checkstyle>

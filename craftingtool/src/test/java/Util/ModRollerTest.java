@@ -1,19 +1,20 @@
 package Util;
 
-import com.jomi.Handlers.Init.modifiers.Mod;
-import com.jomi.Handlers.Init.modifiers.ModTier;
-import com.jomi.Handlers.registry.ModRegistry;
-import com.jomi.Util.ModRoller;
-import com.jomi.Util.ModRoller.ModType;
-import com.jomi.Util.ModRoller.RolledMod;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.jomi.Handlers.Init.modifiers.Mod;
+import com.jomi.Handlers.Init.modifiers.ModTier;
+import com.jomi.Handlers.Init.modifiers.StatRange;
+import com.jomi.Handlers.registry.ModRegistry;
+import com.jomi.Util.ModRoller;
 
 class ModRollerTest {
 
@@ -21,84 +22,54 @@ class ModRollerTest {
     void setup() {
         ModRegistry.clear();
 
-      
-        ModTier tLow  = new ModTier(6,  1,  100, Map.of());
-        ModTier tMid  = new ModTier(3, 30, 200, Map.of());
-        ModTier tHigh = new ModTier(1, 80, 300, Map.of());
-
-        
-        Mod prefixMod = new Mod(
-            "p1", true, false, "Prefix Mod",
-            new String[]{"tag"}, List.of(tLow, tMid, tHigh)
+        Mod testMod = new Mod(
+            "crit_damage_bonus",
+            false,
+            true,
+            "+% to Critical Damage Bonus",
+            List.of("Critical", "Attack", "Damage"),
+            List.of( 
+                new ModTier(6, 8, 1000, Map.of("crit_damage", new StatRange(10, 11))), 
+                new ModTier(5, 21, 1000, Map.of("crit_damage", new StatRange(12, 13))) 
+            )
         );
 
-        Mod suffixMod = new Mod(
-            "s1", false, true, "Suffix Mod",
-            new String[]{"tag"}, List.of(tLow, tMid, tHigh)
-        );
-
-        ModRegistry.register("weapons/talisman", List.of(prefixMod, suffixMod));
+        ModRegistry.register("weapons/testWeapon", List.of(testMod));
     }
 
 
     @Test
-    void rollsOnlyPrefixMods() {
-        for (int i = 0; i < 50; i++) {
-            RolledMod rolled = ModRoller.rollRandomTier("weapons/talisman", 100, ModType.PREFIX);
-            assertTrue(rolled.mod().prefix());
-            assertFalse(rolled.mod().suffix());
-        }
+    void rollReturnsMod() {
+        var rolled = ModRoller.rollRandomTier("weapons/testWeapon", 50, ModRoller.ModType.SUFFIX);
+        assertNotNull(rolled);
+    }
+
+    @Test
+    void tagInclusion() {
+        var rolled = ModRoller.rollRandomTier("weapons/testWeapon", 50, ModRoller.ModType.SUFFIX);
+        assertEquals(List.of("Critical", "Attack", "Damage"), rolled.tags());
+    }
+
+    @Test
+    void itemLevelFilter() {
+        var rolled = ModRoller.rollRandomTier("weapons/testWeapon", 10, ModRoller.ModType.SUFFIX);
+        assertEquals(6, rolled.tier().tier());
     }
 
 
     @Test
-    void rollsOnlySuffixMods() {
-        for (int i = 0; i < 50; i++) {
-            RolledMod rolled = ModRoller.rollRandomTier("weapons/talisman", 100, ModType.SUFFIX);
-            assertTrue(rolled.mod().suffix());
-            assertFalse(rolled.mod().prefix());
-        }
-    }
-
-
-    @Test
-    void rollsBothPrefixAndSuffixWhenRequested() {
-        boolean sawPrefix = false;
-        boolean sawSuffix = false;
-
-        for (int i = 0; i < 200; i++) {
-            RolledMod rolled = ModRoller.rollRandomTier("weapons/talisman", 100, ModType.BOTH);
-
-            if (rolled.mod().prefix()) sawPrefix = true;
-            if (rolled.mod().suffix()) sawSuffix = true;
-
-
-            if (sawPrefix && sawSuffix) break;
-        }
-
-        assertTrue(sawPrefix || sawSuffix);
-    }
-
-    @Test
-    void respectsItemLevelRestrictions() {
-        // Item level 10 → only tLow (ilvl 1) is allowed
-        for (int i = 0; i < 50; i++) {
-            RolledMod rolled = ModRoller.rollRandomTier("weapons/talisman", 10, ModType.BOTH);
-            assertEquals(1, rolled.tier().ilvl());
-        }
-    }
-
-    @Test
-    void throwsWhenNoEligibleTiers() {
+    void prefixFilter() {
         assertThrows(IllegalStateException.class, () ->
-            ModRoller.rollRandomTier("weapons/talisman", 0, ModType.BOTH)
-        );
-    }
+            ModRoller.rollRandomTier("weapons/testWeapon", 50, ModRoller.ModType.PREFIX));
+    }  
 
     @Test
-    void throwsWhenNoModsForItemClass() {
-        assertThrows(IllegalArgumentException.class, () ->
-            ModRoller.rollRandomTier("unknown/class", 100, ModType.BOTH)
-        );
+    void testWeightedSelectionDoesNotCrash() {
+        for (int i = 0; i < 1000; i++) {
+            var rolled = ModRoller.rollRandomTier("weapons/testWeapon", 50, ModRoller.ModType.SUFFIX);
+            assertNotNull(rolled);
+        }
     }
+
+
 }

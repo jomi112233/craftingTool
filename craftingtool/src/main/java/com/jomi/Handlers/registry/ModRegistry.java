@@ -111,5 +111,4 @@ public class ModRegistry {
         modsByItemClass.clear();
     }
 
-
 }

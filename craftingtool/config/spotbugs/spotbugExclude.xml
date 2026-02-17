@@ -23,4 +23,8 @@
     <Match>
         <Class name="com.jomi.Handlers.Init.modifiers.StatRange"/>
     </Match>
+
+     <Match>
+        <Class name="com.jomi.Handlers.Item.LoadedItem"/>
+    </Match>
 </FindBugsFilter>

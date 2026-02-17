@@ -7,6 +7,6 @@ public record Mod(
     boolean prefix,
     boolean suffix,
     String name,
-    String[] tags,
+    List<String> tags,
     List<ModTier> tiers
 ) { }

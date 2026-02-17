@@ -1,5 +1,6 @@
 package com.jomi.Util;
 
+import java.util.List;
 import java.util.Random;
 
 import com.jomi.Handlers.Init.modifiers.Mod;
@@ -8,20 +9,38 @@ import com.jomi.Handlers.registry.ModRegistry;
 
 public class ModRoller {
 
-    public record RolledMod(Mod mod, ModTier tier) {
+    public record RolledMod(
+        String modId,
+        String name,
+        List<String> tags,
+        ModTier tier
+    ) {
+
+        public RolledMod { 
+            tags = List.copyOf(tags);
+        }
 
         public int ilvl() {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'ilvl'");
-        } }
+            return tier.ilvl();
+        }
+
+        @Override
+        public String toString() {
+            return "RolledMod{ id=" + modId +
+                ", name=" + name +
+                ", tags=" + tags +
+                ", tier=" + tier.tier() +
+                ", stats=" + tier.stats() +
+                " }";
+        }
+    }
+
 
     public enum ModType {
         PREFIX,
         SUFFIX,
         BOTH
     }
-
-
 
     private static final Random random = new Random();
 
@@ -32,7 +51,6 @@ public class ModRoller {
             throw new IllegalArgumentException("No mods registered for itemClass: " + itemClass);
         }
 
-        // Filter mods by prefix/suffix type
         var filteredMods = mods.stream()
             .filter(mod -> switch (type) {
                 case PREFIX -> mod.prefix();
@@ -45,13 +63,15 @@ public class ModRoller {
             throw new IllegalStateException("No mods of type " + type + " for itemClass " + itemClass);
         }
 
-        // Collect tiers allowed by item level
-        var eligibleTiers = filteredMods.stream()
-            .flatMap(mod -> mod.tiers().stream())
-            .filter(tier -> tier.ilvl() <= itemLevel)
+        record Entry (Mod mod, ModTier tier) { }
+
+        var entries = filteredMods.stream()
+            .flatMap(mod -> mod.tiers().stream()
+                .filter(tier -> tier.ilvl() <= itemLevel)
+                .map(tier -> new Entry(mod, tier)))
             .toList();
 
-        if (eligibleTiers.isEmpty()) {
+        if (entries.isEmpty()) {
             throw new IllegalStateException(
                 "No eligible tiers for itemClass " + itemClass +
                 " at item level " + itemLevel +
@@ -59,29 +79,25 @@ public class ModRoller {
             );
         }
 
-        // Compute total weight
-        int totalWeight = eligibleTiers.stream()
-            .mapToInt(ModTier::weight)
+        int totalWeight = entries.stream()
+            .mapToInt(e -> e.tier.weight())
             .sum();
 
         int roll = random.nextInt(totalWeight);
 
-        // Weighted selection
-        for (Mod mod : filteredMods) {
-            for (ModTier tier : mod.tiers()) {
-                if (tier.ilvl() <= itemLevel) {
-                    roll -= tier.weight();
-                    if (roll < 0) {
-                        return new RolledMod(mod, tier);
-                    }
-                }
+        for (Entry e : entries) {
+            roll -= e.tier.weight();
+            if (roll < 0) {
+                return new RolledMod(
+                    e.mod.id(),
+                    e.mod.name(),
+                    e.mod.tags(),
+                    e.tier
+                );
+
             }
         }
 
-
         throw new IllegalStateException("Weighted roll failed for itemClass: " + itemClass);
     }
-
-
-    
 }
