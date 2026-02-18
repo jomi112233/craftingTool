@@ -44,5 +44,4 @@ public class LoadedItem {
         this.suffix = suffix;
     }
 
-
 }

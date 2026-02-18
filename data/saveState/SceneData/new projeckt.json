@@ -1,0 +1,31 @@
+{
+  "id" : "9c71ab67-a7e7-4583-9773-9612640b6a5e",
+  "name" : "new projeckt",
+  "itemType" : "weapons/talisman",
+  "createdAt" : "2026-02-18T23:09:30.4456792",
+  "lastModifiedAt" : "2026-02-18T23:09:30.4466761",
+  "nodes" : [ {
+    "id" : "d4296947-b174-48d5-a1e8-97aedad8c0ff",
+    "type" : "End",
+    "xPos" : 871.0,
+    "yPos" : 303.0,
+    "inputPort" : true,
+    "outputPort" : false
+  }, {
+    "id" : "a6c497f2-38c5-4ed7-b11c-0a2f0e6ff3d1",
+    "type" : "start",
+    "xPos" : 200.0,
+    "yPos" : 299.0,
+    "inputPort" : false,
+    "outputPort" : true
+  } ],
+  "connections" : [ {
+    "fromNodeId" : "a6c497f2-38c5-4ed7-b11c-0a2f0e6ff3d1",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "48084c13-31ec-4d07-8f7a-014cceb77b58",
+    "toNodeID" : "d4296947-b174-48d5-a1e8-97aedad8c0ff"
+  } ],
+  "allNodeIds" : [ "d4296947-b174-48d5-a1e8-97aedad8c0ff", "a6c497f2-38c5-4ed7-b11c-0a2f0e6ff3d1" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/9c71ab67-a7e7-4583-9773-9612640b6a5e/"
+}

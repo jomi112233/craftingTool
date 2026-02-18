@@ -159,16 +159,56 @@ public class Project {
         nodes.add(node);
     }
 
-    public void removeNode(Node node) {
-        nodes.remove(node);
-    }
 
     public void addConnection(Connection connection) {
         connections.add(connection);
     }
 
+    public void removeNode(Node node) {
+        nodes.remove(node);
+    }
+
     public void removeConnection(Connection connection) {
-        connections.remove(connection);
+        if (connection == null) {
+            System.out.println("Connection Deletion failed: connection is NULL");
+            return;
+        }
+
+        System.out.println("Deleting connection with object: " + connection);
+
+        try {
+            System.out.println("Connection ID = " + connection.getConnectionID());
+        } catch (Exception ex) {
+            System.out.println("ERROR: getConnectionID() does not exist or returns null");
+            ex.printStackTrace();
+            return;
+        }
+
+        String id = connection.getConnectionID();
+
+        connections.removeIf(c -> {
+            System.out.println("Comparing with: " + c.getConnectionID());
+            return c.getConnectionID().equals(id);
+        });
+    }
+
+
+
+    public void removeConnectionsOf(Node node) {
+    connections.removeIf(conn -> 
+            conn.getToNodeID().equals(node.getId()) ||
+            conn.getFromNodeId().equals(node.getId())
+        );
+    }
+
+
+    public void removeNodeAndConnection(Node node) {
+        nodes.remove(node);
+
+        connections.removeIf(conn -> 
+            conn.getToNodeID().equals(node.getId()) ||
+            conn.getFromNodeId().equals(node.getId())
+        );
     }
 
     public List<String> getAllNodeIds() {

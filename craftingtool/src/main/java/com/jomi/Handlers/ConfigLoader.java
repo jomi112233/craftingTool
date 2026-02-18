@@ -33,4 +33,9 @@ public class ConfigLoader {
     public static Path getDataFolder() {
         return dataFolder;
     }
+
+    public static void setDataFolder(Path folder) {
+        dataFolder = folder;
+    }
+
 }

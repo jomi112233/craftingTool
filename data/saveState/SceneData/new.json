@@ -1,0 +1,44 @@
+{
+  "id" : "08e829db-2d5b-479e-9d0e-e8bfa2998650",
+  "name" : "new",
+  "itemType" : "weapons/talisman",
+  "createdAt" : "2026-02-18T23:22:18.5004538",
+  "lastModifiedAt" : "2026-02-18T23:22:18.5014784",
+  "nodes" : [ {
+    "id" : "ab6999ca-9d66-407e-b9e5-b4c5723fb58e",
+    "type" : "start",
+    "xPos" : 324.0,
+    "yPos" : 523.0,
+    "inputPort" : false,
+    "outputPort" : true
+  }, {
+    "id" : "2be360cc-f9b5-43b8-80de-c77bb9da0a12",
+    "type" : "End",
+    "xPos" : 1157.0,
+    "yPos" : 279.0,
+    "inputPort" : true,
+    "outputPort" : false
+  }, {
+    "id" : "d7682894-e88f-4528-8a95-9875068d27a2",
+    "type" : "new node",
+    "xPos" : 694.0,
+    "yPos" : 169.0,
+    "inputPort" : true,
+    "outputPort" : true
+  } ],
+  "connections" : [ {
+    "fromNodeId" : "ab6999ca-9d66-407e-b9e5-b4c5723fb58e",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "342aca9b-8203-4975-85c7-446d284b2311",
+    "toNodeID" : "d7682894-e88f-4528-8a95-9875068d27a2"
+  }, {
+    "fromNodeId" : "d7682894-e88f-4528-8a95-9875068d27a2",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "90c16c07-de17-475a-befd-cc5d00f51afb",
+    "toNodeID" : "2be360cc-f9b5-43b8-80de-c77bb9da0a12"
+  } ],
+  "allNodeIds" : [ "ab6999ca-9d66-407e-b9e5-b4c5723fb58e", "2be360cc-f9b5-43b8-80de-c77bb9da0a12", "d7682894-e88f-4528-8a95-9875068d27a2" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/08e829db-2d5b-479e-9d0e-e8bfa2998650/"
+}
