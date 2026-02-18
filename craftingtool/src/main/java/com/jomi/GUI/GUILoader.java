@@ -13,6 +13,10 @@ public class GUILoader {
         stage.setMaximized(true);
     }
 
+    public Stage getStage() {
+        return primaryStage;
+    }
+
     public void showStartingScene() {
         StartingScreen startingScreen = new StartingScreen();
         primaryStage.setScene(startingScreen.createScene());

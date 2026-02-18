@@ -1,0 +1,18 @@
+{
+  "id" : "d7ca9f1e-261b-4033-91db-66c3670cded5",
+  "name" : "Projekti",
+  "itemType" : null,
+  "createdAt" : "2026-02-18T01:43:11.2596883",
+  "lastModifiedAt" : "2026-02-18T01:43:11.2606583",
+  "nodes" : [ {
+    "id" : "a0fa342b-4278-4605-ab87-bf72d57b0088",
+    "type" : "start",
+    "xPos" : 200.0,
+    "yPos" : 200.0,
+    "inputPort" : false,
+    "outputPort" : true
+  } ],
+  "connections" : [ ],
+  "allNodeIds" : [ "a0fa342b-4278-4605-ab87-bf72d57b0088" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/d7ca9f1e-261b-4033-91db-66c3670cded5/"
+}

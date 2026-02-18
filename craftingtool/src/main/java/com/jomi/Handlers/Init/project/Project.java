@@ -1,24 +1,122 @@
 package com.jomi.Handlers.Init.project;
 
+import java.net.URI;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jomi.Handlers.ConfigLoader;
+import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Handlers.registry.ItemRegistry;
 
 public class Project {
 
     private final String id;
     private String name;
+    private String itemType;
+    @JsonIgnore
+    private LoadedItem baseItem;
+    private String projectFolderString;
+
+    private final LocalDateTime createdAt;
+    private LocalDateTime lastModifiedAt;
 
     private List<Node> nodes;
     private List<Connection> connections;
 
+    @JsonProperty("projectFolder")
+    public void setProjectFolderString(String folder) {
+        this.projectFolderString = folder;
+    }
+
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+
+
     public Project() {
         this.id = UUID.randomUUID().toString();
         this.name = "Untitled Project";
-
+        this.createdAt = LocalDateTime.now();
+        this.lastModifiedAt = LocalDateTime.now();
         this.nodes = new ArrayList<>();
         this.connections = new ArrayList<>();
     }
+
+    
+
+    public Project(String name) {
+        this();
+        this.name = name;
+    }
+
+    @JsonProperty("projectFolder")
+    public String getProjectFolderString() {
+        return getProjectFolder().toUri().toString();
+    }
+
+    @JsonIgnore
+    public Path getProjectFolder() {
+        if (projectFolderString != null) {
+            return Path.of(URI.create(projectFolderString));
+        }
+
+        // fallback for new projects
+        return ConfigLoader.getDataFolder()
+                .resolve("saveState")
+                .resolve("itemData")
+                .resolve(id);
+    }
+
+
+    @JsonIgnore
+    public LoadedItem getBaseItem() { 
+        return baseItem; 
+    }
+
+     public void setBaseItem(LoadedItem baseItem) {
+        this.baseItem = baseItem; 
+    }
+
+    @JsonIgnore
+    public void saveBaseItem() {
+        if (baseItem == null) return;
+
+        Path folder = getProjectFolder();
+
+        try {
+            ItemRegistry.saveToJson(baseItem, folder.resolve("baseitem.json"));
+            System.out.println("Base item saved.");
+        } catch (Exception e) {
+            System.err.println("Failed to save base item: " + e.getMessage());
+        }
+    }
+
+    @JsonIgnore
+    public void saveCompletedBaseItem() {
+        if (baseItem == null) return;
+
+        Path folder = getProjectFolder();
+
+        try {
+            ItemRegistry.saveToJson(baseItem, folder.resolve("baseitemCompleted.json"));
+            System.out.println("Base item saved.");
+        } catch (Exception e) {
+            System.err.println("Failed to save base item: " + e.getMessage());
+        }
+    }
+
+
 
     public String getId() {
         return id;
@@ -36,6 +134,19 @@ public class Project {
         return List.copyOf(nodes);
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public void setLastModifiedAt() {
+        this.lastModifiedAt = LocalDateTime.now();
+    }
+
+    @JsonIgnore
     public int getNodeSize() {
         return nodes.size();
     }

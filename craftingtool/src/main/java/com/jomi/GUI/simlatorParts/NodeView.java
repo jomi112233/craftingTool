@@ -17,11 +17,12 @@ import javafx.scene.shape.Rectangle;
 public class NodeView extends Pane {
 
     private final Project project;
-
     private final Node node;
 
-    private final Circle inputPort;
-    private final Circle outputPort;
+    private Label titleLabel;
+
+    private Circle inputPort;
+    private Circle outputPort;
 
     private double dragOffsetX;
     private double dragOffsetY;
@@ -30,63 +31,79 @@ public class NodeView extends Pane {
         this.node = node;
         this.project = project;
 
+        // Title label
+        titleLabel = new Label(node.getType());
+        titleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14;");
+        titleLabel.setLayoutX(10);
+        titleLabel.setLayoutY(10);
+
         setLayoutX(node.getxPos());
         setLayoutY(node.getyPos());
 
         setPrefSize(150, 80);
         setPickOnBounds(true);
 
-        Rectangle bg = new Rectangle(150, 80);
+        // Background
+        Rectangle bg = new Rectangle(150, 240);
         bg.setArcWidth(10);
         bg.setArcHeight(10);
         bg.setFill(Color.web("#3c3f41"));
         bg.setStroke(Color.web("#aaaaaa"));
 
-        Label title = new Label(node.getType());
-        title.setTextFill(Color.WHITE);
-        title.setLayoutX(10);
-        title.setLayoutY(10);
-        title.setMouseTransparent(true);
+        getChildren().addAll(bg, titleLabel);
 
-        inputPort = new Circle(6, Color.DODGERBLUE);
-        outputPort = new Circle(6, Color.ORANGE);
-
-        inputPort.setLayoutX(0);
-        inputPort.setLayoutY(40);
-        outputPort.setLayoutX(150);
-        outputPort.setLayoutY(40);
-
-        inputPort.setPickOnBounds(true);
-        outputPort.setPickOnBounds(true);
-        inputPort.setMouseTransparent(false);
-        outputPort.setMouseTransparent(false);
-
-
-        inputPort.setOnMousePressed(e -> e.consume());
-        inputPort.setOnMouseDragged(e -> e.consume());
-
-        inputPort.setCursor(Cursor.HAND);
-        outputPort.setCursor(Cursor.HAND);
-
-        getChildren().addAll(bg, title, inputPort, outputPort);
+        // Create ports based on node flags
+        createPorts();
 
         enableDragging();
-        portFunctionality(node);
+        enablePortConnections();
+    }
+
+    private void createPorts() {
+
+        // INPUT PORT
+        if (node.getInputPort()) {
+            inputPort = new Circle(6, Color.DODGERBLUE);
+            inputPort.setLayoutX(0);
+            inputPort.setLayoutY(40);
+            inputPort.setCursor(Cursor.HAND);
+            inputPort.setPickOnBounds(true);
+            inputPort.setMouseTransparent(false);
+
+            // Prevent dragging the node when clicking port
+            inputPort.setOnMousePressed(e -> e.consume());
+            inputPort.setOnMouseDragged(e -> e.consume());
+
+            getChildren().add(inputPort);
+        }
+
+        // OUTPUT PORT
+        if (node.getOutputPort()) {
+            outputPort = new Circle(6, Color.ORANGE);
+            outputPort.setLayoutX(150);
+            outputPort.setLayoutY(40);
+            outputPort.setCursor(Cursor.HAND);
+            outputPort.setPickOnBounds(true);
+            outputPort.setMouseTransparent(false);
+
+            // Prevent dragging the node when clicking port
+            outputPort.setOnMousePressed(e -> e.consume());
+            outputPort.setOnMouseDragged(e -> e.consume());
+
+            getChildren().add(outputPort);
+        }
     }
 
     private void enableDragging() {
         setOnMousePressed(e -> {
-            if (e.getTarget() instanceof Circle) {
-                return;
-            }
+            if (e.getTarget() instanceof Circle) return;
+
             dragOffsetX = e.getSceneX() - getLayoutX();
             dragOffsetY = e.getSceneY() - getLayoutY();
         });
 
         setOnMouseDragged(e -> {
-            if (e.getTarget() instanceof Circle) {
-                return;
-            }
+            if (e.getTarget() instanceof Circle) return;
 
             double newX = e.getSceneX() - dragOffsetX;
             double newY = e.getSceneY() - dragOffsetY;
@@ -99,45 +116,52 @@ public class NodeView extends Pane {
         });
     }
 
-    private void portFunctionality(Node node) {
+    private void enablePortConnections() {
+
+        // If no output port, this node cannot start a connection
+        if (outputPort == null) return;
+
         outputPort.setOnMouseReleased(e -> {
-            System.out.println("release working");
 
             double mouseX = e.getSceneX();
             double mouseY = e.getSceneY();
 
             Pane parent = (Pane) getParent();
-
             List<NodeView> targets = new ArrayList<>();
 
             for (var nodent : parent.getChildren()) {
-
-                if (nodent instanceof NodeView other 
+                if (nodent instanceof NodeView other
                     && other != this
+                    && other.inputPort != null
                     && other.isMouseNearInput(mouseX, mouseY, 50)) {
+
                     targets.add(other);
                 }
             }
 
             for (NodeView other : targets) {
 
-                System.out.println(node.getId() + " Connected to: " + other.node.getId());
+                Connection connection = new Connection(
+                        node.getId(),
+                        true,   
+                        other.node.getId(),
+                        true
+                );
 
-                Connection connection = new Connection(node.getId(), other.node.getId());
                 project.addConnection(connection);
 
-                ConnectionView connectionView = new ConnectionView(outputPort, other.getInputPort());
+                ConnectionView connectionView =
+                        new ConnectionView(outputPort, other.getInputPort());
+
                 parent.getChildren().add(connectionView);
                 connectionView.toBack();
-
-                System.out.println("Connection size " + project.connectionSize());
             }
-
         });
     }
 
-
     public boolean isMouseNearInput(double sceneX, double sceneY, double radius) {
+        if (inputPort == null) return false;
+
         var bounds = inputPort.localToScene(inputPort.getBoundsInLocal());
         double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
         double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
@@ -145,8 +169,7 @@ public class NodeView extends Pane {
         double dx = sceneX - centerX;
         double dy = sceneY - centerY;
 
-        double distance = Math.sqrt(dx * dx + dy * dy);
-        return distance <= radius;
+        return Math.sqrt(dx * dx + dy * dy) <= radius;
     }
 
     public Circle getInputPort() {
@@ -156,4 +179,26 @@ public class NodeView extends Pane {
     public Circle getOutputPort() {
         return outputPort;
     }
+
+    public Node getNode() {
+        return node;
+    }
+
+    public void setTitle(String title) {
+        titleLabel.setText(title);
+    }
+
+    public void refresh() {
+        
+    }
+
+    protected Project getProject() {
+    return project;
+    }
+
+    protected Label getTitleLabel() {
+        return titleLabel;
+    }
+
+
 }

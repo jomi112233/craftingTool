@@ -1,18 +1,26 @@
 package com.jomi.GUI.simlatorParts;
 
+import java.io.File;
+
+import com.jomi.App;
 import com.jomi.GUI.simlatorParts.canvas.NodeCanvas;
+import com.jomi.Handlers.ConfigLoader;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
+import com.jomi.Util.ProjectActions;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 public class SideBar extends VBox {
-    Project project = new Project();
+    private final Project project;
 
 
-    public SideBar(NodeCanvas canvas) {
+    public SideBar(NodeCanvas canvas, Project project) {
+        this.project = project;
+
         setPadding(new Insets(10));
         setSpacing(10);
         setStyle("-fx-background-color: #333333;");
@@ -29,13 +37,44 @@ public class SideBar extends VBox {
         });
 
 
+        Button addStartNode = new Button("Start Node");
+        addStartNode.setPrefWidth(120);
+
+        addStartNode.setOnAction(e -> {
+            Node node = new Node("start", 200, 200, false, true);
+            project.addNode(node);
+            canvas.addNode(node);
+        });
+
+        Button addEndNode = new Button("end Node");
+        addEndNode.setPrefWidth(120);
+
+        addEndNode.setOnAction(e -> {
+            Node node = new Node("End", 200, 200, true, false);
+            project.addNode(node);
+            canvas.addNode(node);
+        });
+
+
+
+
         Button save = new Button("Save");
+        save.setOnAction(e -> {
+            App.getInstance().getProjectManager().saveProject(project);
+        });
+
+        
         Button load = new Button("Load");
+        load.setOnAction(e -> {
+            ProjectActions.loadProject();;
+        });
+
+
 
 
         save.setPrefWidth(120);
         load.setPrefWidth(120);
 
-        getChildren().addAll(addNode, save, load);
+        getChildren().addAll(addNode, addStartNode, addEndNode, save, load);
     }
 }

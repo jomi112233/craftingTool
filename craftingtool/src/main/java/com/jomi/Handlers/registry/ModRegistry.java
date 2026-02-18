@@ -47,8 +47,6 @@ public class ModRegistry {
         }
     }
 
-
-
     public static Map<String, Integer> getModCountPerItemClass() {
         Map<String, Integer> result = new HashMap<>();
 
@@ -58,10 +56,6 @@ public class ModRegistry {
 
         return result;
     }
-
-
-    
-
 
     public static Mod getById(String id) {
         return modsById.get(id);

@@ -8,7 +8,7 @@ import com.jomi.Handlers.Item.LoadedItem;
 import com.jomi.Handlers.registry.OrbRegistry;
 
 public class CurrencyAction {
-
+    /*
     public static LoadedItem apply(
         LoadedItem item,
         String orbId
@@ -20,13 +20,13 @@ public class CurrencyAction {
         }
 
         // 2. Check rarity requirement
-        if (!rarityAllowed(item.itemRarity(), orb.minRarity())) {
+        if (!rarityAllowed(item.getItemRarity(), orb.minRarity())) {
             throw new IllegalStateException("Item rarity too low for: " + orb.name());
         }
 
         // 3. Determine new rarity
         String newRarity = orb.newRarity().equals("any")
-            ? item.itemRarity()
+            ? item.getItemRarity()
             : orb.newRarity();
 
         // 4. Copy existing mods
@@ -45,9 +45,9 @@ public class CurrencyAction {
 
         // 7. Return updated item
         return new LoadedItem(
-            item.itemLevel(),
+            item.getItemLevel(),
             newRarity,
-            item.loadedItemClass(),
+            item.getLoadedItemClass(),
             prefixes,
             suffixes
         );
@@ -135,4 +135,5 @@ public class CurrencyAction {
             }
         }
     }
+    */
 }

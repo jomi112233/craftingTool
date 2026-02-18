@@ -11,7 +11,13 @@ public class Node {
     private boolean inputPort;
     private boolean outputPort;
 
+
+
     private final List<Action> actions = new ArrayList<>();
+
+    public Node() {
+
+    }
 
     public Node(String type, double xPos, double yPos, boolean input, boolean output) {
         this.id = UUID.randomUUID().toString();
