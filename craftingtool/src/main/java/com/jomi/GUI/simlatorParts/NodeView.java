@@ -22,7 +22,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 public abstract class NodeView extends StackPane {
     private final Project project;
@@ -159,8 +158,12 @@ public abstract class NodeView extends StackPane {
         });
 
         setOnMouseDragged(e -> {
-            if (e.getButton() != MouseButton.PRIMARY) { return; }
-            if (e.getTarget() instanceof Circle) return;
+            if (e.getButton() != MouseButton.PRIMARY) { 
+                return;
+            }
+            if (e.getTarget() instanceof Circle) {
+                return;
+            }
 
             double newX = e.getSceneX() - dragOffsetX;
             double newY = e.getSceneY() - dragOffsetY;
@@ -213,7 +216,9 @@ public abstract class NodeView extends StackPane {
     private void enablePortConnections() {
 
         // If no output port, this node cannot start a connection
-        if (outputPort == null) return;
+        if (outputPort == null) {
+            return;
+        }
 
         outputPort.setOnMouseReleased(e -> {
 
@@ -253,7 +258,9 @@ public abstract class NodeView extends StackPane {
     }
 
     public boolean isMouseNearInput(double sceneX, double sceneY, double radius) {
-        if (inputPort == null) return false;
+        if (inputPort == null) {
+            return false;
+        }
 
         var bounds = inputPort.localToScene(inputPort.getBoundsInLocal());
         double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
@@ -316,7 +323,7 @@ public abstract class NodeView extends StackPane {
     }
 
     protected Project getProject() {
-    return project;
+        return project;
     }
 
     protected Label getTitleLabel() {

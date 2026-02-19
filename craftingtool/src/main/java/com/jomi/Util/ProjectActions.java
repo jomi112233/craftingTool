@@ -17,12 +17,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.util.Pair;
 
 public class ProjectActions {
 
@@ -38,12 +36,12 @@ public class ProjectActions {
 
 
 
-    public record ProjectCreationData(String name, String itemType, int itemLevel) {}
+    public record ProjectCreationData(String name, String itemType, int itemLevel) { }
 
     public static void createNewProject() {
 
         // Record to carry dialog results
-        record ProjectCreationData(String name, String itemType, int itemLevel, String itemRarity) {}
+        record ProjectCreationData(String name, String itemType, int itemLevel, String itemRarity) { }
 
         Dialog<ProjectCreationData> dialog = new Dialog<>();
         dialog.setTitle("Create Project");
@@ -52,7 +50,6 @@ public class ProjectActions {
         ButtonType createButtonType = new ButtonType("Create", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
 
-        // Fields
         TextField nameField = new TextField();
         nameField.setPromptText("Project name");
 
@@ -117,7 +114,7 @@ public class ProjectActions {
                 item.setItemRarity(data.itemRarity());
                 item.setLoadedItemClass(data.itemType());
 
-                // Save updated item back to disk (IMPORTANT!)
+                // Save updated item back to disk
                 ItemRegistry.saveToJson(item, projectFolder.resolve("baseitem.json"));
                 ItemRegistry.saveToJson(item, projectFolder.resolve("baseitemCompleted.json"));
 
@@ -149,7 +146,6 @@ public class ProjectActions {
             new FileChooser.ExtensionFilter("Project Files (*.json)", "*.json")
         );
 
-        // We need a window reference — safest way:
         Window window = App.getInstance().getGui().getStage();
 
         File file = chooser.showOpenDialog(window);

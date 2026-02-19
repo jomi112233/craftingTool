@@ -84,14 +84,16 @@ public class Project {
         return baseItem; 
     }
 
-     public void setBaseItem(LoadedItem baseItem) {
+    public void setBaseItem(LoadedItem baseItem) {
         this.baseItem = baseItem; 
     }
 
     @JsonIgnore
     public void saveBaseItem() {
-        if (baseItem == null) return;
-
+        if (baseItem == null) {
+            return;
+        }
+        
         Path folder = getProjectFolder();
 
         try {
@@ -104,7 +106,9 @@ public class Project {
 
     @JsonIgnore
     public void saveCompletedBaseItem() {
-        if (baseItem == null) return;
+        if (baseItem == null) {
+            return;
+        }
 
         Path folder = getProjectFolder();
 
@@ -195,9 +199,9 @@ public class Project {
 
 
     public void removeConnectionsOf(Node node) {
-    connections.removeIf(conn -> 
-            conn.getToNodeID().equals(node.getId()) ||
-            conn.getFromNodeId().equals(node.getId())
+        connections.removeIf(conn -> 
+                conn.getToNodeID().equals(node.getId()) ||
+                conn.getFromNodeId().equals(node.getId())
         );
     }
 

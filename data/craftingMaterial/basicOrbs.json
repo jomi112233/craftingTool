@@ -7,8 +7,7 @@
             "minRarity": "normal",
             "newRarity": "magic",
             "removeModifierCount": 0,
-            "addedModifierCount": 1,
-            "target": "BOTH"
+            "addedModifierCount": 1
         },
 
         {
@@ -17,8 +16,7 @@
             "minRarity": "magic",
             "newRarity": "magic",
             "removeModifierCount": 0,
-            "addedModifierCount": 1,
-            "target": "BOTH"
+            "addedModifierCount": 1
         },
 
         {
@@ -27,8 +25,7 @@
             "minRarity": "magic",
             "newRarity": "rare",
             "removeModifierCount": 0,
-            "addedModifierCount": 1,
-            "target": "BOTH"
+            "addedModifierCount": 1
         },
 
         {
@@ -37,8 +34,7 @@
             "minRarity": "rare",
             "newRarity": "rare",
             "removeModifierCount": 0,
-            "addedModifierCount": 1,
-            "target": "BOTH"
+            "addedModifierCount": 1
         },
 
         {
@@ -47,8 +43,7 @@
             "minRarity": "rare",
             "newRarity": "rare",
             "removeModifierCount": 1,
-            "addedModifierCount": 1,
-            "target": "BOTH"
+            "addedModifierCount": 1
         },
 
         {
@@ -57,8 +52,7 @@
             "minRarity": "normal",
             "newRarity": "any",
             "removeModifierCount": 1,
-            "addedModifierCount": 0,
-            "target": "BOTH"
+            "addedModifierCount": 0
         }
     ]
 }

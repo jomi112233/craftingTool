@@ -7,9 +7,9 @@ import com.jomi.Handlers.Init.project.Project;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class genericNode extends NodeView {
+public class GenericNode extends NodeView {
 
-    public genericNode(Node node, Project project) {
+    public GenericNode(Node node, Project project) {
         super(node, project);
     }
 

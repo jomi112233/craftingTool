@@ -5,7 +5,7 @@ C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\canvas\NodeCanvas.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\canvas\ZoomPane.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\ConnectionView.java
-C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\Nodes\genericNode.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\Nodes\GenericNode.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\Nodes\StartNode.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\NodeView.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\SideBar.java
@@ -18,6 +18,9 @@ C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\modifiers\ModLoader.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\modifiers\ModTier.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\modifiers\StatRange.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\omen\Omen.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\omen\OmenFile.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\omen\OmenLoader.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\project\Action.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\project\Connection.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\project\Node.java
@@ -27,8 +30,9 @@ C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\ItemRegistry.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\ModRegistry.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\NodeRegister.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\Omenregistry.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\OrbRegistry.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\ProjectManager.java
-C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\CurrencyAction.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\craftingAction\BasicCurrencyAction.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\ModRoller.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\ProjectActions.java

@@ -1,18 +1,13 @@
 package com.jomi.GUI.simlatorParts.Nodes;
 
-import com.jomi.App;
 import com.jomi.GUI.simlatorParts.NodeView;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
 import com.jomi.Handlers.Item.LoadedItem;
-import com.jomi.Handlers.registry.ModRegistry;
 import com.jomi.Util.ModRoller.RolledMod;
 
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 
 public class StartNode extends NodeView {
 
@@ -31,7 +26,7 @@ public class StartNode extends NodeView {
         box.setFillWidth(true);
 
         // ----- PREFIXES -----
-        Label prefixTitle = new Label("Prefixes");
+        Label prefixTitle = new Label("Prefix");
         prefixTitle.getStyleClass().add("node-section-title");
 
         VBox prefixList = new VBox(4);
@@ -55,7 +50,7 @@ public class StartNode extends NodeView {
         }
 
         // ----- SUFFIXES -----
-        Label suffixTitle = new Label("Suffixes");
+        Label suffixTitle = new Label("Suffix");
         suffixTitle.getStyleClass().add("node-section-title");
 
         VBox suffixList = new VBox(4);
@@ -86,7 +81,9 @@ public class StartNode extends NodeView {
 
 
     private String extractClassName(String full) {
-        if (full == null) return "";
+        if (full == null) {
+            return "";
+        }
         int index = full.lastIndexOf('/');
         return index >= 0 ? full.substring(index + 1) : full;
     }

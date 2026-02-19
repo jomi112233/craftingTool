@@ -6,7 +6,6 @@ import com.jomi.GUI.simlatorParts.canvas.NodeCanvas;
 import com.jomi.GUI.simlatorParts.canvas.ZoomPane;
 import com.jomi.Handlers.Init.project.Project;
 
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -15,30 +14,32 @@ public class SimulatorScene {
     public Scene createScene() {
 
         Project project = App.getInstance().getProjectManager().getCurrentProject();
-        NodeCanvas canvas = new NodeCanvas(project);
+        NodeCanvas nodeCanvas = new NodeCanvas(project);
+        ZoomPane zoomPane = new ZoomPane(nodeCanvas);
 
-        ZoomPane zoomPane = new ZoomPane(canvas);
-        SideBar sidebar = new SideBar(canvas, project);
+        zoomPane.setStyle(
+            "-fx-background-color: #2b2b2b;");
+        System.out.println("ZoomPane size = " + zoomPane.getWidth() + " x " + zoomPane.getHeight());
 
-        canvas.getStylesheets().add(
-            getClass().getResource("/styles/nodes.css").toExternalForm()
-        );
+        // ⭐ Force CSS to re-render after layout
+        zoomPane.widthProperty().addListener((obs, oldV, newV) -> zoomPane.applyCss());
+        zoomPane.heightProperty().addListener((obs, oldV, newV) -> zoomPane.applyCss());
 
+        System.out.println("ZoomPane size = " + zoomPane.getWidth() + " x " + zoomPane.getHeight());
+
+
+        SideBar sidebar = new SideBar(nodeCanvas, project); // adjust ctor if needed
 
         BorderPane root = new BorderPane();
         root.setLeft(sidebar);
         root.setCenter(zoomPane);
 
-        Platform.runLater(() -> {
-            canvas.centerOnCanvasCenter(zoomPane.getWidth(), zoomPane.getHeight());
-            System.out.println("centring");
-            System.out.println("TX = " + canvas.getRootLayer().getTranslateX());
-            System.out.println("TY = " + canvas.getRootLayer().getTranslateY());
-
-        });
-
-
         Scene scene = new Scene(root);
+
+
+        scene.getStylesheets().add(
+            getClass().getResource("/styles/nodes.css").toExternalForm()
+        );
 
         return scene;
     }

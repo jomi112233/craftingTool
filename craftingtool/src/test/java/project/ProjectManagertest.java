@@ -11,7 +11,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import com.jomi.Handlers.ConfigLoader;
 import com.jomi.Handlers.Init.project.Project;
-import com.jomi.Handlers.Item.LoadedItem;
 import com.jomi.Handlers.registry.ProjectManager;
 
 public class ProjectManagertest {

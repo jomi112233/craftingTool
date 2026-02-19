@@ -16,8 +16,8 @@ class OrbRegistryTest {
     void resetRegistry() {
         // Re-register with fresh data each test
         OrbRegistry.registerAll(new OrbFile("basic", List.of(
-            new Orb("chaos_orb", "Chaos Orb", "normal", "rare", 0, 6, "item", "basic"),
-            new Orb("transmute_orb", "Orb of Transmutation", "normal", "magic", 0, 2, "item", "basic")
+            new Orb("chaos_orb", "Chaos Orb", "normal", "rare", 0, 6, "item"),
+            new Orb("transmute_orb", "Orb of Transmutation", "normal", "magic", 0, 2, "item")
         )));
     }
 

@@ -21,8 +21,7 @@ public class OrbLoaderTest {
             newRarity,
             removeCount,
             addCount,
-            target,
-            "basic"
+            target
         );
     }
 }

@@ -7,7 +7,6 @@ public record Orb(
     String newRarity,
     int removeModifierCount,
     int addedModifierCount,
-    String target,
 
     String currencyType
 ) { }

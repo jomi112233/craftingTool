@@ -29,7 +29,6 @@ public class OrbLoaderTest {
         assertEquals("rare", chaos.newRarity());
         assertEquals(1, chaos.removeModifierCount());
         assertEquals(1, chaos.addedModifierCount());
-        assertEquals("any", chaos.target());
 
 
     }

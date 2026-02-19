@@ -1,10 +1,7 @@
 package com.jomi.GUI.simlatorParts;
 
-import java.io.File;
-
 import com.jomi.App;
 import com.jomi.GUI.simlatorParts.canvas.NodeCanvas;
-import com.jomi.Handlers.ConfigLoader;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
 import com.jomi.Util.ProjectActions;
@@ -12,7 +9,6 @@ import com.jomi.Util.ProjectActions;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 
 public class SideBar extends VBox {
     private final Project project;
@@ -31,7 +27,7 @@ public class SideBar extends VBox {
         addNode.setOnAction(e -> {
             Node node = new Node("new node", 200, 200, true, true);
             canvas.addNode(node);
-            project.addNode(node);
+            this.project.addNode(node);
             System.out.println("Total Nodes: " + project.getNodeSize());
             System.out.println("node IDs: " + project.getAllNodeIds());
         });
@@ -66,7 +62,7 @@ public class SideBar extends VBox {
         
         Button load = new Button("Load");
         load.setOnAction(e -> {
-            ProjectActions.loadProject();;
+            ProjectActions.loadProject();
         });
 
 
