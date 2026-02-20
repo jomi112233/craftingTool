@@ -1,25 +1,25 @@
 package com.jomi.Handlers.Init.basicCurrency;
 
-import java.io.InputStream;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class OrbLoader {
+
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public static OrbFile load(String path) {
-    try {
-        InputStream stream = OrbLoader.class.getClassLoader().getResourceAsStream(path);
+    public static OrbFile loadFromFile(Path path) {
+        try {
+            if (!Files.exists(path)) {
+                throw new RuntimeException("Orb file does not exist: " + path);
+            }
 
-        if (stream == null) {
-            throw new RuntimeException("Could not find orb file in resources: " + path);
+            return mapper.readValue(path.toFile(), OrbFile.class);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load orb file from filesystem: " + path, e);
         }
-
-        return mapper.readValue(stream, OrbFile.class);
-
-    } catch (Exception e) {
-        throw new RuntimeException("Failed to load orb file: " + path, e);
     }
-}
 
 }

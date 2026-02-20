@@ -1,0 +1,96 @@
+/* ============================
+   NODE BASE
+   ============================ */
+.node-root {
+    -fx-background-color: linear-gradient(to bottom, #2b2b2b, #1a1a1a);
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #444;
+    -fx-border-width: 1.5;
+    -fx-padding: 0;
+    -fx-pref-width: 300;
+    -fx-min-width: 260;
+    -fx-max-width: 500;
+    fx-pref-height: 60; 
+}
+
+/* ============================
+   HEADER
+   ============================ */
+.node-header {
+    -fx-background-color: #3a3a3a;
+    -fx-background-radius: 12 12 12 12;
+    -fx-padding: 6 10;
+    -fx-spacing: 6;
+    -fx-alignment: center;
+}
+
+.node-title {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.node-info {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
+
+/* ============================
+   TOGGLE BUTTON (+ / –)
+   ============================ */
+.node-toggle {
+    -fx-background-color: #222;
+    -fx-text-fill: #eee;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #555;
+    -fx-border-width: 1;
+    -fx-padding: 2 6;
+}
+
+.node-toggle:hover {
+    -fx-border-color: #888;
+}
+.node-root:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.801), 8, 0.3, 0, 0);
+}
+
+
+.node-selected-currency {
+    -fx-text-fill: #ffd700; /* gold */
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.node-selected-omen {
+    -fx-text-fill: #a0ffa0; /* greenish */
+    -fx-font-size: 12px;
+}
+
+
+/* ============================
+   BODY
+   ============================ */
+.node-body {
+    -fx-padding: 10;
+    -fx-spacing: 8;
+}
+
+.node-section-title {
+    -fx-text-fill: #ddd;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 0 2 0;
+}
+
+.node-modifier {
+    -fx-text-fill: #bbb;
+    -fx-font-size: 12px;
+}
+

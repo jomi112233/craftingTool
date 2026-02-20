@@ -1,0 +1,58 @@
+{
+    "currencyType": "basic",
+    "orbs": [
+        {
+            "id": "transmutation_orb",
+            "name": "orb of transmutation",
+            "minRarity": "normal",
+            "newRarity": "magic",
+            "removeModifierCount": 0,
+            "addedModifierCount": 1
+        },
+
+        {
+            "id": "Augmentation_orb",
+            "name": "orb of augmentation",
+            "minRarity": "magic",
+            "newRarity": "magic",
+            "removeModifierCount": 0,
+            "addedModifierCount": 1
+        },
+
+        {
+            "id": "regal_orb",
+            "name": "regal orb",
+            "minRarity": "magic",
+            "newRarity": "rare",
+            "removeModifierCount": 0,
+            "addedModifierCount": 1
+        },
+
+        {
+            "id": "exalted_orb",
+            "name": "exalted orb",
+            "minRarity": "rare",
+            "newRarity": "rare",
+            "removeModifierCount": 0,
+            "addedModifierCount": 1
+        },
+
+        {
+            "id": "chaos_orb",
+            "name": "chaos orb",
+            "minRarity": "rare",
+            "newRarity": "rare",
+            "removeModifierCount": 1,
+            "addedModifierCount": 1
+        },
+
+        {
+            "id": "annul_orb",
+            "name": "orb of annulment",
+            "minRarity": "normal",
+            "newRarity": "any",
+            "removeModifierCount": 1,
+            "addedModifierCount": 0
+        }
+    ]
+}

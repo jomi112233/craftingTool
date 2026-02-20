@@ -1,0 +1,118 @@
+{
+  "id" : "63f900c9-75ad-49b4-8491-3d69e088e47e",
+  "name" : "projekti",
+  "itemType" : "weapons/talisman",
+  "finalSimulatedItem" : null,
+  "createdAt" : "2026-02-21T00:45:12.0522328",
+  "lastModifiedAt" : "2026-02-21T00:45:12.0532594",
+  "nodes" : [ {
+    "id" : "29a258f7-405b-4784-8947-05ab5b6d061a",
+    "type" : "start",
+    "xPos" : 140.0,
+    "yPos" : 277.0,
+    "inputPort" : false,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "410a1fd7-8c24-4bfa-8d4a-820c145556c3",
+    "type" : "basic",
+    "xPos" : 2285.0,
+    "yPos" : 303.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "exalted_orb" ]
+  }, {
+    "id" : "f931aca5-b47e-4504-8f66-cee2c9f26862",
+    "type" : "basic",
+    "xPos" : 1202.0,
+    "yPos" : 500.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "regal_orb" ]
+  }, {
+    "id" : "79f13d9d-818f-4bae-a302-a89a23a10a17",
+    "type" : "basic",
+    "xPos" : 848.0,
+    "yPos" : 284.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "Augmentation_orb" ]
+  }, {
+    "id" : "4339dba7-c242-468c-a19d-320a56de06fc",
+    "type" : "basic",
+    "xPos" : 481.0,
+    "yPos" : 471.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "transmutation_orb" ]
+  }, {
+    "id" : "74138b5c-a523-4a31-bfb9-9f4464556b4e",
+    "type" : "basic",
+    "xPos" : 1559.0,
+    "yPos" : 273.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "exalted_orb", "sinistral_exaltation" ]
+  }, {
+    "id" : "e5628276-0b03-4725-976d-c43935f298a0",
+    "type" : "end",
+    "xPos" : 2661.0,
+    "yPos" : 441.0,
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  }, {
+    "id" : "ba768026-ffd5-4b72-b405-d745796ed9a0",
+    "type" : "basic",
+    "xPos" : 1915.0,
+    "yPos" : 548.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "exalted_orb" ]
+  } ],
+  "connections" : [ {
+    "fromNodeId" : "29a258f7-405b-4784-8947-05ab5b6d061a",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "a9fc3d3d-71fd-422a-8088-2ca513fc71d8",
+    "toNodeID" : "4339dba7-c242-468c-a19d-320a56de06fc"
+  }, {
+    "fromNodeId" : "4339dba7-c242-468c-a19d-320a56de06fc",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "c373ac9b-65a6-49b4-b256-cf964bf41bed",
+    "toNodeID" : "79f13d9d-818f-4bae-a302-a89a23a10a17"
+  }, {
+    "fromNodeId" : "79f13d9d-818f-4bae-a302-a89a23a10a17",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "a955bc71-c1cc-40fc-a549-5ac5d28dfba6",
+    "toNodeID" : "f931aca5-b47e-4504-8f66-cee2c9f26862"
+  }, {
+    "fromNodeId" : "f931aca5-b47e-4504-8f66-cee2c9f26862",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "fa6f2977-b085-4840-82d1-3b339a08056a",
+    "toNodeID" : "74138b5c-a523-4a31-bfb9-9f4464556b4e"
+  }, {
+    "fromNodeId" : "74138b5c-a523-4a31-bfb9-9f4464556b4e",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "70149724-7aac-4c7b-8f33-32a6895c4403",
+    "toNodeID" : "ba768026-ffd5-4b72-b405-d745796ed9a0"
+  }, {
+    "fromNodeId" : "ba768026-ffd5-4b72-b405-d745796ed9a0",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "1202af45-7df0-4ca1-8bb9-d35fd5f9256e",
+    "toNodeID" : "410a1fd7-8c24-4bfa-8d4a-820c145556c3"
+  }, {
+    "fromNodeId" : "410a1fd7-8c24-4bfa-8d4a-820c145556c3",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "42a516cb-456f-48b8-8151-f4ace7da077c",
+    "toNodeID" : "e5628276-0b03-4725-976d-c43935f298a0"
+  } ],
+  "allNodeIds" : [ "29a258f7-405b-4784-8947-05ab5b6d061a", "410a1fd7-8c24-4bfa-8d4a-820c145556c3", "f931aca5-b47e-4504-8f66-cee2c9f26862", "79f13d9d-818f-4bae-a302-a89a23a10a17", "4339dba7-c242-468c-a19d-320a56de06fc", "74138b5c-a523-4a31-bfb9-9f4464556b4e", "e5628276-0b03-4725-976d-c43935f298a0", "ba768026-ffd5-4b72-b405-d745796ed9a0" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/63f900c9-75ad-49b4-8491-3d69e088e47e/"
+}

@@ -2,7 +2,7 @@ package com.jomi.Handlers.Init.modifiers;
 
 import java.util.List;
 
-public class ModFile {
-    public String itemClass;
-    public List<Mod> mods;
-}
+public record ModFile (
+    String itemClass,
+    List<Mod> mods
+) { }

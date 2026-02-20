@@ -2,14 +2,11 @@ package com.jomi.Handlers.Init.modifiers;
 
 import java.util.List;
 
-public class Mod {
-    public String id;
-    public boolean prefix;
-    public boolean suffix;
-    public String name;
-    public String[] tags;
-    public List<ModTier> tiers;
-
-    public String itemClass;
-}
-
+public record Mod(
+    String id,
+    boolean prefix,
+    boolean suffix,
+    String name,
+    List<String> tags,
+    List<ModTier> tiers
+) { }

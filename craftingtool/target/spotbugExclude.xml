@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<FindBugsFilter>
+    <Match>
+        <Class name="com.jomi.Handlers.Init.basicCurrency.OrbFile"/>
+    </Match>
+
+    <Match>
+        <Class name="com.jomi.Handlers.Init.basicCurrency.Orb"/>
+    </Match>
+
+    <Match>
+        <Class name="com.jomi.Handlers.Init.modifiers.Mod"/>
+    </Match>
+
+    <Match>
+        <Class name="com.jomi.Handlers.Init.modifiers.ModFile"/>
+    </Match>
+
+    <Match>
+        <Class name="com.jomi.Handlers.Init.modifiers.ModTier"/>
+    </Match>
+
+    <Match>
+        <Class name="com.jomi.Handlers.Init.modifiers.StatRange"/>
+    </Match>
+
+     <Match>
+        <Class name="com.jomi.Handlers.Item.LoadedItem"/>
+    </Match>
+
+    <Match> 
+        <Bug code="EI"/> 
+    </Match>
+
+    <Match> 
+        <Bug code="EI2"/> 
+    </Match>
+
+</FindBugsFilter>
