@@ -1,5 +1,6 @@
 package com.jomi.Handlers.registry;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,4 +28,7 @@ public class Omenregistry {
         OMENS.clear();
     }
     
+    public static Collection<Omen> getAll() {
+        return OMENS.values();
+    }
 }

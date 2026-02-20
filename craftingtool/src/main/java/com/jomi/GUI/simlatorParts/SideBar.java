@@ -4,9 +4,12 @@ import com.jomi.App;
 import com.jomi.GUI.simlatorParts.canvas.NodeCanvas;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
+import com.jomi.Handlers.Item.LoadedItem;
 import com.jomi.Util.ProjectActions;
+import com.jomi.Util.SimulationRunner;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
@@ -42,11 +45,21 @@ public class SideBar extends VBox {
             canvas.addNode(node);
         });
 
-        Button addEndNode = new Button("end Node");
+        Button addBasicCurrencyNode = new Button("Basic Currency Node");
+        addBasicCurrencyNode.setPrefWidth(120);
+
+        addBasicCurrencyNode.setOnAction(e -> {
+            Node node = new Node("basic", 200, 200, true, true);
+            project.addNode(node);
+            canvas.addNode(node);
+        });
+
+
+        Button addEndNode = new Button("End Node");
         addEndNode.setPrefWidth(120);
 
         addEndNode.setOnAction(e -> {
-            Node node = new Node("End", 200, 200, true, false);
+            Node node = new Node("end", 200, 200, true, false);
             project.addNode(node);
             canvas.addNode(node);
         });
@@ -65,12 +78,35 @@ public class SideBar extends VBox {
             ProjectActions.loadProject();
         });
 
+        Button runButton = new Button("Run Simulation");
+        runButton.setOnAction(e -> {
+            try {
+                LoadedItem result = SimulationRunner.run(project, canvas.getNodeViewMap());
+                System.out.println("Simulation complete!");
+
+                // Optional: show a popup
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Simulation Complete");
+                alert.setContentText("Final item saved to baseItemCompleted.json");
+                alert.show();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Simulation Failed");
+                alert.setContentText(ex.getMessage());
+                alert.show();
+            }
+        });
+
+
 
 
 
         save.setPrefWidth(120);
         load.setPrefWidth(120);
 
-        getChildren().addAll(addNode, addStartNode, addEndNode, save, load);
+        getChildren().addAll(addNode, addBasicCurrencyNode, addStartNode, addEndNode, save, load, runButton);
     }
 }

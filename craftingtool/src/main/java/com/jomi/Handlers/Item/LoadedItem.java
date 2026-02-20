@@ -44,4 +44,17 @@ public class LoadedItem {
         this.suffix = suffix;
     }
 
+    public LoadedItem copy() {
+        LoadedItem c = new LoadedItem();
+        c.itemLevel = this.itemLevel;
+        c.itemRarity = this.itemRarity;
+        c.loadedItemClass = this.loadedItemClass;
+
+        c.prefix = new ArrayList<>(this.prefix);
+        c.suffix = new ArrayList<>(this.suffix);
+
+        return c;
+    }
+
+
 }

@@ -3,6 +3,10 @@ package com.jomi.GUI.simlatorParts.canvas;
 import com.jomi.Handlers.Init.project.Connection;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import com.jomi.GUI.simlatorParts.ConnectionView;
 import com.jomi.GUI.simlatorParts.NodeView;
 import com.jomi.Handlers.registry.NodeRegister;
@@ -24,6 +28,8 @@ public class NodeCanvas {
     private final Pane connectionLayer = new Pane();
     private final Pane nodeLayer = new Pane();
     private final Pane simulatorObjectLayer = new Pane();
+
+    private final Map<String, NodeView> nodeViewMap = new HashMap<>();
 
     private static double width = 4000;
     private static double height = 2000;
@@ -118,13 +124,21 @@ public class NodeCanvas {
         NodeView view = NodeRegister.createNodeView(node, project);
         nodeLayer.getChildren().add(view);
 
+        nodeViewMap.put(node.getId(), view);   // <-- FIX
+
         Platform.runLater(() -> {
             view.setLayoutX(node.getxPos());
             view.setLayoutY(node.getyPos());
         });
     }
 
+
     public void addSimulatorObject(javafx.scene.Node obj) {
         simulatorObjectLayer.getChildren().add(obj);
     }
+
+    public Map<String, NodeView> getNodeViewMap() {
+        return nodeViewMap;
+    }
+
 }

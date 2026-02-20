@@ -62,6 +62,16 @@
 }
 
 
+.node-selected-currency {
+    -fx-text-fill: #ffd700; /* gold */
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.node-selected-omen {
+    -fx-text-fill: #a0ffa0; /* greenish */
+    -fx-font-size: 12px;
+}
 
 
 /* ============================

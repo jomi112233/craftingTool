@@ -1,6 +1,6 @@
 {
-  "itemLevel" : 2,
-  "itemRarity" : "Rare",
+  "itemLevel" : 123,
+  "itemRarity" : "Normal",
   "loadedItemClass" : "weapons/talisman",
   "prefix" : [ ],
   "suffix" : [ ]

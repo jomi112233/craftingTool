@@ -4,20 +4,21 @@ import com.jomi.GUI.simlatorParts.NodeView;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
 import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Handlers.registry.ItemRegistry;
 import com.jomi.Util.ModRoller.RolledMod;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Path;
 
-public class StartNode extends NodeView {
+public class EndNode extends NodeView {
 
-    LoadedItem item = getProject().getBaseItem();
+    private LoadedItem finalItem;
 
-    public StartNode(Node node, Project project) {
+    public EndNode(Node node, Project project) {
         super(node, project);
-        setTitle(extractClassName(item.getLoadedItemClass()));
-        setInfo(item.getItemLevel() + "");
-        applyRarityColor(item.getItemRarity());
+        setTitle("End Node");
     }
 
     @Override
@@ -25,12 +26,19 @@ public class StartNode extends NodeView {
         VBox box = new VBox(10);
         box.setFillWidth(true);
 
+        if (finalItem == null) {
+            Label waiting = new Label("Run simulation to see final item.");
+            waiting.getStyleClass().add("node-section-title");
+            box.getChildren().add(waiting);
+            return box;
+        }
+
         // ----- PREFIXES -----
         Label prefixTitle = new Label("Prefix");
         prefixTitle.getStyleClass().add("node-section-title");
 
         VBox prefixList = new VBox(4);
-        for (RolledMod p : item.getPrefix()) {
+        for (RolledMod p : finalItem.getPrefix()) {
 
             String[] parts = p.name().split(",", 2);
 
@@ -54,7 +62,7 @@ public class StartNode extends NodeView {
         suffixTitle.getStyleClass().add("node-section-title");
 
         VBox suffixList = new VBox(4);
-        for (RolledMod s : item.getSuffix()) {
+        for (RolledMod s : finalItem.getSuffix()) {
 
             String[] parts = s.name().split(",", 2);
 
@@ -78,23 +86,19 @@ public class StartNode extends NodeView {
     }
 
 
-
-
-    private String extractClassName(String full) {
-        if (full == null) {
-            return "";
-        }
-        int index = full.lastIndexOf('/');
-        return index >= 0 ? full.substring(index + 1) : full;
+    private void saveFinal() {
+        getProject().saveCompletedBaseItem();
+        setInfo("Saved!");
     }
 
     @Override
     public LoadedItem execute(LoadedItem item) {
-        return getProject().getBaseItem().copy();
+        this.finalItem = item;              // store final item
+        getProject().setFinalSimulatedItem(item);
+        getProject().saveCompletedBaseItem();
+
+        refresh();                          // rebuild UI with final item
+        return item;
     }
-
-
-
-
 }
 

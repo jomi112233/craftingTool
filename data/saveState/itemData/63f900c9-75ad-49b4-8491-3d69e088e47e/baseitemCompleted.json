@@ -1,0 +1,105 @@
+{
+  "itemLevel" : 81,
+  "itemRarity" : "rare",
+  "loadedItemClass" : "weapons/talisman",
+  "prefix" : [ {
+    "modId" : "flat_fire",
+    "name" : "Adds # to # Fire Damage",
+    "tags" : [ "Damage", "Elemental", "Fire", "Attack" ],
+    "tier" : {
+      "tier" : 6,
+      "ilvl" : 46,
+      "weight" : 1100,
+      "stats" : {
+        "fire_min" : {
+          "min" : 30.0,
+          "max" : 37.0
+        },
+        "fire_max" : {
+          "min" : 45.0,
+          "max" : 56.0
+        }
+      }
+    }
+  }, {
+    "modId" : "flat_accuracy",
+    "name" : "+# to Accuracy Rating",
+    "tags" : [ "Attack" ],
+    "tier" : {
+      "tier" : 9,
+      "ilvl" : 1,
+      "weight" : 800,
+      "stats" : {
+        "accuracy" : {
+          "min" : 11.0,
+          "max" : 32.0
+        }
+      }
+    }
+  }, {
+    "modId" : "flat_cold",
+    "name" : "Adds # to # Cold Damage",
+    "tags" : [ "Damage", "Elemental", "Cold", "Attack" ],
+    "tier" : {
+      "tier" : 7,
+      "ilvl" : 33,
+      "weight" : 1000,
+      "stats" : {
+        "cold_min" : {
+          "min" : 16.0,
+          "max" : 23.0
+        },
+        "cold_max" : {
+          "min" : 25.0,
+          "max" : 35.0
+        }
+      }
+    }
+  } ],
+  "suffix" : [ {
+    "modId" : "crit_chance",
+    "name" : "+#% to Critical Hit Chance",
+    "tags" : [ "Critical", "Chance" ],
+    "tier" : {
+      "tier" : 5,
+      "ilvl" : 20,
+      "weight" : 1000,
+      "stats" : {
+        "crit_chance" : {
+          "min" : 1.51,
+          "max" : 2.1
+        }
+      }
+    }
+  }, {
+    "modId" : "stun_duration",
+    "name" : "% increased Stun Duration",
+    "tags" : [ "Utility", "Stun" ],
+    "tier" : {
+      "tier" : 4,
+      "ilvl" : 30,
+      "weight" : 1000,
+      "stats" : {
+        "stun_duration" : {
+          "min" : 17.0,
+          "max" : 19.0
+        }
+      }
+    }
+  }, {
+    "modId" : "life_on_kill",
+    "name" : "Gain # Life per Enemy Killed",
+    "tags" : [ "Life", "Kill" ],
+    "tier" : {
+      "tier" : 3,
+      "ilvl" : 55,
+      "weight" : 750,
+      "stats" : {
+        "life_on_kill" : {
+          "min" : 41.0,
+          "max" : 53.0
+        }
+      }
+    }
+  } ]
+}

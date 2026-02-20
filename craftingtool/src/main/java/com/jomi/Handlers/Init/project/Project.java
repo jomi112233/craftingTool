@@ -1,6 +1,7 @@
 package com.jomi.Handlers.Init.project;
 
 import java.net.URI;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,11 +23,27 @@ public class Project {
     private LoadedItem baseItem;
     private String projectFolderString;
 
+    private LoadedItem finalSimulatedItem;
+
     private final LocalDateTime createdAt;
     private LocalDateTime lastModifiedAt;
 
     private List<Node> nodes;
     private List<Connection> connections;
+
+
+
+
+
+    public LoadedItem getFinalSimulatedItem() {
+        return finalSimulatedItem;
+    }
+
+    public void setFinalSimulatedItem(LoadedItem item) {
+        this.finalSimulatedItem = item;
+    }
+
+
 
     @JsonProperty("projectFolder")
     public void setProjectFolderString(String folder) {
@@ -106,19 +123,21 @@ public class Project {
 
     @JsonIgnore
     public void saveCompletedBaseItem() {
-        if (baseItem == null) {
+        if (finalSimulatedItem == null) {
+            System.err.println("No final simulated item to save.");
             return;
         }
 
         Path folder = getProjectFolder();
 
         try {
-            ItemRegistry.saveToJson(baseItem, folder.resolve("baseitemCompleted.json"));
-            System.out.println("Base item saved.");
+            ItemRegistry.saveToJson(finalSimulatedItem, folder.resolve("baseItemCompleted.json"));
+            System.out.println("Final item saved.");
         } catch (Exception e) {
-            System.err.println("Failed to save base item: " + e.getMessage());
+            System.err.println("Failed to save final item: " + e.getMessage());
         }
     }
+
 
 
 
@@ -226,6 +245,25 @@ public class Project {
     public int connectionSize() {
         return connections.size();
     }
+
+
+    @JsonIgnore
+    public void clearItemRuns() {
+        Path runsFolder = getProjectFolder().resolve("itemruns");
+
+        try {
+            if (Files.exists(runsFolder)) {
+                Files.walk(runsFolder)
+                    .filter(Files::isRegularFile)
+                    .forEach(path -> {
+                        try { Files.delete(path); } catch (Exception ignored) {}
+                    });
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to clear itemruns: " + e.getMessage());
+        }
+    }
+
 
 
 }

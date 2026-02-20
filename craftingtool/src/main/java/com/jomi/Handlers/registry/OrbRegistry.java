@@ -1,5 +1,6 @@
 package com.jomi.Handlers.registry;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,4 +28,9 @@ public class OrbRegistry {
     public static void clear() {
         ORBS.clear();
     }
+
+    public static Collection<Orb> getAll() {
+        return ORBS.values();
+    }
+
 }

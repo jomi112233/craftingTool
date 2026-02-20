@@ -7,6 +7,7 @@ import com.jomi.App;
 import com.jomi.Handlers.Init.project.Connection;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
+import com.jomi.Handlers.Item.LoadedItem;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -288,6 +289,7 @@ public abstract class NodeView extends StackPane {
             case "normal" -> color = "#3a3a3a";
             case "magic"  -> color = "#4b6cff";
             case "rare"   -> color = "#b8860b";
+            case "basecurrency" -> color = "#412e00";
             default       -> color = "#ff0000";
         }
 
@@ -300,6 +302,9 @@ public abstract class NodeView extends StackPane {
     }
 
 
+    public LoadedItem execute(LoadedItem item) {
+        return item;
+    }
 
 
     public Circle getInputPort() {
@@ -319,8 +324,9 @@ public abstract class NodeView extends StackPane {
     }
 
     public void refresh() {
-        
+        body.getChildren().setAll(buildContent());
     }
+
 
     protected Project getProject() {
         return project;

@@ -13,7 +13,7 @@ public class Node {
 
 
 
-    private final List<Action> actions = new ArrayList<>();
+    private final List<String> actions = new ArrayList<>();
 
     public Node() {
 
@@ -28,18 +28,21 @@ public class Node {
         this.outputPort = output;
     }
 
-    public void addActionA(Action action) {
+    public void addActionA(String action) {
         actions.add(action);
     }
 
-    public List<Action> geActions() {
+    public List<String> getActions() {
         return List.copyOf(actions);
     }
 
-    public void run() {
-        for (Action action : actions) {
-            action.execute();
-        }
+    public void setActions(List<String> actions) {
+        this.actions.clear();
+        this.actions.addAll(actions);
+    }
+
+    public void setAction(String action) {
+        actions.add(action);
     }
 
 
