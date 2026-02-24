@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrbRegistry.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Handlers.registry</a> &gt; <span class="el_source">OrbRegistry.java</span></div><h1>OrbRegistry.java</h1><pre class="source lang-java linenums">package com.jomi.Handlers.registry;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.jomi.Handlers.Init.basicCurrency.Orb;
+import com.jomi.Handlers.Init.basicCurrency.OrbFile;
+
+<span class="nc" id="L10">public class OrbRegistry {</span>
+<span class="fc" id="L11">    private static final Map&lt;String, Orb&gt; ORBS = new HashMap&lt;&gt;();</span>
+
+    public static void registerAll(OrbFile file) {
+<span class="fc bfc" id="L14" title="All 2 branches covered.">        for (Orb orb : file.orbs()) {</span>
+<span class="fc" id="L15">            ORBS.put(orb.id(), orb);</span>
+        }
+<span class="fc" id="L17">    }</span>
+
+    public static Orb get(String id) {
+<span class="fc" id="L20">        return ORBS.get(id);</span>
+    }
+
+
+    public static int size() { 
+<span class="fc" id="L25">        return ORBS.size(); </span>
+    }
+
+    public static void clear() {
+<span class="fc" id="L29">        ORBS.clear();</span>
+<span class="fc" id="L30">    }</span>
+
+    public static Collection&lt;Orb&gt; getAll() {
+<span class="fc" id="L33">        return ORBS.values();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

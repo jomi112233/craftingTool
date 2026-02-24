@@ -57,6 +57,11 @@ public class ModRegistry {
         return result;
     }
 
+    public static List<String> getAllItemClasses() {
+        return new ArrayList<>(modsByItemClass.keySet());
+    }
+
+
     public static Mod getById(String id) {
         return modsById.get(id);
     }

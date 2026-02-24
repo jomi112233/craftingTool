@@ -1,0 +1,61 @@
+{
+  "id" : "6c53395e-b2dd-4791-8ef2-23dbdb26a29d",
+  "name" : "testiRojekti",
+  "itemType" : "weapons/talisman",
+  "createdAt" : "2026-02-24T14:53:13.8264695",
+  "lastModifiedAt" : "2026-02-24T14:53:13.828464",
+  "nodes" : [ {
+    "id" : "cab5a4e6-78d5-496c-8343-db8f76613521",
+    "type" : "start",
+    "xPos" : 167.0,
+    "yPos" : 340.0,
+    "inputPort" : false,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "13e893ef-5fbe-4fca-85dd-988d8df1d63c",
+    "type" : "end",
+    "xPos" : 1646.0,
+    "yPos" : 369.0,
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  }, {
+    "id" : "e125a32a-a65f-4fd3-a607-bb0cd3001f0e",
+    "type" : "basic",
+    "xPos" : 671.0,
+    "yPos" : 333.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "exalted_orb", "greater_exaltation", "dextral_exaltation" ]
+  }, {
+    "id" : "334a3452-2699-4b9a-9f9a-59908dac7d3a",
+    "type" : "basic",
+    "xPos" : 1150.0,
+    "yPos" : 457.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "exalted_orb" ]
+  } ],
+  "connections" : [ {
+    "fromNodeId" : "cab5a4e6-78d5-496c-8343-db8f76613521",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "c7a3a20b-e7df-4be0-b68e-ceb824957ee1",
+    "toNodeID" : "e125a32a-a65f-4fd3-a607-bb0cd3001f0e"
+  }, {
+    "fromNodeId" : "e125a32a-a65f-4fd3-a607-bb0cd3001f0e",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "71ad162f-7f72-4b49-9ab4-ddc3709543f2",
+    "toNodeID" : "334a3452-2699-4b9a-9f9a-59908dac7d3a"
+  }, {
+    "fromNodeId" : "334a3452-2699-4b9a-9f9a-59908dac7d3a",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "21614463-30ea-4431-a6cd-1810fa099eb1",
+    "toNodeID" : "13e893ef-5fbe-4fca-85dd-988d8df1d63c"
+  } ],
+  "allNodeIds" : [ "cab5a4e6-78d5-496c-8343-db8f76613521", "13e893ef-5fbe-4fca-85dd-988d8df1d63c", "e125a32a-a65f-4fd3-a607-bb0cd3001f0e", "334a3452-2699-4b9a-9f9a-59908dac7d3a" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/6c53395e-b2dd-4791-8ef2-23dbdb26a29d/"
+}

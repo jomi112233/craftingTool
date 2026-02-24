@@ -1,0 +1,41 @@
+{
+  "itemLevel" : 55,
+  "itemRarity" : "Normal",
+  "loadedItemClass" : "weapons/warStaff",
+  "prefix" : [ {
+    "modId" : "flat_accuracy",
+    "name" : "+# to Accuracy Rating",
+    "tags" : [ "Attack" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 76,
+      "weight" : 200,
+      "stats" : {
+        "accuracy" : {
+          "min" : 451.0,
+          "max" : 550.0
+        }
+      }
+    }
+  }, {
+    "modId" : "inc_phys_acc",
+    "name" : "% increased Physical Damage, +# to Accuracy Rating",
+    "tags" : [ "Damage", "Physical", "Attack" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 81,
+      "weight" : 100,
+      "stats" : {
+        "phys_inc" : {
+          "min" : 75.0,
+          "max" : 79.0
+        },
+        "accuracy" : {
+          "min" : 175.0,
+          "max" : 200.0
+        }
+      }
+    }
+  } ],
+  "suffix" : [ ]
+}

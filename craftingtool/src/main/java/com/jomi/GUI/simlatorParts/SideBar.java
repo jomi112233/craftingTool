@@ -1,5 +1,7 @@
 package com.jomi.GUI.simlatorParts;
 
+import java.util.List;
+
 import com.jomi.App;
 import com.jomi.GUI.simlatorParts.canvas.NodeCanvas;
 import com.jomi.Handlers.Init.project.Node;
@@ -81,13 +83,25 @@ public class SideBar extends VBox {
         Button runButton = new Button("Run Simulation");
         runButton.setOnAction(e -> {
             try {
-                LoadedItem result = SimulationRunner.run(project, canvas.getNodeViewMap());
-                System.out.println("Simulation complete!");
+                // Run branching simulation
+                List<LoadedItem> results = SimulationRunner.run(project, canvas.getNodeViewMap());
+                System.out.println("Simulation complete! Branches: " + results.size());
 
-                // Optional: show a popup
+                // Save each result (optional)
+                int index = 1;
+                for (LoadedItem item : results) {
+                    project.setFinalSimulatedItem(item); // or your own save logic
+                    App.getInstance().getProjectManager().saveFinalItem(project, item, index);
+                    index++;
+                }
+
+                // Show popup
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Simulation Complete");
-                alert.setContentText("Final item saved to baseItemCompleted.json");
+                alert.setContentText(
+                    "Generated " + results.size() + " final items.\n" +
+                    "Each end node produced its own result."
+                );
                 alert.show();
 
             } catch (Exception ex) {
@@ -99,6 +113,7 @@ public class SideBar extends VBox {
                 alert.show();
             }
         });
+
 
 
 

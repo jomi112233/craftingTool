@@ -65,7 +65,6 @@ public class ProjectManager {
 
             Project loaded = mapper.readValue(file.toFile(), Project.class);
 
-            // ⭐ Load base item from its own file
             Path itemPath = loaded.getProjectFolder().resolve("baseitem.json");
             LoadedItem item = ItemRegistry.loadFromJson(itemPath);
             loaded.setBaseItem(item);
@@ -80,5 +79,29 @@ public class ProjectManager {
             return null;
         }
     }
+
+    public void saveFinalItem(Project project, LoadedItem item, int index) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+            // Folder where the project stores its item data
+            Path folder = project.getProjectFolder();
+            Files.createDirectories(folder);
+
+            // File name: result_1.json, result_2.json, ...
+            Path file = folder.resolve("result_" + index + ".json");
+
+            mapper.writeValue(file.toFile(), item);
+
+            System.out.println("Saved branch result to: " + file.toAbsolutePath());
+
+        } catch (Exception e) {
+            System.err.println("Failed to save final item: " + e.getMessage());
+        }
+    }
+
 
 }

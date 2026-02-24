@@ -61,6 +61,10 @@
     -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.801), 8, 0.3, 0, 0);
 }
 
+.node-item:hover {
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-background-radius: 6;
+}
 
 .node-selected-currency {
     -fx-text-fill: #ffd700; /* gold */

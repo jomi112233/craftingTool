@@ -1,7 +1,7 @@
 package com.jomi.Handlers.registry;
 
-import com.jomi.GUI.simlatorParts.NodeView;
 import com.jomi.GUI.simlatorParts.Nodes.StartNode;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.GUI.simlatorParts.Nodes.BasicCurrencyNode;
 import com.jomi.GUI.simlatorParts.Nodes.EndNode;
 import com.jomi.GUI.simlatorParts.Nodes.GenericNode;

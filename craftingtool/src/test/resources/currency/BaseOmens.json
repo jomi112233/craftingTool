@@ -1,0 +1,85 @@
+{
+    "omenType": "baseOmen",
+    "omens": [
+        {   
+            "id": "greater_exaltation",
+            "name": "Greater Exaltation",
+            "usedWith": "exalted_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "BOTH",
+            "targetTags": false,
+            "addExtraModifiers": 1
+        },
+        {   
+            "id": "homogenising_exaltation",
+            "name": "Homogenising Exaltation",
+            "usedWith": "exalted_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "BOTH",
+            "targetTags": true,
+            "addExtraModifiers": 0
+        },
+        {   
+            "id": "sinistral_exaltation",
+            "name": "Sinistral Exaltation",
+            "usedWith": "exalted_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "PREFIX",
+            "targetTags": false,
+            "addExtraModifiers": 0
+        },
+        {   
+            "id": "dextral_exaltation",
+            "name": "Dextral Exaltation",
+            "usedWith": "exalted_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "SUFFIX",
+            "targetTags": false,
+            "addExtraModifiers": 0
+        },
+
+
+        
+        {   
+            "id": "dextral_erasure",
+            "name": "Dextral Erasure",
+            "usedWith": "chaos_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "SUFFIX",
+            "targetTags": false,
+            "addExtraModifiers": 0
+        },
+        {   
+            "id": "sinistral_erasure",
+            "name": "Sinistral Erasure",
+            "usedWith": "chaos_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "PREFIX",
+            "targetTags": false,
+            "addExtraModifiers": 0
+        },
+
+
+
+        {   
+            "id": "dextral_annulment",
+            "name": "Dextral Annulment",
+            "usedWith": "annul_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "SUFFIX",
+            "targetTags": false,
+            "addExtraModifiers": 0
+        },
+        {   
+            "id": "sinistral_annulmnet",
+            "name": "Sinistral Annulment",
+            "usedWith": "annul_orb",
+            "usedWithCurrencyType": "basic",
+            "targetAffix": "PREFIX",
+            "targetTags": false,
+            "addExtraModifiers": 0
+        }
+
+
+    ]
+}

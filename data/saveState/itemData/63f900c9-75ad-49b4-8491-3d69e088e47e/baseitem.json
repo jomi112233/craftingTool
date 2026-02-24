@@ -3,5 +3,20 @@
   "itemRarity" : "Normal",
   "loadedItemClass" : "weapons/talisman",
   "prefix" : [ ],
-  "suffix" : [ ]
+  "suffix" : [ {
+    "modId" : "crit_chance",
+    "name" : "+#% to Critical Hit Chance",
+    "tags" : [ "Critical", "Chance" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 73,
+      "weight" : 125,
+      "stats" : {
+        "crit_chance" : {
+          "min" : 4.41,
+          "max" : 5.0
+        }
+      }
+    }
+  } ]
 }

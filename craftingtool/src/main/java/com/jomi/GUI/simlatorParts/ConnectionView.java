@@ -1,6 +1,7 @@
 package com.jomi.GUI.simlatorParts;
 
 import com.jomi.App;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.Init.project.Connection;
 import com.jomi.Handlers.Init.project.Project;
 

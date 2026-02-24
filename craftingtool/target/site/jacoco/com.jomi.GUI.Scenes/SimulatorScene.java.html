@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimulatorScene.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.GUI.Scenes</a> &gt; <span class="el_source">SimulatorScene.java</span></div><h1>SimulatorScene.java</h1><pre class="source lang-java linenums">package com.jomi.GUI.Scenes;
+
+import com.jomi.App;
+import com.jomi.GUI.simlatorParts.SideBar;
+import com.jomi.GUI.simlatorParts.canvas.NodeCanvas;
+import com.jomi.GUI.simlatorParts.canvas.ZoomPane;
+import com.jomi.Handlers.Init.project.Project;
+
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+
+<span class="nc" id="L12">public class SimulatorScene {</span>
+
+    public Scene createScene() {
+
+<span class="nc" id="L16">        Project project = App.getInstance().getProjectManager().getCurrentProject();</span>
+<span class="nc" id="L17">        NodeCanvas nodeCanvas = new NodeCanvas(project);</span>
+<span class="nc" id="L18">        ZoomPane zoomPane = new ZoomPane(nodeCanvas);</span>
+
+<span class="nc" id="L20">        zoomPane.setStyle(</span>
+<span class="nc" id="L21">            &quot;-fx-background-color: #2b2b2b;&quot;);</span>
+<span class="nc" id="L22">        System.out.println(&quot;ZoomPane size = &quot; + zoomPane.getWidth() + &quot; x &quot; + zoomPane.getHeight());</span>
+
+        // ⭐ Force CSS to re-render after layout
+<span class="nc" id="L25">        zoomPane.widthProperty().addListener((obs, oldV, newV) -&gt; zoomPane.applyCss());</span>
+<span class="nc" id="L26">        zoomPane.heightProperty().addListener((obs, oldV, newV) -&gt; zoomPane.applyCss());</span>
+
+<span class="nc" id="L28">        System.out.println(&quot;ZoomPane size = &quot; + zoomPane.getWidth() + &quot; x &quot; + zoomPane.getHeight());</span>
+
+
+<span class="nc" id="L31">        SideBar sidebar = new SideBar(nodeCanvas, project); // adjust ctor if needed</span>
+
+<span class="nc" id="L33">        BorderPane root = new BorderPane();</span>
+<span class="nc" id="L34">        root.setLeft(sidebar);</span>
+<span class="nc" id="L35">        root.setCenter(zoomPane);</span>
+
+<span class="nc" id="L37">        Scene scene = new Scene(root);</span>
+
+
+<span class="nc" id="L40">        scene.getStylesheets().add(</span>
+<span class="nc" id="L41">            getClass().getResource(&quot;/styles/nodes.css&quot;).toExternalForm()</span>
+        );
+
+<span class="nc" id="L44">        return scene;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

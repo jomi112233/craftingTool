@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NodeCanvas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.GUI.simlatorParts.canvas</a> &gt; <span class="el_source">NodeCanvas.java</span></div><h1>NodeCanvas.java</h1><pre class="source lang-java linenums">package com.jomi.GUI.simlatorParts.canvas;
+
+import com.jomi.Handlers.Init.project.Connection;
+import com.jomi.Handlers.Init.project.Node;
+import com.jomi.Handlers.Init.project.Project;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.jomi.GUI.simlatorParts.ConnectionView;
+import com.jomi.GUI.simlatorParts.NodeView;
+import com.jomi.Handlers.registry.NodeRegister;
+
+import javafx.application.Platform;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
+public class NodeCanvas {
+
+    private static final int GRID_SIZE = 25;
+
+    private final Project project;
+
+<span class="nc" id="L26">    private final Pane rootLayer = new Pane();</span>
+<span class="nc" id="L27">    private final Pane gridLayer = new Pane();</span>
+<span class="nc" id="L28">    private final Pane connectionLayer = new Pane();</span>
+<span class="nc" id="L29">    private final Pane nodeLayer = new Pane();</span>
+<span class="nc" id="L30">    private final Pane simulatorObjectLayer = new Pane();</span>
+
+<span class="nc" id="L32">    private final Map&lt;String, NodeView&gt; nodeViewMap = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L34">    private static double width = 4000;</span>
+<span class="nc" id="L35">    private static double height = 2000;</span>
+
+<span class="nc" id="L37">    public NodeCanvas(Project project) {</span>
+<span class="nc" id="L38">        this.project = project;</span>
+
+<span class="nc" id="L40">        rootLayer.setPrefSize(width, height);</span>
+<span class="nc" id="L41">        rootLayer.getChildren().addAll(</span>
+<span class="nc" id="L42">            gridLayer,</span>
+<span class="nc" id="L43">            connectionLayer,</span>
+<span class="nc" id="L44">            nodeLayer,</span>
+<span class="nc" id="L45">            simulatorObjectLayer</span>
+        );
+
+<span class="nc" id="L48">        drawGrid();</span>
+
+        // Load nodes
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        for (Node node : project.getNodes()) {</span>
+<span class="nc" id="L52">            addNode(node);</span>
+        }
+
+        // Load connections
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        for (Connection c : project.getConnections()) {</span>
+<span class="nc" id="L57">            drawConnection(c);</span>
+        }
+<span class="nc" id="L59">    }</span>
+    
+
+    public Pane getRootLayer() {
+<span class="nc" id="L63">        return rootLayer;</span>
+    }
+
+    public double getWorldWidth() {
+<span class="nc" id="L67">        return width;</span>
+    }
+
+    public double getWorldHeight() {
+<span class="nc" id="L71">        return height;</span>
+    }
+
+    //not used really currently
+    private void drawGrid() {
+<span class="nc" id="L76">        Canvas grid = new Canvas(width, height);</span>
+<span class="nc" id="L77">        GraphicsContext gc = grid.getGraphicsContext2D();</span>
+
+<span class="nc" id="L79">        gc.setStroke(Color.rgb(255, 255, 255, 0));</span>
+<span class="nc" id="L80">        gc.setLineWidth(1);</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (int x = 0; x &lt; width; x += GRID_SIZE) {</span>
+<span class="nc" id="L83">            gc.strokeLine(x, 0, x, height);</span>
+        }
+
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        for (int y = 0; y &lt; height; y += GRID_SIZE) {</span>
+<span class="nc" id="L87">            gc.strokeLine(0, y, width, y);</span>
+        }
+
+<span class="nc" id="L90">        grid.setMouseTransparent(true);</span>
+<span class="nc" id="L91">        gridLayer.getChildren().add(grid);</span>
+<span class="nc" id="L92">    }</span>
+
+    private NodeView findNodeViewById(String id) {
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        for (var child : nodeLayer.getChildren()) {</span>
+<span class="nc bnc" id="L96" title="All 4 branches missed.">            if (child instanceof NodeView view &amp;&amp; view.getNode().getId().equals(id)) {</span>
+<span class="nc" id="L97">                return view;</span>
+            }
+        }
+<span class="nc" id="L100">        return null;</span>
+    }
+
+    public void drawConnection(Connection c) {
+<span class="nc" id="L104">        NodeView fromNode = findNodeViewById(c.getFromNodeId());</span>
+<span class="nc" id="L105">        NodeView toNode   = findNodeViewById(c.getToNodeID());</span>
+
+<span class="nc bnc" id="L107" title="All 4 branches missed.">        if (fromNode == null || toNode == null) {</span>
+<span class="nc" id="L108">            return;</span>
+        }
+
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        var fromPort = c.isFromIsOutput()</span>
+<span class="nc" id="L112">                ? fromNode.getOutputPort()</span>
+<span class="nc" id="L113">                : fromNode.getInputPort();</span>
+
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        var toPort = c.isToIsInput()</span>
+<span class="nc" id="L116">                ? toNode.getInputPort()</span>
+<span class="nc" id="L117">                : toNode.getOutputPort();</span>
+
+<span class="nc" id="L119">        ConnectionView line = new ConnectionView(fromPort, toPort, c, project);</span>
+<span class="nc" id="L120">        connectionLayer.getChildren().add(line);</span>
+<span class="nc" id="L121">    }</span>
+
+    public void addNode(Node node) {
+<span class="nc" id="L124">        NodeView view = NodeRegister.createNodeView(node, project);</span>
+<span class="nc" id="L125">        nodeLayer.getChildren().add(view);</span>
+
+<span class="nc" id="L127">        nodeViewMap.put(node.getId(), view);   // &lt;-- FIX</span>
+
+<span class="nc" id="L129">        Platform.runLater(() -&gt; {</span>
+<span class="nc" id="L130">            view.setLayoutX(node.getxPos());</span>
+<span class="nc" id="L131">            view.setLayoutY(node.getyPos());</span>
+<span class="nc" id="L132">        });</span>
+<span class="nc" id="L133">    }</span>
+
+
+    public void addSimulatorObject(javafx.scene.Node obj) {
+<span class="nc" id="L137">        simulatorObjectLayer.getChildren().add(obj);</span>
+<span class="nc" id="L138">    }</span>
+
+    public Map&lt;String, NodeView&gt; getNodeViewMap() {
+<span class="nc" id="L141">        return nodeViewMap;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

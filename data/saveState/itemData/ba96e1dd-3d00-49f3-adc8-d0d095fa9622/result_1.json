@@ -1,0 +1,71 @@
+{
+  "itemLevel" : 81,
+  "itemRarity" : "rare",
+  "loadedItemClass" : "weapons/warStaff",
+  "prefix" : [ {
+    "modId" : "flat_phys_damage",
+    "name" : "Adds # to # Physical Damage",
+    "tags" : [ "Damage", "Physical", "Attack" ],
+    "tier" : {
+      "tier" : 8,
+      "ilvl" : 8,
+      "weight" : 1000,
+      "stats" : {
+        "phys_min" : {
+          "min" : 5.0,
+          "max" : 8.0
+        },
+        "phys_max" : {
+          "min" : 10.0,
+          "max" : 15.0
+        }
+      }
+    }
+  } ],
+  "suffix" : [ {
+    "modId" : "inc_attack_speed",
+    "name" : "% increased Attack Speed",
+    "tags" : [ "Attack", "Speed" ],
+    "tier" : {
+      "tier" : 5,
+      "ilvl" : 30,
+      "weight" : 1000,
+      "stats" : {
+        "attack_speed" : {
+          "min" : 14.0,
+          "max" : 16.0
+        }
+      }
+    }
+  }, {
+    "modId" : "flat_int",
+    "name" : "+# to Intelligence",
+    "tags" : [ "Attribute" ],
+    "tier" : {
+      "tier" : 7,
+      "ilvl" : 11,
+      "weight" : 250,
+      "stats" : {
+        "int" : {
+          "min" : 9.0,
+          "max" : 12.0
+        }
+      }
+    }
+  }, {
+    "modId" : "flat_dex",
+    "name" : "+# to Dexterity",
+    "tags" : [ "Attribute" ],
+    "tier" : {
+      "tier" : 4,
+      "ilvl" : 44,
+      "weight" : 750,
+      "stats" : {
+        "dex" : {
+          "min" : 21.0,
+          "max" : 24.0
+        }
+      }
+    }
+  } ]
+}
