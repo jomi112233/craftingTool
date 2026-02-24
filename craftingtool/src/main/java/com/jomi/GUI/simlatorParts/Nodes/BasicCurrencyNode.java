@@ -3,7 +3,8 @@ package com.jomi.GUI.simlatorParts.Nodes;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jomi.GUI.simlatorParts.NodeView;
+import com.jomi.GUI.simlatorParts.baseNode.NodeSection;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.Init.basicCurrency.Orb;
 import com.jomi.Handlers.Init.omen.Omen;
 import com.jomi.Handlers.Init.project.Node;
@@ -13,11 +14,6 @@ import com.jomi.Handlers.registry.Omenregistry;
 import com.jomi.Handlers.registry.OrbRegistry;
 import com.jomi.Util.craftingAction.BasicCurrencyAction;
 
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-
 public class BasicCurrencyNode extends NodeView {
 
     public BasicCurrencyNode(Node node, Project project) {
@@ -26,88 +22,73 @@ public class BasicCurrencyNode extends NodeView {
         refresh();
     }
 
+    /**
+     * NEW: Instead of building JavaFX UI, we return structured data.
+     */
     @Override
-    protected VBox buildContent() {
-        VBox box = new VBox(8);
+    protected List<NodeSection> getSections() {
+
+        Node data = getNode();
+        List<String> actions = data.getActions();
+
+        List<NodeSection> sections = new ArrayList<>();
+
+        // SECTION 1 — Selected actions
+        if (!actions.isEmpty()) {
+
+            List<String> selectedItems = new ArrayList<>();
+
+            // First action = currency
+            selectedItems.add("Currency: " + actions.get(0));
+
+            // Remaining actions = omens
+            for (int i = 1; i < actions.size(); i++) {
+                selectedItems.add("Omen: " + actions.get(i));
+            }
+
+            sections.add(new NodeSection("Selected", selectedItems));
+        }
+
+        // SECTION 2 — Dropdown options
+        if (actions.isEmpty()) {
+            // No currency selected → show currency list
+            List<String> currencyList = OrbRegistry.getAll().stream()
+                    .map(Orb::id)
+                    .toList();
+
+            sections.add(new NodeSection("Select Currency", currencyList));
+
+        } else {
+            // Currency selected → show omens
+            List<String> omenList = Omenregistry.getAll().stream()
+                    .map(Omen::id)
+                    .toList();
+
+            sections.add(new NodeSection("Add Omen", omenList));
+        }
+
+        return sections;
+    }
+
+    /**
+     * NodeView will render the section items as labels.
+     * But we still need to handle clicks on items.
+     */
+    @Override
+    protected void onSectionItemClicked(String sectionTitle, String itemText) {
 
         Node data = getNode();
 
-        // Show selected actions
-        if (!data.getActions().isEmpty()) {
-            VBox selectedBox = new VBox(4);
-            Label selectedLabel = new Label("Selected:");
-            selectedLabel.getStyleClass().add("node-section-title");
-            selectedBox.getChildren().add(selectedLabel);
-
-            // First action = currency
-            String currency = data.getActions().get(0);
-            Label currencyLabel = new Label("• " + currency);
-            currencyLabel.getStyleClass().add("node-selected-currency");
-            selectedBox.getChildren().add(currencyLabel);
-
-            // Remaining actions = omens
-            for (int i = 1; i < data.getActions().size(); i++) {
-                String omen = data.getActions().get(i);
-                Label omenLabel = new Label("• " + omen);
-                omenLabel.getStyleClass().add("node-selected-omen");
-                selectedBox.getChildren().add(omenLabel);
-            }
-
-            box.getChildren().add(selectedBox);
+        if (sectionTitle.equals("Select Currency")) {
+            data.setAction(itemText);
+            refresh();
+            return;
         }
 
-        // Show dropdown depending on state
-        if (data.getActions().isEmpty()) {
-            box.getChildren().add(buildCurrencyDropdown());
-        } else {
-            box.getChildren().add(buildOmenDropdown());
+        if (sectionTitle.equals("Add Omen")) {
+            data.setAction(itemText);
+            refresh();
         }
-
-        return box;
-    }
-
-
-
-    private VBox buildCurrencyDropdown() {
-        VBox box = new VBox(6);
-
-        Label label = new Label("Select Currency:");
-        ComboBox<String> combo = new ComboBox<>();
-
-        OrbRegistry.getAll().forEach(orb -> combo.getItems().add(orb.id()));
-
-        combo.setOnAction(e -> {
-            String selected = combo.getValue();
-            if (selected != null) {
-                getNode().setAction(selected);  // <-- FIXED
-                refresh();
-            }
-        });
-
-        box.getChildren().addAll(label, combo);
-        return box;
-    }
-
-
-
-    private VBox buildOmenDropdown() {
-        VBox box = new VBox(6);
-
-        Label label = new Label("Add Omen:");
-        ComboBox<String> combo = new ComboBox<>();
-
-        Omenregistry.getAll().forEach(omen -> combo.getItems().add(omen.id()));
-
-        combo.setOnAction(e -> {
-            String selected = combo.getValue();
-            if (selected != null) {
-                getNode().setAction(selected);
-                refresh();
-            }
-        });
-
-        box.getChildren().addAll(label, combo);
-        return box;
     }
 
     @Override
@@ -135,9 +116,8 @@ public class BasicCurrencyNode extends NodeView {
         return item;
     }
 
-
-
-
-    
+    @Override
+    protected void edit() {
+        System.out.println("BasicCurrencyNode has no editable fields.");
+    }
 }
-

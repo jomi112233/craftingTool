@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SideBar.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.GUI.simlatorParts</a> &gt; <span class="el_source">SideBar.java</span></div><h1>SideBar.java</h1><pre class="source lang-java linenums">package com.jomi.GUI.simlatorParts;
+
+import java.util.List;
+
+import com.jomi.App;
+import com.jomi.GUI.simlatorParts.canvas.NodeCanvas;
+import com.jomi.Handlers.Init.project.Node;
+import com.jomi.Handlers.Init.project.Project;
+import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Util.ProjectActions;
+import com.jomi.Util.SimulationRunner;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+
+public class SideBar extends VBox {
+    private final Project project;
+
+
+<span class="nc" id="L22">    public SideBar(NodeCanvas canvas, Project project) {</span>
+<span class="nc" id="L23">        this.project = project;</span>
+
+<span class="nc" id="L25">        setPadding(new Insets(10));</span>
+<span class="nc" id="L26">        setSpacing(10);</span>
+<span class="nc" id="L27">        setStyle(&quot;-fx-background-color: #333333;&quot;);</span>
+
+<span class="nc" id="L29">        Button addNode = new Button(&quot;Basic Node&quot;);</span>
+<span class="nc" id="L30">        addNode.setPrefWidth(120);</span>
+
+<span class="nc" id="L32">        addNode.setOnAction(e -&gt; {</span>
+<span class="nc" id="L33">            Node node = new Node(&quot;new node&quot;, 200, 200, true, true);</span>
+<span class="nc" id="L34">            canvas.addNode(node);</span>
+<span class="nc" id="L35">            this.project.addNode(node);</span>
+<span class="nc" id="L36">            System.out.println(&quot;Total Nodes: &quot; + project.getNodeSize());</span>
+<span class="nc" id="L37">            System.out.println(&quot;node IDs: &quot; + project.getAllNodeIds());</span>
+<span class="nc" id="L38">        });</span>
+
+
+<span class="nc" id="L41">        Button addStartNode = new Button(&quot;Start Node&quot;);</span>
+<span class="nc" id="L42">        addStartNode.setPrefWidth(120);</span>
+
+<span class="nc" id="L44">        addStartNode.setOnAction(e -&gt; {</span>
+<span class="nc" id="L45">            Node node = new Node(&quot;start&quot;, 200, 200, false, true);</span>
+<span class="nc" id="L46">            project.addNode(node);</span>
+<span class="nc" id="L47">            canvas.addNode(node);</span>
+<span class="nc" id="L48">        });</span>
+
+<span class="nc" id="L50">        Button addBasicCurrencyNode = new Button(&quot;Basic Currency Node&quot;);</span>
+<span class="nc" id="L51">        addBasicCurrencyNode.setPrefWidth(120);</span>
+
+<span class="nc" id="L53">        addBasicCurrencyNode.setOnAction(e -&gt; {</span>
+<span class="nc" id="L54">            Node node = new Node(&quot;basic&quot;, 200, 200, true, true);</span>
+<span class="nc" id="L55">            project.addNode(node);</span>
+<span class="nc" id="L56">            canvas.addNode(node);</span>
+<span class="nc" id="L57">        });</span>
+
+
+<span class="nc" id="L60">        Button addEndNode = new Button(&quot;End Node&quot;);</span>
+<span class="nc" id="L61">        addEndNode.setPrefWidth(120);</span>
+
+<span class="nc" id="L63">        addEndNode.setOnAction(e -&gt; {</span>
+<span class="nc" id="L64">            Node node = new Node(&quot;end&quot;, 200, 200, true, false);</span>
+<span class="nc" id="L65">            project.addNode(node);</span>
+<span class="nc" id="L66">            canvas.addNode(node);</span>
+<span class="nc" id="L67">        });</span>
+
+
+
+
+<span class="nc" id="L72">        Button save = new Button(&quot;Save&quot;);</span>
+<span class="nc" id="L73">        save.setOnAction(e -&gt; {</span>
+<span class="nc" id="L74">            App.getInstance().getProjectManager().saveProject(project);</span>
+<span class="nc" id="L75">        });</span>
+
+        
+<span class="nc" id="L78">        Button load = new Button(&quot;Load&quot;);</span>
+<span class="nc" id="L79">        load.setOnAction(e -&gt; {</span>
+<span class="nc" id="L80">            ProjectActions.loadProject();</span>
+<span class="nc" id="L81">        });</span>
+
+<span class="nc" id="L83">        Button runButton = new Button(&quot;Run Simulation&quot;);</span>
+<span class="nc" id="L84">        runButton.setOnAction(e -&gt; {</span>
+            try {
+                // Run branching simulation
+<span class="nc" id="L87">                List&lt;LoadedItem&gt; results = SimulationRunner.run(project, canvas.getNodeViewMap());</span>
+<span class="nc" id="L88">                System.out.println(&quot;Simulation complete! Branches: &quot; + results.size());</span>
+
+                // Save each result (optional)
+<span class="nc" id="L91">                int index = 1;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                for (LoadedItem item : results) {</span>
+<span class="nc" id="L93">                    project.setFinalSimulatedItem(item); // or your own save logic</span>
+<span class="nc" id="L94">                    App.getInstance().getProjectManager().saveFinalItem(project, item, index);</span>
+<span class="nc" id="L95">                    index++;</span>
+                }
+
+                // Show popup
+<span class="nc" id="L99">                Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L100">                alert.setHeaderText(&quot;Simulation Complete&quot;);</span>
+<span class="nc" id="L101">                alert.setContentText(</span>
+<span class="nc" id="L102">                    &quot;Generated &quot; + results.size() + &quot; final items.\n&quot; +</span>
+                    &quot;Each end node produced its own result.&quot;
+                );
+<span class="nc" id="L105">                alert.show();</span>
+
+<span class="nc" id="L107">            } catch (Exception ex) {</span>
+<span class="nc" id="L108">                ex.printStackTrace();</span>
+
+<span class="nc" id="L110">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L111">                alert.setHeaderText(&quot;Simulation Failed&quot;);</span>
+<span class="nc" id="L112">                alert.setContentText(ex.getMessage());</span>
+<span class="nc" id="L113">                alert.show();</span>
+            }
+<span class="nc" id="L115">        });</span>
+
+
+
+
+
+
+<span class="nc" id="L122">        save.setPrefWidth(120);</span>
+<span class="nc" id="L123">        load.setPrefWidth(120);</span>
+
+<span class="nc" id="L125">        getChildren().addAll(addNode, addBasicCurrencyNode, addStartNode, addEndNode, save, load, runButton);</span>
+<span class="nc" id="L126">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

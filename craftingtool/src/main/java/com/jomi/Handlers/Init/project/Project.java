@@ -22,7 +22,8 @@ public class Project {
     @JsonIgnore
     private LoadedItem baseItem;
     private String projectFolderString;
-
+    
+    @JsonIgnore
     private LoadedItem finalSimulatedItem;
 
     private final LocalDateTime createdAt;
@@ -34,11 +35,11 @@ public class Project {
 
 
 
-
+    @JsonIgnore
     public LoadedItem getFinalSimulatedItem() {
         return finalSimulatedItem;
     }
-
+    @JsonIgnore
     public void setFinalSimulatedItem(LoadedItem item) {
         this.finalSimulatedItem = item;
     }

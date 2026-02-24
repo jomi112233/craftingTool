@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jomi.GUI.simlatorParts.ConnectionView;
-import com.jomi.GUI.simlatorParts.NodeView;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.registry.NodeRegister;
 
 import javafx.application.Platform;
@@ -47,17 +47,24 @@ public class NodeCanvas {
 
         drawGrid();
 
-        // Load nodes
+
+        drawNodes();
+        drawConnections();     
+    }
+
+
+    public void drawNodes() {
         for (Node node : project.getNodes()) {
             addNode(node);
         }
+    }
 
-        // Load connections
+    public void drawConnections() {
         for (Connection c : project.getConnections()) {
             drawConnection(c);
         }
     }
-    
+
 
     public Pane getRootLayer() {
         return rootLayer;
@@ -70,6 +77,8 @@ public class NodeCanvas {
     public double getWorldHeight() {
         return height;
     }
+
+    
 
     //not used really currently
     private void drawGrid() {

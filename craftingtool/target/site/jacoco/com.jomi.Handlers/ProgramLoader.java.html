@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProgramLoader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Handlers</a> &gt; <span class="el_source">ProgramLoader.java</span></div><h1>ProgramLoader.java</h1><pre class="source lang-java linenums">package com.jomi.Handlers;
+
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
+
+import com.jomi.Handlers.Init.basicCurrency.OrbFile;
+import com.jomi.Handlers.Init.basicCurrency.OrbLoader;
+import com.jomi.Handlers.Init.modifiers.ModFile;
+import com.jomi.Handlers.Init.modifiers.ModLoader;
+import com.jomi.Handlers.Init.omen.Omen;
+import com.jomi.Handlers.Init.omen.OmenFile;
+import com.jomi.Handlers.Init.omen.OmenLoader;
+import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Handlers.registry.ModRegistry;
+import com.jomi.Handlers.registry.Omenregistry;
+import com.jomi.Handlers.registry.OrbRegistry;
+import com.jomi.Util.craftingAction.BasicCurrencyAction;
+
+<span class="nc" id="L20">public class ProgramLoader {</span>
+
+    public static void loadProgramData() {
+<span class="nc" id="L23">        long start = System.nanoTime();</span>
+
+<span class="nc" id="L25">        Path root = ConfigLoader.getDataFolder();</span>
+
+
+<span class="nc" id="L28">        Path modifierPath = root.resolve(&quot;modifiers&quot;);</span>
+<span class="nc" id="L29">        List&lt;ModFile&gt; modFiles = ModLoader.loadAll(modifierPath);</span>
+<span class="nc" id="L30">        ModRegistry.registerAll(modFiles);</span>
+
+
+<span class="nc" id="L33">        Path orbPath = root.resolve(&quot;craftingMaterial/basicOrbs.json&quot;);</span>
+<span class="nc" id="L34">        OrbFile orbFile = OrbLoader.loadFromFile(orbPath);</span>
+<span class="nc" id="L35">        OrbRegistry.registerAll(orbFile);</span>
+
+<span class="nc" id="L37">        Path omenPath = root.resolve(&quot;craftingMaterial/BaseOmens.json&quot;);</span>
+<span class="nc" id="L38">        OmenFile omenFile = OmenLoader.loadFromFile(omenPath);</span>
+<span class="nc" id="L39">        Omenregistry.registerAll(omenFile);</span>
+
+<span class="nc" id="L41">        long end = System.nanoTime();</span>
+<span class="nc" id="L42">        long duration = end - start;</span>
+
+<span class="nc" id="L44">        Map&lt;String, Integer&gt; counts = ModRegistry.getModCountPerItemClass();</span>
+<span class="nc" id="L45">        counts.forEach((itemClass, count) -&gt;</span>
+<span class="nc" id="L46">            System.out.println(itemClass + &quot;: &quot; + count + &quot; mods&quot;)</span>
+        );
+
+<span class="nc" id="L49">        System.out.println(&quot;Loaded orbs: &quot; + OrbRegistry.size());</span>
+        
+<span class="nc" id="L51">        System.out.println(&quot;Program Loader took: &quot; + duration + &quot; ns&quot;);</span>
+<span class="nc" id="L52">        System.out.println(&quot;Program Loader took: &quot; + duration / 1_000_000 + &quot; ms&quot;);</span>
+
+        
+<span class="nc" id="L55">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

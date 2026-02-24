@@ -1,0 +1,69 @@
+{
+  "id" : "ba96e1dd-3d00-49f3-adc8-d0d095fa9622",
+  "name" : "81",
+  "itemType" : "weapons/warStaff",
+  "createdAt" : "2026-02-24T19:15:37.9196081",
+  "lastModifiedAt" : "2026-02-24T19:15:37.920598",
+  "nodes" : [ {
+    "id" : "d09b00ec-7fd7-4fe6-96ec-39569a042fd4",
+    "type" : "start",
+    "xPos" : 117.0,
+    "yPos" : 381.0,
+    "inputPort" : false,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "a04fcfa4-b617-41fb-8a47-1ec965e5e7d3",
+    "type" : "basic",
+    "xPos" : 585.0,
+    "yPos" : 294.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "alchemy_orb" ]
+  }, {
+    "id" : "90c37c8a-047f-4c19-a5a9-90ee8ecbaf81",
+    "type" : "basic",
+    "xPos" : 1637.0,
+    "yPos" : 552.0,
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "regal_orb" ]
+  }, {
+    "id" : "db97b18b-3c56-4f86-8553-db5f36b1040c",
+    "type" : "end",
+    "xPos" : 1073.0,
+    "yPos" : 289.0,
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  }, {
+    "id" : "1ff086bc-dd71-4650-a803-0489b632a849",
+    "type" : "end",
+    "xPos" : 2056.0,
+    "yPos" : 541.0,
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  } ],
+  "connections" : [ {
+    "fromNodeId" : "d09b00ec-7fd7-4fe6-96ec-39569a042fd4",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "2fae3844-0ce1-4dd8-a915-e2cbe9ae70d6",
+    "toNodeID" : "a04fcfa4-b617-41fb-8a47-1ec965e5e7d3"
+  }, {
+    "fromNodeId" : "a04fcfa4-b617-41fb-8a47-1ec965e5e7d3",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "35aec6da-27a6-4d92-859f-e6fa9438713b",
+    "toNodeID" : "db97b18b-3c56-4f86-8553-db5f36b1040c"
+  }, {
+    "fromNodeId" : "90c37c8a-047f-4c19-a5a9-90ee8ecbaf81",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "a7221fc1-7a90-4a64-989c-974531853699",
+    "toNodeID" : "1ff086bc-dd71-4650-a803-0489b632a849"
+  } ],
+  "allNodeIds" : [ "d09b00ec-7fd7-4fe6-96ec-39569a042fd4", "a04fcfa4-b617-41fb-8a47-1ec965e5e7d3", "90c37c8a-047f-4c19-a5a9-90ee8ecbaf81", "db97b18b-3c56-4f86-8553-db5f36b1040c", "1ff086bc-dd71-4650-a803-0489b632a849" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/ba96e1dd-3d00-49f3-adc8-d0d095fa9622/"
+}

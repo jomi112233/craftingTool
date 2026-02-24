@@ -1,16 +1,13 @@
 package com.jomi.GUI.simlatorParts.Nodes;
 
-import com.jomi.GUI.simlatorParts.NodeView;
+import java.util.List;
+
+import com.jomi.GUI.simlatorParts.baseNode.NodeSection;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
 import com.jomi.Handlers.Item.LoadedItem;
-import com.jomi.Handlers.registry.ItemRegistry;
 import com.jomi.Util.ModRoller.RolledMod;
-
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Path;
 
 public class EndNode extends NodeView {
 
@@ -22,83 +19,51 @@ public class EndNode extends NodeView {
     }
 
     @Override
-    protected VBox buildContent() {
-        VBox box = new VBox(10);
-        box.setFillWidth(true);
+    protected List<NodeSection> getSections() {
 
+        // No final item yet → show waiting message
         if (finalItem == null) {
-            Label waiting = new Label("Run simulation to see final item.");
-            waiting.getStyleClass().add("node-section-title");
-            box.getChildren().add(waiting);
-            return box;
+            return List.of(
+                new NodeSection("Waiting", List.of("Run simulation to see final item."))
+            );
         }
 
-        // ----- PREFIXES -----
-        Label prefixTitle = new Label("Prefix");
-        prefixTitle.getStyleClass().add("node-section-title");
+        // Build prefix list
+        List<String> prefixItems = finalItem.getPrefix().stream()
+                .map(this::formatMod)
+                .toList();
 
-        VBox prefixList = new VBox(4);
-        for (RolledMod p : finalItem.getPrefix()) {
+        // Build suffix list
+        List<String> suffixItems = finalItem.getSuffix().stream()
+                .map(this::formatMod)
+                .toList();
 
-            String[] parts = p.name().split(",", 2);
-
-            String text;
-            if (parts.length == 2) {
-                text = "• (T" + p.tier().tier() + ") "
-                    + parts[0].trim() + ",\n    "
-                    + parts[1].trim();
-            } else {
-                text = "• (T" + p.tier().tier() + ") " + p.name();
-            }
-
-            Label label = new Label(text);
-            label.setWrapText(true);
-            label.getStyleClass().add("node-modifier");
-            prefixList.getChildren().add(label);
-        }
-
-        // ----- SUFFIXES -----
-        Label suffixTitle = new Label("Suffix");
-        suffixTitle.getStyleClass().add("node-section-title");
-
-        VBox suffixList = new VBox(4);
-        for (RolledMod s : finalItem.getSuffix()) {
-
-            String[] parts = s.name().split(",", 2);
-
-            String text;
-            if (parts.length == 2) {
-                text = "• (T" + s.tier().tier() + ") "
-                    + parts[0].trim() + ",\n    "
-                    + parts[1].trim();
-            } else {
-                text = "• (T" + s.tier().tier() + ") " + s.name();
-            }
-
-            Label label = new Label(text);
-            label.setWrapText(true);
-            label.getStyleClass().add("node-modifier");
-            suffixList.getChildren().add(label);
-        }
-
-        box.getChildren().addAll(prefixTitle, prefixList, suffixTitle, suffixList);
-        return box;
+        return List.of(
+                new NodeSection("Prefix", prefixItems),
+                new NodeSection("Suffix", suffixItems)
+        );
     }
 
+    private String formatMod(RolledMod mod) {
+        String[] parts = mod.name().split(",", 2);
 
-    private void saveFinal() {
-        getProject().saveCompletedBaseItem();
-        setInfo("Saved!");
+        if (parts.length == 2) {
+            return "• (T" + mod.tier().tier() + ") "
+                    + parts[0].trim() + ",\n    "
+                    + parts[1].trim();
+        }
+        return "• (T" + mod.tier().tier() + ") " + mod.name();
     }
 
     @Override
     public LoadedItem execute(LoadedItem item) {
-        this.finalItem = item;              // store final item
-        getProject().setFinalSimulatedItem(item);
-        getProject().saveCompletedBaseItem();
+        this.finalItem = item;   // store final item for UI display
+        refresh();               // update UI
+        return item;             // return item to simulation runner
+    }
 
-        refresh();                          // rebuild UI with final item
-        return item;
+    @Override
+    protected void edit() {
+        System.out.println("EndNode has no editable fields.");
     }
 }
-

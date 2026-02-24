@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NodeEditorWindow.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Util.NodeShit</a> &gt; <span class="el_source">NodeEditorWindow.java</span></div><h1>NodeEditorWindow.java</h1><pre class="source lang-java linenums">package com.jomi.Util.NodeShit;
+
+import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Handlers.registry.ModRegistry;
+import com.jomi.Util.ModRoller;
+import com.jomi.Util.ModRoller.RolledMod;
+import com.jomi.Handlers.Init.modifiers.Mod;
+
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+<span class="nc" id="L15">public class NodeEditorWindow {</span>
+
+    public static void open(LoadedItem item, Runnable onClose, Stage previousStage) {
+
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if (previousStage != null) {</span>
+<span class="nc" id="L20">            previousStage.close();</span>
+        }
+
+<span class="nc" id="L23">        Stage stage = new Stage();</span>
+<span class="nc" id="L24">        stage.setTitle(&quot;Edit Base Item&quot;);</span>
+
+<span class="nc" id="L26">        VBox root = new VBox(12);</span>
+<span class="nc" id="L27">        root.setPadding(new Insets(12));</span>
+
+        // ---------------- ITEM LEVEL ----------------
+<span class="nc" id="L30">        Label ilvlLabel = new Label(&quot;Item Level:&quot;);</span>
+<span class="nc" id="L31">        TextField ilvlField = new TextField(String.valueOf(item.getItemLevel()));</span>
+
+<span class="nc" id="L33">        ilvlField.textProperty().addListener((obs, oldV, newV) -&gt; {</span>
+            try {
+<span class="nc" id="L35">                int lvl = Integer.parseInt(newV);</span>
+<span class="nc" id="L36">                item.setItemLevel(lvl);</span>
+<span class="nc" id="L37">                onClose.run();</span>
+<span class="nc" id="L38">            } catch (NumberFormatException ignored) {}</span>
+<span class="nc" id="L39">        });</span>
+
+        // ---------------- ITEM RARITY ----------------
+<span class="nc" id="L42">        Label rarityLabel = new Label(&quot;Rarity:&quot;);</span>
+<span class="nc" id="L43">        ComboBox&lt;String&gt; rarityBox = new ComboBox&lt;&gt;();</span>
+<span class="nc" id="L44">        rarityBox.getItems().addAll(&quot;Normal&quot;, &quot;Magic&quot;, &quot;Rare&quot;, &quot;Unique&quot;);</span>
+<span class="nc" id="L45">        rarityBox.setValue(item.getItemRarity());</span>
+
+<span class="nc" id="L47">        rarityBox.valueProperty().addListener((obs, oldV, newV) -&gt; {</span>
+<span class="nc" id="L48">            item.setItemRarity(newV);</span>
+<span class="nc" id="L49">            onClose.run();</span>
+<span class="nc" id="L50">        });</span>
+
+        // ---------------- ITEM CLASS ----------------
+<span class="nc" id="L53">        Label classLabel = new Label(&quot;Item Class:&quot;);</span>
+<span class="nc" id="L54">        ComboBox&lt;String&gt; classBox = new ComboBox&lt;&gt;();</span>
+
+        // Load all item classes from registry
+<span class="nc" id="L57">        classBox.getItems().addAll(ModRegistry.getAllItemClasses());</span>
+
+        // Set current value
+<span class="nc" id="L60">        classBox.setValue(item.getLoadedItemClass());</span>
+
+        // Update item when changed
+<span class="nc" id="L63">        classBox.valueProperty().addListener((obs, oldV, newV) -&gt; {</span>
+<span class="nc" id="L64">            item.setLoadedItemClass(newV);</span>
+<span class="nc" id="L65">            onClose.run(); // save immediately</span>
+<span class="nc" id="L66">        });</span>
+
+
+        // ---------------- PREFIX LIST ----------------
+<span class="nc" id="L70">        Label prefixLabel = new Label(&quot;Prefixes&quot;);</span>
+<span class="nc" id="L71">        VBox prefixBox = new VBox(6);</span>
+<span class="nc" id="L72">        refreshList(prefixBox, item, true);</span>
+
+        // ---------------- SUFFIX LIST ----------------
+<span class="nc" id="L75">        Label suffixLabel = new Label(&quot;Suffixes&quot;);</span>
+<span class="nc" id="L76">        VBox suffixBox = new VBox(6);</span>
+<span class="nc" id="L77">        refreshList(suffixBox, item, false);</span>
+
+        // ---------------- ADD MOD BUTTON ----------------
+<span class="nc" id="L80">        Button addModBtn = new Button(&quot;Add Modifier&quot;);</span>
+<span class="nc" id="L81">        addModBtn.setOnAction(e -&gt; {</span>
+<span class="nc" id="L82">            ModSearchWindow.open(item, (mod, tier) -&gt; {</span>
+
+<span class="nc" id="L84">                RolledMod rolled = new RolledMod(mod.id(), mod.name(), mod.tags(), tier);</span>
+
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                if (mod.prefix()) {</span>
+<span class="nc" id="L87">                    item.getPrefix().add(rolled);</span>
+<span class="nc" id="L88">                    refreshList(prefixBox, item, true);</span>
+<span class="nc" id="L89">                    onClose.run();</span>
+
+                }
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                if (mod.suffix()) {</span>
+<span class="nc" id="L94">                    item.getSuffix().add(rolled);</span>
+<span class="nc" id="L95">                    refreshList(suffixBox, item, false);</span>
+<span class="nc" id="L96">                    onClose.run();</span>
+
+                }
+
+<span class="nc" id="L100">            });</span>
+<span class="nc" id="L101">        });</span>
+
+<span class="nc" id="L103">        root.getChildren().addAll(</span>
+<span class="nc" id="L104">            ilvlLabel, ilvlField,</span>
+<span class="nc" id="L105">            rarityLabel, rarityBox,</span>
+<span class="nc" id="L106">            classLabel, classBox,</span>
+<span class="nc" id="L107">            prefixLabel, prefixBox,</span>
+<span class="nc" id="L108">            suffixLabel, suffixBox,</span>
+<span class="nc" id="L109">            addModBtn</span>
+        );
+
+<span class="nc" id="L112">        stage.setScene(new Scene(root, 500, 700));</span>
+
+<span class="nc" id="L114">        stage.setOnCloseRequest(e -&gt; onClose.run());</span>
+<span class="nc" id="L115">        stage.show();</span>
+<span class="nc" id="L116">    }</span>
+
+    private static void refreshList(VBox box, LoadedItem item, boolean prefix) {
+<span class="nc" id="L119">        box.getChildren().clear();</span>
+
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        var list = prefix ? item.getPrefix() : item.getSuffix();</span>
+
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        for (RolledMod mod : list) {</span>
+
+<span class="nc" id="L125">            Label label = new Label(&quot;• (T&quot; + mod.tier().tier() + &quot;) &quot; + mod.name());</span>
+<span class="nc" id="L126">            label.setWrapText(true);</span>
+
+<span class="nc" id="L128">            Button removeBtn = new Button(&quot;✖&quot;);</span>
+<span class="nc" id="L129">            removeBtn.setOnAction(e -&gt; {</span>
+<span class="nc" id="L130">                list.remove(mod);</span>
+<span class="nc" id="L131">                refreshList(box, item, prefix);</span>
+<span class="nc" id="L132">            });</span>
+
+<span class="nc" id="L134">            HBox row = new HBox(8, label, removeBtn);</span>
+<span class="nc" id="L135">            box.getChildren().add(row);</span>
+        }
+<span class="nc" id="L137">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

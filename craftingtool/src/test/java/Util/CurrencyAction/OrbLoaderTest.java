@@ -12,7 +12,8 @@ public class OrbLoaderTest {
         String newRarity,
         int removeCount,
         int addCount,
-        String target
+        String target,
+        String currencyType
     ) {
         return new Orb(
             id,
@@ -21,7 +22,8 @@ public class OrbLoaderTest {
             newRarity,
             removeCount,
             addCount,
-            target
+            target,
+            currencyType
         );
     }
 }

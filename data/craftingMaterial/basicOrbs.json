@@ -38,6 +38,15 @@
         },
 
         {
+            "id": "alchemy_orb",
+            "name": "Orb of Alchemy",
+            "minRarity": "normal",
+            "newRarity": "rare",
+            "removeModifierCount": 2,
+            "addedModifierCount": 4
+        },
+
+        {
             "id": "chaos_orb",
             "name": "chaos orb",
             "minRarity": "rare",

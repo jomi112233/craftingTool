@@ -1,0 +1,52 @@
+{
+  "itemLevel" : 81,
+  "itemRarity" : "rare",
+  "loadedItemClass" : "weapons/warStaff",
+  "prefix" : [ ],
+  "suffix" : [ {
+    "modId" : "flat_dex",
+    "name" : "+# to Dexterity",
+    "tags" : [ "Attribute" ],
+    "tier" : {
+      "tier" : 6,
+      "ilvl" : 22,
+      "weight" : 750,
+      "stats" : {
+        "dex" : {
+          "min" : 13.0,
+          "max" : 16.0
+        }
+      }
+    }
+  }, {
+    "modId" : "mana_leech_percent",
+    "name" : "Leeches % of Physical Damage as Mana",
+    "tags" : [ "Mana", "Physical", "Attack" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 81,
+      "weight" : 1000,
+      "stats" : {
+        "mana_leech_percent" : {
+          "min" : 8.0,
+          "max" : 8.9
+        }
+      }
+    }
+  }, {
+    "modId" : "life_on_kill",
+    "name" : "Gain # Life per Enemy Killed",
+    "tags" : [ "Life" ],
+    "tier" : {
+      "tier" : 4,
+      "ilvl" : 44,
+      "weight" : 750,
+      "stats" : {
+        "life_on_kill" : {
+          "min" : 29.0,
+          "max" : 40.0
+        }
+      }
+    }
+  } ]
+}

@@ -1,0 +1,86 @@
+{
+  "itemLevel" : 81,
+  "itemRarity" : "Rare",
+  "loadedItemClass" : "weapons/talisman",
+  "prefix" : [ {
+    "modId" : "inc_ele_dmg_attacks",
+    "name" : "% increased Elemental Damage with Attacks",
+    "tags" : [ "Damage", "Elemental", "Attack" ],
+    "tier" : {
+      "tier" : 2,
+      "ilvl" : 60,
+      "weight" : 500,
+      "stats" : {
+        "ele_inc" : {
+          "min" : 100.0,
+          "max" : 119.0
+        }
+      }
+    }
+  }, {
+    "modId" : "inc_phys_acc",
+    "name" : "% increased Physical Damage, +# to Accuracy Rating",
+    "tags" : [ "Damage", "Physical", "Attack" ],
+    "tier" : {
+      "tier" : 6,
+      "ilvl" : 23,
+      "weight" : 1000,
+      "stats" : {
+        "phys_inc" : {
+          "min" : 25.0,
+          "max" : 34.0
+        },
+        "accuracy" : {
+          "min" : 47.0,
+          "max" : 72.0
+        }
+      }
+    }
+  } ],
+  "suffix" : [ {
+    "modId" : "attack_speed",
+    "name" : "% increased Attack Speed",
+    "tags" : [ "Attack", "Speed" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 77,
+      "weight" : 100,
+      "stats" : {
+        "attack_speed" : {
+          "min" : 26.0,
+          "max" : 28.0
+        }
+      }
+    }
+  }, {
+    "modId" : "mana_leech_percent",
+    "name" : "Leeches #% of Physical Damage as Mana",
+    "tags" : [ "Mana", "Leech", "Physical" ],
+    "tier" : {
+      "tier" : 4,
+      "ilvl" : 38,
+      "weight" : 1000,
+      "stats" : {
+        "mana_leech_percent" : {
+          "min" : 5.0,
+          "max" : 5.9
+        }
+      }
+    }
+  }, {
+    "modId" : "life_leech_percent",
+    "name" : "Leeches #% of Physical Damage as Life",
+    "tags" : [ "Life", "Leech", "Physical" ],
+    "tier" : {
+      "tier" : 5,
+      "ilvl" : 21,
+      "weight" : 1000,
+      "stats" : {
+        "life_leech_percent" : {
+          "min" : 5.0,
+          "max" : 5.9
+        }
+      }
+    }
+  } ]
+}

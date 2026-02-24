@@ -2,6 +2,8 @@ C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\GUILoader.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\Scenes\SimulatorScene.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\Scenes\StartingScreen.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\baseNode\NodeSection.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\baseNode\NodeView.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\canvas\NodeCanvas.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\canvas\ZoomPane.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\ConnectionView.java
@@ -9,7 +11,6 @@ C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\Nodes\EndNode.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\Nodes\GenericNode.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\Nodes\StartNode.java
-C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\NodeView.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\GUI\simlatorParts\SideBar.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\ConfigLoader.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\Init\basicCurrency\Orb.java
@@ -37,6 +38,9 @@ C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Handlers\registry\ProjectManager.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\craftingAction\BasicCurrencyAction.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\ModRoller.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\NodeShit\ModSearchWindow.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\NodeShit\NodeEditorWindow.java
+C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\NodeShit\searchAction.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\ProjectActions.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\SimulationRunner.java
 C:\Users\micoj\Desktop\Coding stuff\craftingTool\craftingtool\src\main\java\com\jomi\Util\TurriHaku.java

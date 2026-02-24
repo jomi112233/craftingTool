@@ -9,6 +9,9 @@ import com.jomi.Handlers.registry.ModRegistry;
 
 public class ModRoller {
 
+    // ------------------------------------------------------------
+    // RolledMod: represents a chosen tier of a mod (no stat rolling)
+    // ------------------------------------------------------------
     public record RolledMod(
         String modId,
         String name,
@@ -16,7 +19,7 @@ public class ModRoller {
         ModTier tier
     ) {
 
-        public RolledMod { 
+        public RolledMod {
             tags = List.copyOf(tags);
         }
 
@@ -36,6 +39,9 @@ public class ModRoller {
     }
 
 
+    // ------------------------------------------------------------
+    // ModType: used for random rolling
+    // ------------------------------------------------------------
     public enum ModType {
         PREFIX,
         SUFFIX,
@@ -44,6 +50,33 @@ public class ModRoller {
 
     private static final Random random = new Random();
 
+
+    // ------------------------------------------------------------
+    // NEW: Create a RolledMod from a Mod definition + item level
+    // ------------------------------------------------------------
+    public static RolledMod fromMod(Mod mod, int itemLevel) {
+
+        // Pick the highest tier allowed by item level
+        ModTier tier = mod.tiers().stream()
+            .filter(t -> t.ilvl() <= itemLevel)
+            .sorted((a, b) -> Integer.compare(b.tier(), a.tier())) // highest tier first
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException(
+                "No valid tier for mod " + mod.id() + " at ilvl " + itemLevel
+            ));
+
+        return new RolledMod(
+            mod.id(),
+            mod.name(),
+            mod.tags(),
+            tier
+        );
+    }
+
+
+    // ------------------------------------------------------------
+    // Existing: Weighted random mod roller
+    // ------------------------------------------------------------
     public static RolledMod rollRandomTier(String itemClass, int itemLevel, ModType type) {
 
         var mods = ModRegistry.getItemByClass(itemClass);
@@ -94,7 +127,6 @@ public class ModRoller {
                     e.mod.tags(),
                     e.tier
                 );
-
             }
         }
 

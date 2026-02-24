@@ -1,0 +1,6 @@
+project\ProjectManagertest.class
+project\FakeConfigLoader.class
+Util\CurrencyAction\OrbLoaderTest.class
+Util\ModRollerTest.class
+Init\modifiers\ModLoaderTest.class
+Init\modifiers\ModRegisterTest.class

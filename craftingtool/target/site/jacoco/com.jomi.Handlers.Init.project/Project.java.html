@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Project.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Handlers.Init.project</a> &gt; <span class="el_source">Project.java</span></div><h1>Project.java</h1><pre class="source lang-java linenums">package com.jomi.Handlers.Init.project;
+
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jomi.Handlers.ConfigLoader;
+import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Handlers.registry.ItemRegistry;
+
+public class Project {
+
+    private final String id;
+    private String name;
+    private String itemType;
+    @JsonIgnore
+    private LoadedItem baseItem;
+    private String projectFolderString;
+    
+    @JsonIgnore
+    private LoadedItem finalSimulatedItem;
+
+    private final LocalDateTime createdAt;
+    private LocalDateTime lastModifiedAt;
+
+    private List&lt;Node&gt; nodes;
+    private List&lt;Connection&gt; connections;
+
+
+
+
+    @JsonIgnore
+    public LoadedItem getFinalSimulatedItem() {
+<span class="nc" id="L40">        return finalSimulatedItem;</span>
+    }
+    @JsonIgnore
+    public void setFinalSimulatedItem(LoadedItem item) {
+<span class="nc" id="L44">        this.finalSimulatedItem = item;</span>
+<span class="nc" id="L45">    }</span>
+
+
+
+    @JsonProperty(&quot;projectFolder&quot;)
+    public void setProjectFolderString(String folder) {
+<span class="nc" id="L51">        this.projectFolderString = folder;</span>
+<span class="nc" id="L52">    }</span>
+
+
+    public String getItemType() {
+<span class="nc" id="L56">        return itemType;</span>
+    }
+
+    public void setItemType(String itemType) {
+<span class="nc" id="L60">        this.itemType = itemType;</span>
+<span class="nc" id="L61">    }</span>
+
+
+
+<span class="nc" id="L65">    public Project() {</span>
+<span class="nc" id="L66">        this.id = UUID.randomUUID().toString();</span>
+<span class="nc" id="L67">        this.name = &quot;Untitled Project&quot;;</span>
+<span class="nc" id="L68">        this.createdAt = LocalDateTime.now();</span>
+<span class="nc" id="L69">        this.lastModifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L70">        this.nodes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L71">        this.connections = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L72">    }</span>
+
+    
+
+    public Project(String name) {
+<span class="nc" id="L77">        this();</span>
+<span class="nc" id="L78">        this.name = name;</span>
+<span class="nc" id="L79">    }</span>
+
+    @JsonProperty(&quot;projectFolder&quot;)
+    public String getProjectFolderString() {
+<span class="nc" id="L83">        return getProjectFolder().toUri().toString();</span>
+    }
+
+    @JsonIgnore
+    public Path getProjectFolder() {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (projectFolderString != null) {</span>
+<span class="nc" id="L89">            return Path.of(URI.create(projectFolderString));</span>
+        }
+
+        // fallback for new projects
+<span class="nc" id="L93">        return ConfigLoader.getDataFolder()</span>
+<span class="nc" id="L94">                .resolve(&quot;saveState&quot;)</span>
+<span class="nc" id="L95">                .resolve(&quot;itemData&quot;)</span>
+<span class="nc" id="L96">                .resolve(id);</span>
+    }
+
+
+    @JsonIgnore
+    public LoadedItem getBaseItem() { 
+<span class="nc" id="L102">        return baseItem; </span>
+    }
+
+    public void setBaseItem(LoadedItem baseItem) {
+<span class="nc" id="L106">        this.baseItem = baseItem; </span>
+<span class="nc" id="L107">    }</span>
+
+    @JsonIgnore
+    public void saveBaseItem() {
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (baseItem == null) {</span>
+<span class="nc" id="L112">            return;</span>
+        }
+        
+<span class="nc" id="L115">        Path folder = getProjectFolder();</span>
+
+        try {
+<span class="nc" id="L118">            ItemRegistry.saveToJson(baseItem, folder.resolve(&quot;baseitem.json&quot;));</span>
+<span class="nc" id="L119">            System.out.println(&quot;Base item saved.&quot;);</span>
+<span class="nc" id="L120">        } catch (Exception e) {</span>
+<span class="nc" id="L121">            System.err.println(&quot;Failed to save base item: &quot; + e.getMessage());</span>
+        }
+<span class="nc" id="L123">    }</span>
+
+    @JsonIgnore
+    public void saveCompletedBaseItem() {
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (finalSimulatedItem == null) {</span>
+<span class="nc" id="L128">            System.err.println(&quot;No final simulated item to save.&quot;);</span>
+<span class="nc" id="L129">            return;</span>
+        }
+
+<span class="nc" id="L132">        Path folder = getProjectFolder();</span>
+
+        try {
+<span class="nc" id="L135">            ItemRegistry.saveToJson(finalSimulatedItem, folder.resolve(&quot;baseItemCompleted.json&quot;));</span>
+<span class="nc" id="L136">            System.out.println(&quot;Final item saved.&quot;);</span>
+<span class="nc" id="L137">        } catch (Exception e) {</span>
+<span class="nc" id="L138">            System.err.println(&quot;Failed to save final item: &quot; + e.getMessage());</span>
+        }
+<span class="nc" id="L140">    }</span>
+
+
+
+
+    public String getId() {
+<span class="nc" id="L146">        return id;</span>
+    }
+
+    public String getName() {
+<span class="nc" id="L150">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="nc" id="L154">        this.name = name;</span>
+<span class="nc" id="L155">    }</span>
+
+    public List&lt;Node&gt; getNodes() {
+<span class="nc" id="L158">        return List.copyOf(nodes);</span>
+    }
+
+    public LocalDateTime getCreatedAt() {
+<span class="nc" id="L162">        return createdAt;</span>
+    }
+
+    public LocalDateTime getLastModifiedAt() {
+<span class="nc" id="L166">        return lastModifiedAt;</span>
+    }
+
+    public void setLastModifiedAt() {
+<span class="nc" id="L170">        this.lastModifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L171">    }</span>
+
+    @JsonIgnore
+    public int getNodeSize() {
+<span class="nc" id="L175">        return nodes.size();</span>
+    }
+
+    public List&lt;Connection&gt; getConnections() {
+<span class="nc" id="L179">        return List.copyOf(connections);</span>
+    }
+
+    public void addNode(Node node) {
+<span class="nc" id="L183">        nodes.add(node);</span>
+<span class="nc" id="L184">    }</span>
+
+
+    public void addConnection(Connection connection) {
+<span class="nc" id="L188">        connections.add(connection);</span>
+<span class="nc" id="L189">    }</span>
+
+    public void removeNode(Node node) {
+<span class="nc" id="L192">        nodes.remove(node);</span>
+<span class="nc" id="L193">    }</span>
+
+    public void removeConnection(Connection connection) {
+<span class="nc bnc" id="L196" title="All 2 branches missed.">        if (connection == null) {</span>
+<span class="nc" id="L197">            System.out.println(&quot;Connection Deletion failed: connection is NULL&quot;);</span>
+<span class="nc" id="L198">            return;</span>
+        }
+
+<span class="nc" id="L201">        System.out.println(&quot;Deleting connection with object: &quot; + connection);</span>
+
+        try {
+<span class="nc" id="L204">            System.out.println(&quot;Connection ID = &quot; + connection.getConnectionID());</span>
+<span class="nc" id="L205">        } catch (Exception ex) {</span>
+<span class="nc" id="L206">            System.out.println(&quot;ERROR: getConnectionID() does not exist or returns null&quot;);</span>
+<span class="nc" id="L207">            ex.printStackTrace();</span>
+<span class="nc" id="L208">            return;</span>
+        }
+
+<span class="nc" id="L211">        String id = connection.getConnectionID();</span>
+
+<span class="nc" id="L213">        connections.removeIf(c -&gt; {</span>
+<span class="nc" id="L214">            System.out.println(&quot;Comparing with: &quot; + c.getConnectionID());</span>
+<span class="nc" id="L215">            return c.getConnectionID().equals(id);</span>
+        });
+<span class="nc" id="L217">    }</span>
+
+
+
+    public void removeConnectionsOf(Node node) {
+<span class="nc" id="L222">        connections.removeIf(conn -&gt; </span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">                conn.getToNodeID().equals(node.getId()) ||</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">                conn.getFromNodeId().equals(node.getId())</span>
+        );
+<span class="nc" id="L226">    }</span>
+
+
+    public void removeNodeAndConnection(Node node) {
+<span class="nc" id="L230">        nodes.remove(node);</span>
+
+<span class="nc" id="L232">        connections.removeIf(conn -&gt; </span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">            conn.getToNodeID().equals(node.getId()) ||</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">            conn.getFromNodeId().equals(node.getId())</span>
+        );
+<span class="nc" id="L236">    }</span>
+
+    public List&lt;String&gt; getAllNodeIds() {
+<span class="nc" id="L239">        List&lt;String&gt; ids = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">        for (Node node : nodes) {</span>
+<span class="nc" id="L241">            ids.add(node.getId());</span>
+        }
+<span class="nc" id="L243">        return ids;</span>
+    }
+
+    public int connectionSize() {
+<span class="nc" id="L247">        return connections.size();</span>
+    }
+
+
+    @JsonIgnore
+    public void clearItemRuns() {
+<span class="nc" id="L253">        Path runsFolder = getProjectFolder().resolve(&quot;itemruns&quot;);</span>
+
+        try {
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            if (Files.exists(runsFolder)) {</span>
+<span class="nc" id="L257">                Files.walk(runsFolder)</span>
+<span class="nc" id="L258">                    .filter(Files::isRegularFile)</span>
+<span class="nc" id="L259">                    .forEach(path -&gt; {</span>
+<span class="nc" id="L260">                        try { Files.delete(path); } catch (Exception ignored) {}</span>
+<span class="nc" id="L261">                    });</span>
+            }
+<span class="nc" id="L263">        } catch (Exception e) {</span>
+<span class="nc" id="L264">            System.err.println(&quot;Failed to clear itemruns: &quot; + e.getMessage());</span>
+        }
+<span class="nc" id="L266">    }</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

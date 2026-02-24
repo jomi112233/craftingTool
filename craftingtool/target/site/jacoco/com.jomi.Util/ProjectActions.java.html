@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectActions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Util</a> &gt; <span class="el_source">ProjectActions.java</span></div><h1>ProjectActions.java</h1><pre class="source lang-java linenums"><span class="nc" id="L1">package com.jomi.Util;</span>
+
+import java.io.File;
+import java.nio.file.Path;
+import java.util.Optional;
+
+import com.jomi.App;
+import com.jomi.Handlers.ConfigLoader;
+import com.jomi.Handlers.Init.project.Project;
+import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Handlers.registry.ItemRegistry;
+import com.jomi.Handlers.registry.ModRegistry;
+
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+
+<span class="nc" id="L25">public class ProjectActions {</span>
+
+    private Stage mainStage;
+
+    public void setMainStage(Stage stage) {
+<span class="nc" id="L30">        this.mainStage = stage;</span>
+<span class="nc" id="L31">    }</span>
+
+    public Stage getMainStage() {
+<span class="nc" id="L34">        return mainStage;</span>
+    }
+
+
+
+    public record ProjectCreationData(String name, String itemType, int itemLevel) { }
+
+    public static void createNewProject() {
+
+        // Record to carry dialog results
+        record ProjectCreationData(String name, String itemType, int itemLevel, String itemRarity) { }
+
+<span class="nc" id="L46">        Dialog&lt;ProjectCreationData&gt; dialog = new Dialog&lt;&gt;();</span>
+<span class="nc" id="L47">        dialog.setTitle(&quot;Create Project&quot;);</span>
+<span class="nc" id="L48">        dialog.setHeaderText(&quot;Enter project details&quot;);</span>
+
+<span class="nc" id="L50">        ButtonType createButtonType = new ButtonType(&quot;Create&quot;, ButtonBar.ButtonData.OK_DONE);</span>
+<span class="nc" id="L51">        dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);</span>
+
+<span class="nc" id="L53">        TextField nameField = new TextField();</span>
+<span class="nc" id="L54">        nameField.setPromptText(&quot;Project name&quot;);</span>
+
+<span class="nc" id="L56">        ComboBox&lt;String&gt; itemTypeSelector = new ComboBox&lt;&gt;();</span>
+<span class="nc" id="L57">        itemTypeSelector.getItems().addAll(ModRegistry.getModCountPerItemClass().keySet());</span>
+<span class="nc" id="L58">        itemTypeSelector.setPromptText(&quot;Select item type&quot;);</span>
+
+<span class="nc" id="L60">        TextField itemLevelField = new TextField();</span>
+<span class="nc" id="L61">        itemLevelField.setPromptText(&quot;Item level (1–100)&quot;);</span>
+
+<span class="nc" id="L63">        ComboBox&lt;String&gt; raritySelector = new ComboBox&lt;&gt;();</span>
+<span class="nc" id="L64">        raritySelector.getItems().addAll(&quot;Normal&quot;, &quot;Magic&quot;, &quot;Rare&quot;, &quot;Unique&quot;);</span>
+<span class="nc" id="L65">        raritySelector.setPromptText(&quot;Select rarity&quot;);</span>
+
+<span class="nc" id="L67">        VBox content = new VBox(</span>
+<span class="nc" id="L68">            10,</span>
+<span class="nc" id="L69">            new Label(&quot;Project Name:&quot;), nameField,</span>
+<span class="nc" id="L70">            new Label(&quot;Item Type:&quot;), itemTypeSelector,</span>
+<span class="nc" id="L71">            new Label(&quot;Item Level:&quot;), itemLevelField,</span>
+<span class="nc" id="L72">            new Label(&quot;Item Rarity:&quot;), raritySelector</span>
+        );
+
+<span class="nc" id="L75">        dialog.getDialogPane().setContent(content);</span>
+
+<span class="nc" id="L77">        dialog.setResultConverter(button -&gt; {</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (button == createButtonType) {</span>
+<span class="nc" id="L79">                int level = Integer.parseInt(itemLevelField.getText());</span>
+<span class="nc" id="L80">                return new ProjectCreationData(</span>
+<span class="nc" id="L81">                    nameField.getText(),</span>
+<span class="nc" id="L82">                    itemTypeSelector.getValue(),</span>
+<span class="nc" id="L83">                    level,</span>
+<span class="nc" id="L84">                    raritySelector.getValue()</span>
+                );
+            }
+<span class="nc" id="L87">            return null;</span>
+        });
+
+<span class="nc" id="L90">        Optional&lt;ProjectCreationData&gt; result = dialog.showAndWait();</span>
+
+<span class="nc" id="L92">        result.ifPresent(data -&gt; {</span>
+            try {
+<span class="nc" id="L94">                var pm = App.getInstance().getProjectManager();</span>
+<span class="nc" id="L95">                pm.newProject(data.name());</span>
+
+<span class="nc" id="L97">                Project project = pm.getCurrentProject();</span>
+<span class="nc" id="L98">                project.setItemType(data.itemType());</span>
+
+                // Create item files with user selections
+<span class="nc" id="L101">                Path projectFolder = project.getProjectFolder();</span>
+<span class="nc" id="L102">                LoadedItem item = ItemRegistry.createNewItem(</span>
+<span class="nc" id="L103">                    projectFolder,</span>
+<span class="nc" id="L104">                    data.itemLevel(),</span>
+<span class="nc" id="L105">                    data.itemRarity(),</span>
+<span class="nc" id="L106">                    data.itemType() // used as loadedItemClass</span>
+                );
+
+<span class="nc" id="L109">                project.setBaseItem(item);</span>
+
+
+                // Apply user selections
+<span class="nc" id="L113">                item.setItemLevel(data.itemLevel());</span>
+<span class="nc" id="L114">                item.setItemRarity(data.itemRarity());</span>
+<span class="nc" id="L115">                item.setLoadedItemClass(data.itemType());</span>
+
+                // Save updated item back to disk
+<span class="nc" id="L118">                ItemRegistry.saveToJson(item, projectFolder.resolve(&quot;baseitem.json&quot;));</span>
+<span class="nc" id="L119">                ItemRegistry.saveToJson(item, projectFolder.resolve(&quot;baseitemCompleted.json&quot;));</span>
+
+<span class="nc" id="L121">                project.setBaseItem(item);</span>
+
+<span class="nc" id="L123">                App.getInstance().getGui().showSimulator();</span>
+<span class="nc" id="L124">                System.out.println(&quot;New project created successfully.&quot;);</span>
+
+<span class="nc" id="L126">            } catch (Exception e) {</span>
+<span class="nc" id="L127">                System.err.println(&quot;Failed to create new project: &quot; + e.getMessage());</span>
+            }
+<span class="nc" id="L129">        });</span>
+<span class="nc" id="L130">    }</span>
+
+
+    public static void loadProject() {
+
+<span class="nc" id="L135">        FileChooser chooser = new FileChooser();</span>
+<span class="nc" id="L136">        chooser.setTitle(&quot;Load Project&quot;);</span>
+
+<span class="nc" id="L138">        chooser.setInitialDirectory(</span>
+<span class="nc" id="L139">            ConfigLoader.getDataFolder()</span>
+<span class="nc" id="L140">                .resolve(&quot;saveState&quot;)</span>
+<span class="nc" id="L141">                .resolve(&quot;SceneData&quot;)</span>
+<span class="nc" id="L142">                .toFile()</span>
+        );
+
+<span class="nc" id="L145">        chooser.getExtensionFilters().add(</span>
+<span class="nc" id="L146">            new FileChooser.ExtensionFilter(&quot;Project Files (*.json)&quot;, &quot;*.json&quot;)</span>
+        );
+
+<span class="nc" id="L149">        Window window = App.getInstance().getGui().getStage();</span>
+
+<span class="nc" id="L151">        File file = chooser.showOpenDialog(window);</span>
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (file != null) {</span>
+<span class="nc" id="L154">            String name = file.getName().replace(&quot;.json&quot;, &quot;&quot;);</span>
+
+<span class="nc" id="L156">            Project loaded = App.getInstance()</span>
+<span class="nc" id="L157">                                .getProjectManager()</span>
+<span class="nc" id="L158">                                .loadProject(name);</span>
+
+<span class="nc bnc" id="L160" title="All 2 branches missed.">            if (loaded != null) {</span>
+<span class="nc" id="L161">                App.getInstance().getGui().showSimulator();</span>
+<span class="nc" id="L162">                System.out.println(&quot;Loaded project: &quot; + name);</span>
+<span class="nc" id="L163">            } else {</span>
+<span class="nc" id="L164">                System.err.println(&quot;Failed to load project: &quot; + name);</span>
+            }
+        }
+<span class="nc" id="L167">    }</span>
+
+
+    public static void saveProject() {
+<span class="nc" id="L171">        System.out.println(&quot;Saving&quot;);</span>
+<span class="nc" id="L172">    }</span>
+
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

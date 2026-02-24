@@ -51,9 +51,4 @@ public class ItemRegistry {
             throw new RuntimeException("Failed to create new item in: " + projectFolder, e);
         }
     }
-
-
-
-
-
 }
