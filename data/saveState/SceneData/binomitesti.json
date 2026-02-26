@@ -1,0 +1,71 @@
+{
+  "id" : "d79db317-a383-457d-b22e-6beae2326c1f",
+  "name" : "binomitesti",
+  "itemType" : "weapons/wand",
+  "createdAt" : "2026-02-26T20:48:04.3420652",
+  "lastModifiedAt" : "2026-02-26T20:48:04.3430571",
+  "nodes" : [ {
+    "id" : "7e4087c0-11d4-4c0c-8b0d-6be96fdbb175",
+    "type" : "iterator",
+    "xPos" : 757.0,
+    "yPos" : 274.0,
+    "iterator" : true,
+    "active" : false,
+    "forcedTarget" : [ {
+      "modId" : "inc_cast_speed",
+      "name" : "% increased Cast Speed",
+      "tags" : [ "Caster", "Speed" ],
+      "tier" : {
+        "tier" : 3,
+        "ilvl" : 60,
+        "weight" : 1000,
+        "stats" : {
+          "cast_speed_inc" : {
+            "min" : 25.0,
+            "max" : 28.0
+          }
+        }
+      }
+    } ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "chaos_orb" ]
+  }, {
+    "id" : "aec14ca9-3ed3-4863-be7f-09c9ab62b3ad",
+    "type" : "start",
+    "xPos" : 220.0,
+    "yPos" : 268.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : false,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "e484a400-c723-4d62-8d73-43926640b702",
+    "type" : "end",
+    "xPos" : 1311.0,
+    "yPos" : 296.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  } ],
+  "connections" : [ {
+    "fromNodeId" : "aec14ca9-3ed3-4863-be7f-09c9ab62b3ad",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "b03238d0-241f-41de-9da1-4cf2d9ef7809",
+    "toNodeID" : "7e4087c0-11d4-4c0c-8b0d-6be96fdbb175"
+  }, {
+    "fromNodeId" : "7e4087c0-11d4-4c0c-8b0d-6be96fdbb175",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "e863b8ab-7b0c-4ba6-90f3-0f50d4466631",
+    "toNodeID" : "e484a400-c723-4d62-8d73-43926640b702"
+  } ],
+  "allNodeIds" : [ "7e4087c0-11d4-4c0c-8b0d-6be96fdbb175", "aec14ca9-3ed3-4863-be7f-09c9ab62b3ad", "e484a400-c723-4d62-8d73-43926640b702" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/d79db317-a383-457d-b22e-6beae2326c1f/"
+}

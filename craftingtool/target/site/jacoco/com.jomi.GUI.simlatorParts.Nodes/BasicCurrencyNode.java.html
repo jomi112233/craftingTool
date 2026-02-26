@@ -2,8 +2,11 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import com.jomi.GUI.simlatorParts.NodeView;
+import com.jomi.App;
+import com.jomi.GUI.simlatorParts.baseNode.NodeSection;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.Init.basicCurrency.Orb;
 import com.jomi.Handlers.Init.omen.Omen;
 import com.jomi.Handlers.Init.project.Node;
@@ -12,135 +15,222 @@ import com.jomi.Handlers.Item.LoadedItem;
 import com.jomi.Handlers.registry.Omenregistry;
 import com.jomi.Handlers.registry.OrbRegistry;
 import com.jomi.Util.craftingAction.BasicCurrencyAction;
-
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import com.jomi.Util.NodeShit.searchAction;
 
 public class BasicCurrencyNode extends NodeView {
 
+<span class="nc" id="L22">    private List&lt;NodeSection&gt; sections = new ArrayList&lt;&gt;();</span>
+
     public BasicCurrencyNode(Node node, Project project) {
-<span class="nc" id="L26">        super(node, project);</span>
-<span class="nc" id="L27">        setTitle(&quot;Basic Currency&quot;);</span>
+<span class="nc" id="L25">        super(node, project);</span>
+<span class="nc" id="L26">        setTitle(&quot;Basic Currency&quot;);</span>
+<span class="nc" id="L27">        buildSections();</span>
 <span class="nc" id="L28">        refresh();</span>
 <span class="nc" id="L29">    }</span>
 
+    // ---------------------------------------------------------
+    // BUILD SECTIONS (StartNode-style)
+    // ---------------------------------------------------------
+    private void buildSections() {
+
+<span class="nc" id="L36">        Node data = getNode();</span>
+<span class="nc" id="L37">        List&lt;String&gt; actions = data.getActions();</span>
+
+<span class="nc" id="L39">        List&lt;String&gt; currencyItems = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (!actions.isEmpty()) {</span>
+<span class="nc" id="L41">            currencyItems.add(&quot;• &quot; + actions.get(0));</span>
+        }
+<span class="nc" id="L43">        currencyItems.add(&quot;add&quot;);</span>
+
+<span class="nc" id="L45">        List&lt;String&gt; omenItems = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        for (int i = 1; i &lt; actions.size(); i++) {</span>
+<span class="nc" id="L47">            omenItems.add(&quot;• &quot; + actions.get(i));</span>
+        }
+<span class="nc" id="L49">        omenItems.add(&quot;add&quot;);</span>
+
+<span class="nc" id="L51">        sections = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L52">        sections.add(new NodeSection(&quot;Currency&quot;, currencyItems));</span>
+<span class="nc" id="L53">        sections.add(new NodeSection(&quot;Omen&quot;, omenItems));</span>
+<span class="nc" id="L54">    }</span>
+
     @Override
-    protected VBox buildContent() {
-<span class="nc" id="L33">        VBox box = new VBox(8);</span>
+    protected List&lt;NodeSection&gt; getSections() {
+<span class="nc" id="L58">        return sections;</span>
+    }
 
-<span class="nc" id="L35">        Node data = getNode();</span>
+    // ---------------------------------------------------------
+    // CLICK HANDLING
+    // ---------------------------------------------------------
+    @Override
+    protected void onSectionItemClicked(String sectionTitle, String itemText) {
 
-        // Show selected actions
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (!data.getActions().isEmpty()) {</span>
-<span class="nc" id="L39">            VBox selectedBox = new VBox(4);</span>
-<span class="nc" id="L40">            Label selectedLabel = new Label(&quot;Selected:&quot;);</span>
-<span class="nc" id="L41">            selectedLabel.getStyleClass().add(&quot;node-section-title&quot;);</span>
-<span class="nc" id="L42">            selectedBox.getChildren().add(selectedLabel);</span>
+<span class="nc" id="L67">        String cleaned = itemText.trim().toLowerCase();</span>
 
-            // First action = currency
-<span class="nc" id="L45">            String currency = data.getActions().get(0);</span>
-<span class="nc" id="L46">            Label currencyLabel = new Label(&quot;• &quot; + currency);</span>
-<span class="nc" id="L47">            currencyLabel.getStyleClass().add(&quot;node-selected-currency&quot;);</span>
-<span class="nc" id="L48">            selectedBox.getChildren().add(currencyLabel);</span>
-
-            // Remaining actions = omens
-<span class="nc bnc" id="L51" title="All 2 branches missed.">            for (int i = 1; i &lt; data.getActions().size(); i++) {</span>
-<span class="nc" id="L52">                String omen = data.getActions().get(i);</span>
-<span class="nc" id="L53">                Label omenLabel = new Label(&quot;• &quot; + omen);</span>
-<span class="nc" id="L54">                omenLabel.getStyleClass().add(&quot;node-selected-omen&quot;);</span>
-<span class="nc" id="L55">                selectedBox.getChildren().add(omenLabel);</span>
-            }
-
-<span class="nc" id="L58">            box.getChildren().add(selectedBox);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (cleaned.equals(&quot;add&quot;)) {</span>
+<span class="nc" id="L70">            replaceSectionItem(sectionTitle, itemText, &quot;search:&quot; + sectionTitle.toLowerCase());</span>
+        } else {
+<span class="nc" id="L72">            removeItem(sectionTitle, itemText);</span>
         }
 
-        // Show dropdown depending on state
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (data.getActions().isEmpty()) {</span>
-<span class="nc" id="L63">            box.getChildren().add(buildCurrencyDropdown());</span>
-<span class="nc" id="L64">        } else {</span>
-<span class="nc" id="L65">            box.getChildren().add(buildOmenDropdown());</span>
+<span class="nc" id="L75">        refresh();</span>
+<span class="nc" id="L76">    }</span>
+
+    private void removeItem(String section, String itemText) {
+
+<span class="nc" id="L80">        Node data = getNode();</span>
+<span class="nc" id="L81">        List&lt;String&gt; actions = new ArrayList&lt;&gt;(data.getActions());</span>
+<span class="nc" id="L82">        String cleaned = itemText.replace(&quot;•&quot;, &quot;&quot;).trim();</span>
+
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (section.equals(&quot;Currency&quot;)) {</span>
+<span class="nc" id="L85">            actions.clear();</span>
+
         }
 
-<span class="nc" id="L68">        return box;</span>
-    }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (section.equals(&quot;Omen&quot;)) {</span>
+<span class="nc" id="L90">            actions.removeIf(a -&gt; a.equalsIgnoreCase(cleaned));</span>
+        }
 
+<span class="nc" id="L93">        data.setActions(actions);</span>
+<span class="nc" id="L94">        buildSections();</span>
+<span class="nc" id="L95">        App.getInstance().getProjectManager().saveProject(getProject());</span>
+<span class="nc" id="L96">    }</span>
 
+    // ---------------------------------------------------------
+    // SEARCH RESULT SELECTED
+    // ---------------------------------------------------------
+    @Override
+    protected void onSearchResultSelected(String section, String key, String result) {
 
-    private VBox buildCurrencyDropdown() {
-<span class="nc" id="L74">        VBox box = new VBox(6);</span>
+<span class="nc" id="L104">        Node data = getNode();</span>
+<span class="nc" id="L105">        List&lt;String&gt; actions = new ArrayList&lt;&gt;(data.getActions());</span>
 
-<span class="nc" id="L76">        Label label = new Label(&quot;Select Currency:&quot;);</span>
-<span class="nc" id="L77">        ComboBox&lt;String&gt; combo = new ComboBox&lt;&gt;();</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (section.equals(&quot;Currency&quot;)) {</span>
 
-<span class="nc" id="L79">        OrbRegistry.getAll().forEach(orb -&gt; combo.getItems().add(orb.id()));</span>
+<span class="nc" id="L109">            Orb orb = OrbRegistry.getAll().stream()</span>
+<span class="nc" id="L110">                .filter(o -&gt; o.getName().equalsIgnoreCase(result))</span>
+<span class="nc" id="L111">                .findFirst()</span>
+<span class="nc" id="L112">                .orElse(null);</span>
 
-<span class="nc" id="L81">        combo.setOnAction(e -&gt; {</span>
-<span class="nc" id="L82">            String selected = combo.getValue();</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (selected != null) {</span>
-<span class="nc" id="L84">                getNode().setAction(selected);</span>
-<span class="nc" id="L85">                refresh();</span>
+<span class="nc" id="L114">            actions.clear();</span>
+<span class="nc" id="L115">            actions.add(orb.getid());</span>
+        }
+
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (section.equals(&quot;Omen&quot;)) {</span>
+<span class="nc" id="L119">            Omen omen = Omenregistry.getAll().stream()</span>
+<span class="nc" id="L120">                .filter(o -&gt; o.getName().equalsIgnoreCase(result))</span>
+<span class="nc" id="L121">                .findFirst()</span>
+<span class="nc" id="L122">                .orElse(null);</span>
+<span class="nc" id="L123">            actions.add(omen.id());</span>
+        }
+
+<span class="nc" id="L126">        data.setActions(actions);</span>
+        
+<span class="nc" id="L128">        buildSections();</span>
+<span class="nc" id="L129">        refresh();</span>
+<span class="nc" id="L130">        App.getInstance().getProjectManager().saveProject(getProject());</span>
+<span class="nc" id="L131">    }</span>
+
+    // ---------------------------------------------------------
+    // SEARCH SOURCE
+    // ---------------------------------------------------------
+    @Override
+    protected List&lt;? extends searchAction&gt; getSearchSource(String section, String key) {
+
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (section.equalsIgnoreCase(&quot;Currency&quot;)) {</span>
+<span class="nc" id="L140">            return OrbRegistry.getAll().stream().toList();</span>
+        }
+
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (section.equalsIgnoreCase(&quot;Omen&quot;)) {</span>
+
+<span class="nc" id="L145">            List&lt;String&gt; actions = getNode().getActions();</span>
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            if (actions.isEmpty()) {</span>
+<span class="nc" id="L148">                return List.of();</span>
             }
-<span class="nc" id="L87">        });</span>
 
-<span class="nc" id="L89">        box.getChildren().addAll(label, combo);</span>
-<span class="nc" id="L90">        return box;</span>
-    }
+            // The first action is the orb ID
+<span class="nc" id="L152">            String orbId = actions.get(0);</span>
 
-
-
-    private VBox buildOmenDropdown() {
-<span class="nc" id="L96">        VBox box = new VBox(6);</span>
-
-<span class="nc" id="L98">        Label label = new Label(&quot;Add Omen:&quot;);</span>
-<span class="nc" id="L99">        ComboBox&lt;String&gt; combo = new ComboBox&lt;&gt;();</span>
-
-<span class="nc" id="L101">        Omenregistry.getAll().forEach(omen -&gt; combo.getItems().add(omen.id()));</span>
-
-<span class="nc" id="L103">        combo.setOnAction(e -&gt; {</span>
-<span class="nc" id="L104">            String selected = combo.getValue();</span>
-<span class="nc bnc" id="L105" title="All 2 branches missed.">            if (selected != null) {</span>
-<span class="nc" id="L106">                getNode().setAction(selected);</span>
-<span class="nc" id="L107">                refresh();</span>
+            // Look up the orb
+<span class="nc" id="L155">            Orb orb = OrbRegistry.get(orbId);</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">            if (orb == null) {</span>
+<span class="nc" id="L157">                return List.of();</span>
             }
-<span class="nc" id="L109">        });</span>
 
-<span class="nc" id="L111">        box.getChildren().addAll(label, combo);</span>
-<span class="nc" id="L112">        return box;</span>
+<span class="nc" id="L160">            String omenTarget = orb.omenTarget();</span>
+
+<span class="nc" id="L162">            return Omenregistry.getAll().stream()</span>
+<span class="nc" id="L163">                    .filter(o -&gt; o.usedWith().equalsIgnoreCase(omenTarget))</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">                    .filter(o -&gt; !actions.contains(o.id())) // prevent duplicates</span>
+<span class="nc" id="L165">                    .collect(Collectors.toMap(</span>
+                            Omen::id,
+<span class="nc" id="L167">                            o -&gt; o,</span>
+<span class="nc" id="L168">                            (a, b) -&gt; a</span>
+                    ))
+<span class="nc" id="L170">                    .values()</span>
+<span class="nc" id="L171">                    .stream()</span>
+<span class="nc" id="L172">                    .toList();</span>
+        }
+
+<span class="nc" id="L175">        return List.of();</span>
     }
 
+
+
+    // ---------------------------------------------------------
+    // REPLACE SECTION ITEM (StartNode-style)
+    // ---------------------------------------------------------
+    @Override
+    public void replaceSectionItem(String section, String oldItem, String newItem) {
+
+<span class="nc" id="L186">        List&lt;NodeSection&gt; updated = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        for (NodeSection sec : sections) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">            if (sec.title().equals(section)) {</span>
+
+<span class="nc" id="L191">                List&lt;String&gt; items = new ArrayList&lt;&gt;(sec.items());</span>
+<span class="nc" id="L192">                int index = items.indexOf(oldItem);</span>
+
+<span class="nc bnc" id="L194" title="All 2 branches missed.">                if (index &gt;= 0) {</span>
+<span class="nc" id="L195">                    items.set(index, newItem);</span>
+                }
+
+<span class="nc" id="L198">                updated.add(new NodeSection(section, items));</span>
+<span class="nc" id="L199">            } else {</span>
+<span class="nc" id="L200">                updated.add(sec);</span>
+            }
+<span class="nc" id="L202">        }</span>
+
+<span class="nc" id="L204">        sections = updated;</span>
+<span class="nc" id="L205">    }</span>
+
+    // ---------------------------------------------------------
+    // EXECUTION
+    // ---------------------------------------------------------
     @Override
     public LoadedItem execute(LoadedItem item) {
 
-<span class="nc" id="L118">        List&lt;String&gt; actions = getNode().getActions();</span>
+<span class="nc" id="L213">        List&lt;String&gt; actions = getNode().getActions();</span>
 
-<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (actions.isEmpty()) {</span>
-<span class="nc" id="L121">            return item; // nothing to do</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">        if (actions.isEmpty()) {</span>
+<span class="nc" id="L216">            return item;</span>
         }
 
-        // First action = currency
-<span class="nc" id="L125">        String orbId = actions.get(0);</span>
-<span class="nc" id="L126">        Orb orb = OrbRegistry.get(orbId);</span>
+<span class="nc" id="L219">        Orb orb = OrbRegistry.get(actions.get(0));</span>
 
-        // Remaining actions = omens
-<span class="nc" id="L129">        List&lt;Omen&gt; omens = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L130" title="All 2 branches missed.">        for (int i = 1; i &lt; actions.size(); i++) {</span>
-<span class="nc" id="L131">            Omen o = Omenregistry.get(actions.get(i));</span>
-<span class="nc bnc" id="L132" title="All 2 branches missed.">            if (o != null) omens.add(o);</span>
+<span class="nc" id="L221">        List&lt;Omen&gt; omens = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        for (int i = 1; i &lt; actions.size(); i++) {</span>
+<span class="nc" id="L223">            Omen o = Omenregistry.get(actions.get(i));</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">            if (o != null) omens.add(o);</span>
         }
 
-<span class="nc" id="L135">        BasicCurrencyAction.apply(item, orb, omens);</span>
-
-<span class="nc" id="L137">        return item;</span>
+<span class="nc" id="L227">        BasicCurrencyAction.apply(item, orb, omens);</span>
+<span class="nc" id="L228">        return item;</span>
     }
 
     @Override
     protected void edit() {
-<span class="nc" id="L142">        System.out.println(&quot;StartNode has no editable fields.&quot;);</span>
-<span class="nc" id="L143">    }    </span>
+<span class="nc" id="L233">        System.out.println(&quot;BasicCurrencyNode has no editable fields.&quot;);</span>
+<span class="nc" id="L234">    }</span>
 }
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

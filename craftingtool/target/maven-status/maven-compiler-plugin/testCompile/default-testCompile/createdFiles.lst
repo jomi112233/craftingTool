@@ -1,6 +1,12 @@
 project\ProjectManagertest.class
 project\FakeConfigLoader.class
+Init\item\ItemRegistryTest.class
 Util\CurrencyAction\OrbLoaderTest.class
+Init\node\NodeRegisterTest.class
+Init\omen\omenLoaderTest.class
 Util\ModRollerTest.class
+Init\omen\omenRegistrytest.class
 Init\modifiers\ModLoaderTest.class
+Init\currency\OrbRegistryTest.class
 Init\modifiers\ModRegisterTest.class
+Init\currency\OrbLoaderTest.class

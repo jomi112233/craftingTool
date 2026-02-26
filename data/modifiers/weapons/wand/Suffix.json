@@ -1,0 +1,255 @@
+{
+    "itemClass": "weapons/wand",
+    "mods": [
+    {
+        "id": "inc_cast_speed",
+        "suffix": true,
+        "name": "% increased Cast Speed",
+        "tags": ["Caster", "Speed"],
+        "tiers": [
+            { "tier": 7, "ilvl": 1,  "weight": 1000, "stats": { "cast_speed_inc": { "min": 9,  "max": 12 } } },
+            { "tier": 6, "ilvl": 15, "weight": 1000, "stats": { "cast_speed_inc": { "min": 13, "max": 16 } } },
+            { "tier": 5, "ilvl": 30, "weight": 1000, "stats": { "cast_speed_inc": { "min": 17, "max": 20 } } },
+            { "tier": 4, "ilvl": 45, "weight": 1000, "stats": { "cast_speed_inc": { "min": 21, "max": 24 } } },
+            { "tier": 3, "ilvl": 60, "weight": 1000, "stats": { "cast_speed_inc": { "min": 25, "max": 28 } } },
+            { "tier": 2, "ilvl": 70, "weight": 500,  "stats": { "cast_speed_inc": { "min": 29, "max": 32 } } },
+            { "tier": 1, "ilvl": 80, "weight": 250,  "stats": { "cast_speed_inc": { "min": 33, "max": 35 } } }
+        ]
+    },
+    {
+        "id": "inc_chance_to_shock",
+        "suffix": true,
+        "name": "% increased chance to Shock",
+        "tags": [ ],
+        "tiers": [
+            { "tier": 5, "ilvl": 15, "weight": 1000, "stats": { "shock_chance_inc": { "min": 51, "max": 60 } } },
+            { "tier": 4, "ilvl": 30, "weight": 1000, "stats": { "shock_chance_inc": { "min": 61, "max": 70 } } },
+            { "tier": 3, "ilvl": 45, "weight": 1000, "stats": { "shock_chance_inc": { "min": 71, "max": 80 } } },
+            { "tier": 2, "ilvl": 60, "weight": 500,  "stats": { "shock_chance_inc": { "min": 81, "max": 90 } } },
+            { "tier": 1, "ilvl": 75, "weight": 500,  "stats": { "shock_chance_inc": { "min": 91, "max": 100 } } }
+        ]
+    },
+    {
+        "id": "inc_spell_crit_chance",
+        "suffix": true,
+        "name": "% increased Critical Hit Chance for Spells",
+        "tags": ["Caster", "Critical"],
+        "tiers": [
+            { "tier": 6, "ilvl": 11, "weight": 1000, "stats": { "spell_crit_chance_inc": { "min": 27, "max": 33 } } },
+            { "tier": 5, "ilvl": 21, "weight": 1000, "stats": { "spell_crit_chance_inc": { "min": 34, "max": 39 } } },
+            { "tier": 4, "ilvl": 28, "weight": 1000, "stats": { "spell_crit_chance_inc": { "min": 40, "max": 46 } } },
+            { "tier": 3, "ilvl": 41, "weight": 500,  "stats": { "spell_crit_chance_inc": { "min": 47, "max": 53 } } },
+            { "tier": 2, "ilvl": 59, "weight": 250,  "stats": { "spell_crit_chance_inc": { "min": 54, "max": 59 } } },
+            { "tier": 1, "ilvl": 76, "weight": 125,  "stats": { "spell_crit_chance_inc": { "min": 60, "max": 73 } } }
+        ]
+    },
+    {
+        "id": "inc_crit_spell_damage_bonus",
+        "suffix": true,
+        "name": "% increased Critical Spell Damage Bonus",
+        "tags": ["Caster", "Critical"],
+        "tiers": [
+            { "tier": 6, "ilvl": 8,  "weight": 1000, "stats": { "crit_spell_damage_bonus_inc": { "min": 10, "max": 14 } } },
+            { "tier": 5, "ilvl": 21, "weight": 1000, "stats": { "crit_spell_damage_bonus_inc": { "min": 15, "max": 19 } } },
+            { "tier": 4, "ilvl": 30, "weight": 1000, "stats": { "crit_spell_damage_bonus_inc": { "min": 20, "max": 24 } } },
+            { "tier": 3, "ilvl": 44, "weight": 500,  "stats": { "crit_spell_damage_bonus_inc": { "min": 25, "max": 29 } } },
+            { "tier": 2, "ilvl": 59, "weight": 250,  "stats": { "crit_spell_damage_bonus_inc": { "min": 30, "max": 34 } } },
+            { "tier": 1, "ilvl": 73, "weight": 125,  "stats": { "crit_spell_damage_bonus_inc": { "min": 35, "max": 39 } } }
+        ]
+    },
+    {
+        "id": "inc_flammability_magnitude",
+        "suffix": true,
+        "name": "% increased Flammability Magnitude",
+        "tags": [ ],
+        "tiers": [
+            { "tier": 5, "ilvl": 15, "weight": 1000, "stats": { "flammability_mag_inc": { "min": 51, "max": 60 } } },
+            { "tier": 4, "ilvl": 30, "weight": 1000, "stats": { "flammability_mag_inc": { "min": 61, "max": 70 } } },
+            { "tier": 3, "ilvl": 45, "weight": 1000, "stats": { "flammability_mag_inc": { "min": 71, "max": 80 } } },
+            { "tier": 2, "ilvl": 60, "weight": 500,  "stats": { "flammability_mag_inc": { "min": 81, "max": 90 } } },
+            { "tier": 1, "ilvl": 75, "weight": 500,  "stats": { "flammability_mag_inc": { "min": 91, "max": 100 } } }
+        ]
+    },
+    {
+        "id": "inc_freeze_buildup",
+        "suffix": true,
+        "name": "% increased Freeze Buildup",
+        "tags": [ ],
+        "tiers": [
+            { "tier": 5, "ilvl": 15, "weight": 1000, "stats": { "freeze_buildup_inc": { "min": 31, "max": 40 } } },
+            { "tier": 4, "ilvl": 30, "weight": 1000, "stats": { "freeze_buildup_inc": { "min": 41, "max": 50 } } },
+            { "tier": 3, "ilvl": 45, "weight": 1000, "stats": { "freeze_buildup_inc": { "min": 51, "max": 60 } } },
+            { "tier": 2, "ilvl": 60, "weight": 500,  "stats": { "freeze_buildup_inc": { "min": 61, "max": 70 } } },
+            { "tier": 1, "ilvl": 75, "weight": 500,  "stats": { "freeze_buildup_inc": { "min": 71, "max": 80 } } }
+        ]
+    },
+    {
+        "id": "light_radius_mana_regen",
+        "suffix": true,
+        "name": "Light Radius %, % increased Mana Regeneration Rate",
+        "tags": ["Mana"],
+        "tiers": [
+            { "tier": 3, "ilvl": 8,  "weight": 1000, "stats": { "light_radius_inc": { "min": 5, "max": 5},  "mana_regen_inc": { "min": 8,  "max": 12 } } },
+            { "tier": 2, "ilvl": 15, "weight": 1000, "stats": { "light_radius_inc": { "min": 10, "max": 10}, "mana_regen_inc": { "min": 13, "max": 17 } } },
+            { "tier": 1, "ilvl": 30, "weight": 1000, "stats": { "light_radius_inc": { "min": 15, "max": 15}, "mana_regen_inc": { "min": 18, "max": 22 } } }
+        ]
+    },
+    {
+        "id": "inc_mana_regen_rate",
+        "suffix": true,
+        "name": "% increased Mana Regeneration Rate",
+        "tags": ["Mana"],
+        "tiers": [
+            { "tier": 6, "ilvl": 1,  "weight": 1000, "stats": { "mana_regen_inc": { "min": 10, "max": 19 } } },
+            { "tier": 5, "ilvl": 18, "weight": 1000, "stats": { "mana_regen_inc": { "min": 20, "max": 29 } } },
+            { "tier": 4, "ilvl": 29, "weight": 1000, "stats": { "mana_regen_inc": { "min": 30, "max": 39 } } },
+            { "tier": 3, "ilvl": 42, "weight": 1000, "stats": { "mana_regen_inc": { "min": 40, "max": 49 } } },
+            { "tier": 2, "ilvl": 55, "weight": 1000, "stats": { "mana_regen_inc": { "min": 50, "max": 59 } } },
+            { "tier": 1, "ilvl": 79, "weight": 1000, "stats": { "mana_regen_inc": { "min": 60, "max": 69 } } }
+        ]
+    },
+    {
+        "id": "reduced_attribute_requirements",
+        "suffix": true,
+        "name": "% reduced Attribute Requirements",
+        "tags": [ ],
+        "tiers": [
+            { "tier": 5, "ilvl": 24, "weight": 1000, "stats": { "attribute_requirements_reduced": { "min": 15, "max": 15 } } },
+            { "tier": 4, "ilvl": 32, "weight": 1000, "stats": { "attribute_requirements_reduced": { "min": 20, "max": 20 } } },
+            { "tier": 3, "ilvl": 40, "weight": 1000, "stats": { "attribute_requirements_reduced": { "min": 25, "max": 25 } } },
+            { "tier": 2, "ilvl": 52, "weight": 1000, "stats": { "attribute_requirements_reduced": { "min": 30, "max": 30 } } },
+            { "tier": 1, "ilvl": 60, "weight": 1000, "stats": { "attribute_requirements_reduced": { "min": 35, "max": 35 } } }
+        ]
+    },
+    {
+        "id": "flat_intelligence",
+        "suffix": true,
+        "name": "+# to Intelligence",
+        "tags": ["Attribute"],
+        "tiers": [
+            { "tier": 8, "ilvl": 1,  "weight": 1000, "stats": { "int_flat": { "min": 5,  "max": 8  } } },
+            { "tier": 7, "ilvl": 11, "weight": 1000, "stats": { "int_flat": { "min": 9,  "max": 12 } } },
+            { "tier": 6, "ilvl": 22, "weight": 1000, "stats": { "int_flat": { "min": 13, "max": 16 } } },
+            { "tier": 5, "ilvl": 33, "weight": 1000, "stats": { "int_flat": { "min": 17, "max": 20 } } },
+            { "tier": 4, "ilvl": 44, "weight": 1000, "stats": { "int_flat": { "min": 21, "max": 24 } } },
+            { "tier": 3, "ilvl": 55, "weight": 1000, "stats": { "int_flat": { "min": 25, "max": 27 } } },
+            { "tier": 2, "ilvl": 66, "weight": 1000, "stats": { "int_flat": { "min": 28, "max": 30 } } },
+            { "tier": 1, "ilvl": 74, "weight": 1000, "stats": { "int_flat": { "min": 31, "max": 33 } } }
+        ]
+    },
+    {
+        "id": "plus_levels_chaos_spells",
+        "suffix": true,
+        "name": "+# to Level of all Chaos Spell Skills",
+        "tags": ["Caster", "Chaos", "Gem"],
+        "tiers": [
+            { "tier": 5, "ilvl": 2,  "weight": 1000, "stats": { "chaos_spell_levels": { "min": 1, "max": 1 } }},
+            { "tier": 4, "ilvl": 18, "weight": 750,  "stats": { "chaos_spell_levels": { "min": 2, "max": 2 } }},
+            { "tier": 3, "ilvl": 36, "weight": 500,  "stats": { "chaos_spell_levels": { "min": 3, "max": 3 } }},
+            { "tier": 2, "ilvl": 55, "weight": 250,  "stats": { "chaos_spell_levels": { "min": 4, "max": 4 } }},
+            { "tier": 1, "ilvl": 81, "weight": 100,  "stats": { "chaos_spell_levels": { "min": 5, "max": 5 } }}
+
+        ]
+    },
+    {
+        "id": "plus_levels_cold_spells",
+        "suffix": true,
+        "name": "+# to Level of all Cold Spell Skills",
+        "tags": ["Caster", "Cold", "Gem", "Elemental"],
+        "tiers": [
+            { "tier": 5, "ilvl": 2,  "weight": 1000, "stats": { "cold_spell_levels": { "min": 1, "max": 1 } }},
+            { "tier": 4, "ilvl": 18, "weight": 750,  "stats": { "cold_spell_levels": { "min": 2, "max": 2 } }},
+            { "tier": 3, "ilvl": 36, "weight": 500,  "stats": { "cold_spell_levels": { "min": 3, "max": 3 } }},
+            { "tier": 2, "ilvl": 55, "weight": 250,  "stats": { "cold_spell_levels": { "min": 4, "max": 4 } }},
+            { "tier": 1, "ilvl": 81, "weight": 100,  "stats": { "cold_spell_levels": { "min": 5, "max": 5 } }}
+
+        ]
+    },
+    {
+        "id": "plus_levels_fire_spells",
+        "suffix": true,
+        "name": "+# to Level of all Fire Spell Skills",
+        "tags": ["Caster", "Fire", "Gem", "Elemental"],
+        "tiers": [
+            { "tier": 5, "ilvl": 2,  "weight": 1000, "stats": { "fire_spell_levels": { "min": 1, "max": 1 } }},
+            { "tier": 4, "ilvl": 18, "weight": 750,  "stats": { "fire_spell_levels": { "min": 2, "max": 2 } }},
+            { "tier": 3, "ilvl": 36, "weight": 500,  "stats": { "fire_spell_levels": { "min": 3, "max": 3 } }},
+            { "tier": 2, "ilvl": 55, "weight": 250,  "stats": { "fire_spell_levels": { "min": 4, "max": 4 } }},
+            { "tier": 1, "ilvl": 81, "weight": 100,  "stats": { "fire_spell_levels": { "min": 5, "max": 5 } }}
+
+        ]
+    },
+    {
+        "id": "plus_levels_lightning_spells",
+        "suffix": true,
+        "name": "+# to Level of all Lightning Spell Skills",
+        "tags": ["Caster", "Lightning", "Gem", "Elemental"],
+        "tiers": [
+            { "tier": 5, "ilvl": 2,  "weight": 1000, "stats": { "lightning_spell_levels": { "min": 1, "max": 1 } }},
+            { "tier": 4, "ilvl": 18, "weight": 750,  "stats": { "lightning_spell_levels": { "min": 2, "max": 2 } }},
+            { "tier": 3, "ilvl": 36, "weight": 500,  "stats": { "lightning_spell_levels": { "min": 3, "max": 3 } }},
+            { "tier": 2, "ilvl": 55, "weight": 250,  "stats": { "lightning_spell_levels": { "min": 4, "max": 4 } }},
+            { "tier": 1, "ilvl": 81, "weight": 100,  "stats": { "lightning_spell_levels": { "min": 5, "max": 5 } }}
+
+        ]
+    },
+    {
+        "id": "plus_levels_physical_spells",
+        "suffix": true,
+        "name": "+# to Level of all Physical Spell Skills",
+        "tags": ["Caster", "Physical", "Gem"],
+        "tiers": [
+            { "tier": 5, "ilvl": 2,  "weight": 1000, "stats": { "physical_spell_levels": { "min": 1, "max": 1 } }},
+            { "tier": 4, "ilvl": 18, "weight": 750,  "stats": { "physical_spell_levels": { "min": 2, "max": 2 } }},
+            { "tier": 3, "ilvl": 36, "weight": 500,  "stats": { "physical_spell_levels": { "min": 3, "max": 3 } }},
+            { "tier": 2, "ilvl": 55, "weight": 250,  "stats": { "physical_spell_levels": { "min": 4, "max": 4 } }},
+            { "tier": 1, "ilvl": 81, "weight": 100,  "stats": { "physical_spell_levels": { "min": 5, "max": 5 } }}
+
+        ]
+    },
+    {
+        "id": "plus_levels_all_spells",
+        "suffix": true,
+        "name": "+# to Level of all Spell Skills",
+        "tags": ["Caster", "Gem"],
+        "tiers": [
+            { "tier": 4, "ilvl": 5,  "weight": 200, "stats": { "all_spell_levels": { "min": 1, "max": 1 } }},
+            { "tier": 3, "ilvl": 25, "weight": 150, "stats": { "all_spell_levels": { "min": 2, "max": 2 } }},
+            { "tier": 2, "ilvl": 55, "weight": 100, "stats": { "all_spell_levels": { "min": 3, "max": 3 } }},
+            { "tier": 1, "ilvl": 78, "weight": 50,  "stats": { "all_spell_levels": { "min": 4, "max": 4 } }}
+
+        ]
+    },
+    {
+        "id": "life_on_kill",
+        "suffix": true,
+        "name": "Gain # Life per Enemy Killed",
+        "tags": ["Life"],
+        "tiers": [
+            { "tier": 8, "ilvl": 1,  "weight": 750, "stats": { "life_on_kill": { "min": 4,  "max": 6  } } },
+            { "tier": 7, "ilvl": 11, "weight": 750, "stats": { "life_on_kill": { "min": 7,  "max": 9  } } },
+            { "tier": 6, "ilvl": 22, "weight": 750, "stats": { "life_on_kill": { "min": 10, "max": 18 } } },
+            { "tier": 5, "ilvl": 33, "weight": 750, "stats": { "life_on_kill": { "min": 19, "max": 28 } } },
+            { "tier": 4, "ilvl": 44, "weight": 750, "stats": { "life_on_kill": { "min": 29, "max": 40 } } },
+            { "tier": 3, "ilvl": 55, "weight": 750, "stats": { "life_on_kill": { "min": 41, "max": 53 } } },
+            { "tier": 2, "ilvl": 66, "weight": 750, "stats": { "life_on_kill": { "min": 54, "max": 68 } } },
+            { "tier": 1, "ilvl": 77, "weight": 750, "stats": { "life_on_kill": { "min": 69, "max": 84 } } }
+        ]
+    },
+    {
+        "id": "mana_on_kill",
+        "suffix": true,
+        "name": "Gain # Mana per Enemy Killed",
+        "tags": ["Mana"],
+        "tiers": [
+            { "tier": 8, "ilvl": 1,  "weight": 750, "stats": { "mana_on_kill": { "min": 2,  "max": 3  } } },
+            { "tier": 7, "ilvl": 12, "weight": 750, "stats": { "mana_on_kill": { "min": 4,  "max": 5  } } },
+            { "tier": 6, "ilvl": 23, "weight": 750, "stats": { "mana_on_kill": { "min": 6,  "max": 9  } } },
+            { "tier": 5, "ilvl": 34, "weight": 750, "stats": { "mana_on_kill": { "min": 10, "max": 14 } } },
+            { "tier": 4, "ilvl": 45, "weight": 750, "stats": { "mana_on_kill": { "min": 15, "max": 20 } } },
+            { "tier": 3, "ilvl": 56, "weight": 750, "stats": { "mana_on_kill": { "min": 21, "max": 27 } } },
+            { "tier": 2, "ilvl": 67, "weight": 750, "stats": { "mana_on_kill": { "min": 28, "max": 35 } } },
+            { "tier": 1, "ilvl": 78, "weight": 750, "stats": { "mana_on_kill": { "min": 36, "max": 45 } } }
+        ]
+    } ]
+}

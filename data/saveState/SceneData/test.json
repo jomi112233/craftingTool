@@ -1,11 +1,55 @@
 {
-  "id" : "697580ef-ab00-4298-86c5-74e7c8f63ed0",
+  "id" : "87ba0a3c-0639-49bc-8424-fcaf757b9f74",
   "name" : "test",
-  "itemType" : null,
-  "createdAt" : "2026-02-24T19:13:58.8715636",
-  "lastModifiedAt" : "2026-02-24T19:13:58.8715636",
-  "nodes" : [ ],
+  "itemType" : "weapons/wand",
+  "createdAt" : "2026-02-25T22:36:34.7759182",
+  "lastModifiedAt" : "2026-02-25T22:36:34.7769155",
+  "nodes" : [ {
+    "id" : "0f036d03-cf34-483b-87d2-b273e9974255",
+    "type" : "start",
+    "xPos" : 195.0,
+    "yPos" : 188.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : false,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "395ac898-dd91-49e6-8598-7eddd1fcb099",
+    "type" : "basic",
+    "xPos" : 662.0,
+    "yPos" : 199.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "2d7e9d57-b32a-48d8-9454-bb3f249ec994",
+    "type" : "iterator",
+    "xPos" : 215.0,
+    "yPos" : 478.0,
+    "iterator" : true,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "2f39c39e-cd97-4e72-9ded-30b75a01dbfc",
+    "type" : "end",
+    "xPos" : 771.0,
+    "yPos" : 473.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  } ],
   "connections" : [ ],
-  "allNodeIds" : [ ],
-  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/697580ef-ab00-4298-86c5-74e7c8f63ed0"
+  "allNodeIds" : [ "0f036d03-cf34-483b-87d2-b273e9974255", "395ac898-dd91-49e6-8598-7eddd1fcb099", "2d7e9d57-b32a-48d8-9454-bb3f249ec994", "2f39c39e-cd97-4e72-9ded-30b75a01dbfc" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/87ba0a3c-0639-49bc-8424-fcaf757b9f74/"
 }

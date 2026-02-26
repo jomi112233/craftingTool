@@ -2,66 +2,187 @@
     "currencyType": "basic",
     "orbs": [
         {
-            "id": "transmutation_orb",
-            "name": "orb of transmutation",
-            "minRarity": "normal",
-            "newRarity": "magic",
-            "removeModifierCount": 0,
-            "addedModifierCount": 1
+        "id": "transmutation_orb",
+        "name": "orb of transmutation",
+        "omenTarget": "transmutation_orb",
+        "allowedRarity": ["normal"],
+        "newRarity": "magic",
+        "minModifierLevel": 0,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "greater_transmutation_orb",
+        "name": "greater orb of transmutation",
+        "omenTarget": "transmutation_orb",
+        "allowedRarity": ["normal"],
+        "newRarity": "magic",
+        "minModifierLevel": 55,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "perfect_transmutation_orb",
+        "name": "perfect orb of transmutation",
+        "omenTarget": "transmutation_orb",
+        "allowedRarity": ["normal"],
+        "newRarity": "magic",
+        "minModifierLevel": 70,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
         },
 
-        {
-            "id": "Augmentation_orb",
-            "name": "orb of augmentation",
-            "minRarity": "magic",
-            "newRarity": "magic",
-            "removeModifierCount": 0,
-            "addedModifierCount": 1
-        },
 
         {
-            "id": "regal_orb",
-            "name": "regal orb",
-            "minRarity": "magic",
-            "newRarity": "rare",
-            "removeModifierCount": 0,
-            "addedModifierCount": 1
+        "id": "augmentation_orb",
+        "name": "orb of augmentation",
+        "omenTarget": "Augmentation_orb",
+        "allowedRarity": ["magic"],
+        "newRarity": "magic",
+        "minModifierLevel": 0,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "greater_augmentation_orb",
+        "name": "greater orb of augmentation",
+        "omenTarget": "Augmentation_orb",
+        "allowedRarity": ["magic"],
+        "newRarity": "magic",
+        "minModifierLevel": 55,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "perfect_augmentation_orb",
+        "name": "perfect orb of augmentation",
+        "omenTarget": "Augmentation_orb",
+        "allowedRarity": ["magic"],
+        "newRarity": "magic",
+        "minModifierLevel": 70,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
         },
 
-        {
-            "id": "exalted_orb",
-            "name": "exalted orb",
-            "minRarity": "rare",
-            "newRarity": "rare",
-            "removeModifierCount": 0,
-            "addedModifierCount": 1
-        },
 
         {
-            "id": "alchemy_orb",
-            "name": "Orb of Alchemy",
-            "minRarity": "normal",
-            "newRarity": "rare",
-            "removeModifierCount": 2,
-            "addedModifierCount": 4
+        "id": "regal_orb",
+        "name": "regal orb",
+        "omenTarget": "regal_orb",
+        "allowedRarity": ["magic"],
+        "newRarity": "rare",
+        "minModifierLevel": 0,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "greater_regal_orb",
+        "name": "greater regal orb",
+        "omenTarget": "regal_orb",
+        "allowedRarity": ["magic"],
+        "newRarity": "rare",
+        "minModifierLevel": 35,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "perfect_regal_orb",
+        "name": "perfect regal orb",
+        "omenTarget": "regal_orb",
+        "allowedRarity": ["magic"],
+        "newRarity": "rare",
+        "minModifierLevel": 50,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
         },
 
-        {
-            "id": "chaos_orb",
-            "name": "chaos orb",
-            "minRarity": "rare",
-            "newRarity": "rare",
-            "removeModifierCount": 1,
-            "addedModifierCount": 1
-        },
 
         {
-            "id": "annul_orb",
-            "name": "orb of annulment",
-            "minRarity": "normal",
-            "newRarity": "any",
-            "removeModifierCount": 1,
-            "addedModifierCount": 0
+        "id": "exalted_orb",
+        "name": "exalted orb",
+        "omenTarget": "exalted_orb",
+        "allowedRarity": ["rare"],
+        "newRarity": "rare",
+        "minModifierLevel": 0,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "greater_exalted_orb",
+        "name": "greater exalted orb",
+        "omenTarget": "exalted_orb",
+        "allowedRarity": ["rare"],
+        "newRarity": "rare",
+        "minModifierLevel": 35,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "perfect_exalted_orb",
+        "name": "perfect exalted orb",
+        "omenTarget": "exalted_orb",
+        "allowedRarity": ["rare"],
+        "newRarity": "rare",
+        "minModifierLevel": 50,
+        "removeModifierCount": 0,
+        "addedModifierCount": 1
+        },
+
+
+        {
+        "id": "alchemy_orb",
+        "name": "Orb of Alchemy",
+        "omenTarget": "alchemy_orb",
+        "allowedRarity": ["normal", "magic"],
+        "newRarity": "rare",
+        "minModifierLevel": 0,
+        "removeModifierCount": 4,
+        "addedModifierCount": 4
+        },
+
+
+        {
+        "id": "chaos_orb",
+        "name": "chaos orb",
+        "omenTarget": "chaos_orb",
+        "allowedRarity": ["rare"],
+        "newRarity": "rare",
+        "minModifierLevel": 0,
+        "removeModifierCount": 1,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "greater_chaos_orb",
+        "name": "greater_chaos orb",
+        "omenTarget": "chaos_orb",
+        "allowedRarity": ["rare"],
+        "newRarity": "rare",
+        "minModifierLevel": 35,
+        "removeModifierCount": 1,
+        "addedModifierCount": 1
+        },
+        {
+        "id": "perfect_chaos_orb",
+        "name": "perfect chaos orb",
+        "omenTarget": "chaos_orb",
+        "allowedRarity": ["rare"],
+        "newRarity": "rare",
+        "minModifierLevel": 50,
+        "removeModifierCount": 1,
+        "addedModifierCount": 1
+        },
+
+
+        {
+        "id": "annul_orb",
+        "name": "orb of annulment",
+        "omenTarget": "annul_orb",
+        "allowedRarity": ["magic", "rare"],
+        "newRarity": null,
+        "minModifierLevel": 0,
+        "removeModifierCount": 1,
+        "addedModifierCount": 0
         }
     ]
 }
+

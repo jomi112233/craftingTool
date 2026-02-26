@@ -5,7 +5,7 @@ import com.jomi.Handlers.Init.basicCurrency.Orb;
 
 public class OrbLoaderTest {
 
-    public static Orb orb(
+/*     public static Orb orb(
         String id,
         String name,
         String minRarity,
@@ -25,5 +25,5 @@ public class OrbLoaderTest {
             target,
             currencyType
         );
-    }
+    } */
 }

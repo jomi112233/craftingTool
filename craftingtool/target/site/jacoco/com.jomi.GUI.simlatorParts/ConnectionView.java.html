@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConnectionView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.GUI.simlatorParts</a> &gt; <span class="el_source">ConnectionView.java</span></div><h1>ConnectionView.java</h1><pre class="source lang-java linenums">package com.jomi.GUI.simlatorParts;
 
 import com.jomi.App;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.Init.project.Connection;
 import com.jomi.Handlers.Init.project.Project;
 
@@ -15,45 +16,45 @@ public class ConnectionView extends Line {
     private final Connection connection;
     private final Project project;
 
-<span class="nc" id="L18">    public ConnectionView(Circle fromPort, Circle toPort, Connection connection, Project project) {</span>
-<span class="nc" id="L19">        this.connection = connection;</span>
-<span class="nc" id="L20">        this.project = project;</span>
+<span class="nc" id="L19">    public ConnectionView(Circle fromPort, Circle toPort, Connection connection, Project project) {</span>
+<span class="nc" id="L20">        this.connection = connection;</span>
+<span class="nc" id="L21">        this.project = project;</span>
 
-<span class="nc" id="L22">        NodeView fromNode = (NodeView) fromPort.getParent();</span>
-<span class="nc" id="L23">        NodeView toNode   = (NodeView) toPort.getParent();</span>
+<span class="nc" id="L23">        NodeView fromNode = (NodeView) fromPort.getParent();</span>
+<span class="nc" id="L24">        NodeView toNode   = (NodeView) toPort.getParent();</span>
 
-<span class="nc" id="L25">        startXProperty().bind(fromNode.layoutXProperty().add(fromPort.layoutXProperty()));</span>
-<span class="nc" id="L26">        startYProperty().bind(fromNode.layoutYProperty().add(fromPort.layoutYProperty()));</span>
+<span class="nc" id="L26">        startXProperty().bind(fromNode.layoutXProperty().add(fromPort.layoutXProperty()));</span>
+<span class="nc" id="L27">        startYProperty().bind(fromNode.layoutYProperty().add(fromPort.layoutYProperty()));</span>
 
-<span class="nc" id="L28">        endXProperty().bind(toNode.layoutXProperty().add(toPort.layoutXProperty()));</span>
-<span class="nc" id="L29">        endYProperty().bind(toNode.layoutYProperty().add(toPort.layoutYProperty()));</span>
+<span class="nc" id="L29">        endXProperty().bind(toNode.layoutXProperty().add(toPort.layoutXProperty()));</span>
+<span class="nc" id="L30">        endYProperty().bind(toNode.layoutYProperty().add(toPort.layoutYProperty()));</span>
 
-<span class="nc" id="L31">        setStrokeWidth(2);</span>
-<span class="nc" id="L32">        setStroke(Color.WHITE);</span>
+<span class="nc" id="L32">        setStrokeWidth(2);</span>
+<span class="nc" id="L33">        setStroke(Color.WHITE);</span>
 
-<span class="nc" id="L34">        enableContextMenu();</span>
-<span class="nc" id="L35">        toBack();</span>
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L35">        enableContextMenu();</span>
+<span class="nc" id="L36">        toBack();</span>
+<span class="nc" id="L37">    }</span>
 
     private void enableContextMenu() {
-<span class="nc" id="L39">        ContextMenu menu = new ContextMenu();</span>
+<span class="nc" id="L40">        ContextMenu menu = new ContextMenu();</span>
 
-<span class="nc" id="L41">        MenuItem deleteConnection = new MenuItem(&quot;Delete Connection&quot;);</span>
-<span class="nc" id="L42">        deleteConnection.setOnAction(e -&gt; deleteConnection());</span>
+<span class="nc" id="L42">        MenuItem deleteConnection = new MenuItem(&quot;Delete Connection&quot;);</span>
+<span class="nc" id="L43">        deleteConnection.setOnAction(e -&gt; deleteConnection());</span>
 
-<span class="nc" id="L44">        menu.getItems().add(deleteConnection);</span>
+<span class="nc" id="L45">        menu.getItems().add(deleteConnection);</span>
 
-<span class="nc" id="L46">        setOnContextMenuRequested(e -&gt;</span>
-<span class="nc" id="L47">            menu.show(this, e.getScreenX(), e.getScreenY())</span>
+<span class="nc" id="L47">        setOnContextMenuRequested(e -&gt;</span>
+<span class="nc" id="L48">            menu.show(this, e.getScreenX(), e.getScreenY())</span>
         );
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L50">    }</span>
 
 
     private void deleteConnection() {
-<span class="nc" id="L53">        System.out.println(&quot;Deleting Connection&quot;);</span>
-<span class="nc" id="L54">        project.removeConnection(connection);</span>
-<span class="nc" id="L55">        App.getInstance().getGui().showSimulator();</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L54">        System.out.println(&quot;Deleting Connection&quot;);</span>
+<span class="nc" id="L55">        project.removeConnection(connection);</span>
+<span class="nc" id="L56">        App.getInstance().getGui().showSimulator();</span>
+<span class="nc" id="L57">    }</span>
 
 
 }

@@ -17,181 +17,215 @@ import com.jomi.Util.ModRoller;
     private static final int SUFFIX_CAP = 3;
 
     public static void apply(LoadedItem item, Orb orb, List&lt;Omen&gt; omens) {
+<span class="nc" id="L20">        if (!orb.allowedRarity().stream()</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">            .anyMatch(r -&gt; r.equalsIgnoreCase(item.getItemRarity()))) {</span>
 
-<span class="nc bnc" id="L21" title="All 2 branches missed.">    if (!item.getItemRarity().equalsIgnoreCase(orb.minRarity())) {</span>
-<span class="nc" id="L22">        throw new IllegalStateException(</span>
-<span class="nc" id="L23">            &quot;Item rarity &quot; + item.getItemRarity() +</span>
-<span class="nc" id="L24">            &quot; does not meet minimum rarity &quot; + orb.minRarity() +</span>
-<span class="nc" id="L25">            &quot; for currency &quot; + orb.id()</span>
-        );
-    }
-
-<span class="nc bnc" id="L29" title="All 2 branches missed.">    if (orb.newRarity() != null &amp;&amp;</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        !orb.newRarity().equalsIgnoreCase(item.getItemRarity())) {</span>
-
-<span class="nc" id="L32">        item.setItemRarity(orb.newRarity());</span>
-    }
+<span class="nc" id="L23">            throw new IllegalStateException(</span>
+<span class="nc" id="L24">                &quot;Item rarity &quot; + item.getItemRarity() +</span>
+<span class="nc" id="L25">                &quot; is not allowed for currency &quot; + orb.id()</span>
+            );
+        }
 
 
-<span class="nc bnc" id="L36" title="All 2 branches missed.">    for (int i = 0; i &lt; orb.removeModifierCount(); i++) {</span>
-<span class="nc" id="L37">        removeRandomModifier(item);</span>
-    }
 
-    // combine omen effects
-<span class="nc" id="L41">    String finalTargetAffix = &quot;BOTH&quot;;</span>
-<span class="nc" id="L42">    boolean finalTargetTags = false;</span>
-<span class="nc" id="L43">    int extraMods = 0;</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (orb.newRarity() != null &amp;&amp;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            !orb.newRarity().equalsIgnoreCase(item.getItemRarity())) {</span>
 
-<span class="nc bnc" id="L45" title="All 2 branches missed.">    if (omens != null) {</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        for (Omen omen : omens) {</span>
+<span class="nc" id="L34">            item.setItemRarity(orb.newRarity());</span>
+        }
 
-            // Only apply omens that match the orb
-<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (!omen.usedWith().equalsIgnoreCase(orb.id())) continue;</span>
 
-            // Forced prefix/suffix
-<span class="nc bnc" id="L52" title="All 2 branches missed.">            if (!omen.targetAffix().equalsIgnoreCase(&quot;BOTH&quot;)) {</span>
-<span class="nc" id="L53">                finalTargetAffix = omen.targetAffix();</span>
+        // combine omen effects
+<span class="nc" id="L39">        String finalTargetAffix = &quot;BOTH&quot;;</span>
+<span class="nc" id="L40">        boolean finalTargetTags = false;</span>
+<span class="nc" id="L41">        int extraMods = 0;</span>
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (omens != null) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">            for (Omen omen : omens) {</span>
+
+                // Only apply omens that match the orb
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (!omen.usedWith().equalsIgnoreCase(orb.omenTarget())) continue;</span>
+
+                // Forced prefix/suffix
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                if (!omen.targetAffix().equalsIgnoreCase(&quot;BOTH&quot;)) {</span>
+<span class="nc" id="L51">                    finalTargetAffix = omen.targetAffix();</span>
+                }
+
+                // Tag targeting
+<span class="nc bnc" id="L55" title="All 4 branches missed.">                if (omen.targetTags() != null &amp;&amp; omen.targetTags()) {</span>
+<span class="nc" id="L56">                    finalTargetTags = true;</span>
+                }
+
+                // Extra modifiers
+<span class="nc" id="L60">                extraMods += omen.addExtraModifiers();</span>
+<span class="nc" id="L61">            }</span>
+        }
+
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        for (int i = 0; i &lt; orb.removeModifierCount(); i++) {</span>
+<span class="nc" id="L65">            removeRandomModifier(item, finalTargetAffix);</span>
+        }
+
+
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        for (int i = 0; i &lt; orb.addedModifierCount(); i++) {</span>
+<span class="nc" id="L70">            addModifier(item, orb, finalTargetAffix, finalTargetTags);</span>
+        }
+
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        for (int i = 0; i &lt; extraMods; i++) {</span>
+<span class="nc" id="L74">            addModifier(item, orb, finalTargetAffix, finalTargetTags);</span>
+        }
+<span class="nc" id="L76">    }</span>
+
+
+    private static void removeRandomModifier(LoadedItem item, String targetAffix) {
+<span class="nc" id="L80">        var prefix = item.getPrefix();</span>
+<span class="nc" id="L81">        var suffix = item.getSuffix();</span>
+
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        boolean hasPrefix = !prefix.isEmpty();</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        boolean hasSuffix = !suffix.isEmpty();</span>
+
+<span class="nc bnc" id="L86" title="All 4 branches missed.">        if (!hasPrefix &amp;&amp; !hasSuffix) {</span>
+<span class="nc" id="L87">            return;</span>
+        }
+
+<span class="nc bnc" id="L90" title="All 3 branches missed.">        switch (targetAffix.toUpperCase()) {</span>
+
+            case &quot;PREFIX&quot; -&gt; {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                if (hasPrefix) {</span>
+<span class="nc" id="L94">                    prefix.remove((int)(Math.random() * prefix.size()));</span>
+<span class="nc" id="L95">                    return;</span>
+                }
+<span class="nc" id="L97">                System.out.println(&quot;no valid prefix modifiers&quot;);</span>
+<span class="nc" id="L98">                return;</span>
+                
             }
 
-            // Tag targeting
-<span class="nc bnc" id="L57" title="All 4 branches missed.">            if (omen.targetTags() != null &amp;&amp; omen.targetTags()) {</span>
-<span class="nc" id="L58">                finalTargetTags = true;</span>
+            case &quot;SUFFIX&quot; -&gt; {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">                if (hasSuffix) {</span>
+<span class="nc" id="L104">                    suffix.remove((int)(Math.random() * suffix.size()));</span>
+<span class="nc" id="L105">                    return;</span>
+                }
+<span class="nc" id="L107">                System.out.println(&quot;no valid suffix modifiers&quot;);</span>
+<span class="nc" id="L108">                return;</span>
+            
             }
 
-            // Extra modifiers
-<span class="nc" id="L62">            extraMods += omen.addExtraModifiers();</span>
+            default -&gt; { // BOTH
+<span class="nc bnc" id="L113" title="All 4 branches missed.">                if (hasPrefix &amp;&amp; hasSuffix) {</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                    if (Math.random() &lt; 0.5) {</span>
+<span class="nc" id="L115">                        prefix.remove((int)(Math.random() * prefix.size()));</span>
+                    } else {
+<span class="nc" id="L117">                        suffix.remove((int)(Math.random() * suffix.size()));</span>
+                    }
+<span class="nc" id="L119">                    return;</span>
+                }
+            }
         }
-    }
-
-<span class="nc bnc" id="L66" title="All 2 branches missed.">    for (int i = 0; i &lt; orb.addedModifierCount(); i++) {</span>
-<span class="nc" id="L67">        addModifier(item, finalTargetAffix, finalTargetTags);</span>
-    }
-
-<span class="nc bnc" id="L70" title="All 2 branches missed.">    for (int i = 0; i &lt; extraMods; i++) {</span>
-<span class="nc" id="L71">        addModifier(item, finalTargetAffix, finalTargetTags);</span>
-    }
-<span class="nc" id="L73">}</span>
-
-
-    private static void removeRandomModifier(LoadedItem item) {
-<span class="nc" id="L77">        var prefix = item.getPrefix();</span>
-<span class="nc" id="L78">        var suffix = item.getSuffix();</span>
-
-<span class="nc" id="L80">        int total = prefix.size() + suffix.size();</span>
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (total == 0) return;</span>
-
-<span class="nc" id="L83">        int roll = (int)(Math.random() * total);</span>
-
-<span class="nc bnc" id="L85" title="All 2 branches missed.">        if (roll &lt; prefix.size()) {</span>
-<span class="nc" id="L86">            prefix.remove(roll);</span>
-<span class="nc" id="L87">        } else {</span>
-<span class="nc" id="L88">            suffix.remove(roll - prefix.size());</span>
-        }
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L123">    }</span>
 
 
 
     private static void addModifier(
             LoadedItem item,
+            Orb orb,
             String targetAffix,
             boolean targetTags
     ) {
 
-<span class="nc bnc" id="L100" title="All 3 branches missed.">        ModRoller.ModType type = switch (targetAffix.toUpperCase()) {</span>
-<span class="nc" id="L101">            case &quot;PREFIX&quot; -&gt; ModRoller.ModType.PREFIX;</span>
-<span class="nc" id="L102">            case &quot;SUFFIX&quot; -&gt; ModRoller.ModType.SUFFIX;</span>
-<span class="nc" id="L103">            default -&gt; ModRoller.ModType.BOTH;</span>
+<span class="nc bnc" id="L134" title="All 3 branches missed.">        ModRoller.ModType type = switch (targetAffix.toUpperCase()) {</span>
+<span class="nc" id="L135">            case &quot;PREFIX&quot; -&gt; ModRoller.ModType.PREFIX;</span>
+<span class="nc" id="L136">            case &quot;SUFFIX&quot; -&gt; ModRoller.ModType.SUFFIX;</span>
+<span class="nc" id="L137">            default -&gt; ModRoller.ModType.BOTH;</span>
         };
 
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        boolean canAddPrefix = item.getPrefix().size() &lt; PREFIX_CAP;</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">        boolean canAddSuffix = item.getSuffix().size() &lt; SUFFIX_CAP;</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        boolean canAddPrefix = item.getPrefix().size() &lt; PREFIX_CAP;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        boolean canAddSuffix = item.getSuffix().size() &lt; SUFFIX_CAP;</span>
 
-<span class="nc bnc" id="L109" title="All 4 branches missed.">        if (!canAddPrefix &amp;&amp; !canAddSuffix) {</span>
-<span class="nc" id="L110">            System.out.println(&quot;no valid modifiers&quot;);</span>
-<span class="nc" id="L111">            return;</span>
+<span class="nc bnc" id="L143" title="All 4 branches missed.">        if (!canAddPrefix &amp;&amp; !canAddSuffix) {</span>
+<span class="nc" id="L144">            System.out.println(&quot;no valid modifiers&quot;);</span>
+<span class="nc" id="L145">            return;</span>
         }
 
         // Collect item tags from existing mods
-<span class="nc" id="L115">        List&lt;String&gt; itemTags = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L116">        item.getPrefix().forEach(rm -&gt; {</span>
-<span class="nc" id="L117">            Mod m = ModRegistry.getById(rm.modId());</span>
-<span class="nc bnc" id="L118" title="All 4 branches missed.">            if (m != null &amp;&amp; m.tags() != null) itemTags.addAll(m.tags());</span>
-<span class="nc" id="L119">        });</span>
-<span class="nc" id="L120">        item.getSuffix().forEach(rm -&gt; {</span>
-<span class="nc" id="L121">            Mod m = ModRegistry.getById(rm.modId());</span>
-<span class="nc bnc" id="L122" title="All 4 branches missed.">            if (m != null &amp;&amp; m.tags() != null) itemTags.addAll(m.tags());</span>
-<span class="nc" id="L123">        });</span>
+<span class="nc" id="L149">        List&lt;String&gt; itemTags = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L150">        item.getPrefix().forEach(rm -&gt; {</span>
+<span class="nc" id="L151">            Mod m = ModRegistry.getById(rm.modId());</span>
+<span class="nc bnc" id="L152" title="All 4 branches missed.">            if (m != null &amp;&amp; m.tags() != null) itemTags.addAll(m.tags());</span>
+<span class="nc" id="L153">        });</span>
+<span class="nc" id="L154">        item.getSuffix().forEach(rm -&gt; {</span>
+<span class="nc" id="L155">            Mod m = ModRegistry.getById(rm.modId());</span>
+<span class="nc bnc" id="L156" title="All 4 branches missed.">            if (m != null &amp;&amp; m.tags() != null) itemTags.addAll(m.tags());</span>
+<span class="nc" id="L157">        });</span>
 
-<span class="nc bnc" id="L125" title="All 2 branches missed.">        for (int attempt = 0; attempt &lt; 50; attempt++) {</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        for (int attempt = 0; attempt &lt; 50; attempt++) {</span>
 
-<span class="nc" id="L127">            ModRoller.RolledMod rolled = ModRoller.rollRandomTier(</span>
-<span class="nc" id="L128">                item.getLoadedItemClass(),</span>
-<span class="nc" id="L129">                item.getItemLevel(),</span>
-<span class="nc" id="L130">                type</span>
+<span class="nc" id="L161">            ModRoller.RolledMod rolled = ModRoller.rollRandomTier(</span>
+<span class="nc" id="L162">                item.getLoadedItemClass(),</span>
+<span class="nc" id="L163">                item.getItemLevel(),</span>
+<span class="nc" id="L164">                orb.minModifierLevel(),</span>
+                type
             );
 
-<span class="nc" id="L133">            Mod mod = ModRegistry.getById(rolled.modId());</span>
-<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (mod == null) continue;</span>
+<span class="nc" id="L168">            Mod mod = ModRegistry.getById(rolled.modId());</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">            if (mod == null) continue;</span>
 
             // Duplicate blocker
-<span class="nc" id="L137">            boolean duplicate =</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">                item.getPrefix().stream().anyMatch(rm -&gt; rm.modId().equals(mod.id())) ||</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">                item.getSuffix().stream().anyMatch(rm -&gt; rm.modId().equals(mod.id()));</span>
+<span class="nc" id="L172">            boolean duplicate =</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">                item.getPrefix().stream().anyMatch(rm -&gt; rm.modId().equals(mod.id())) ||</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">                item.getSuffix().stream().anyMatch(rm -&gt; rm.modId().equals(mod.id()));</span>
 
-<span class="nc bnc" id="L141" title="All 2 branches missed.">            if (duplicate) continue;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            if (duplicate) continue;</span>
 
             // Tag targeting not working correctly
-<span class="nc bnc" id="L144" title="All 2 branches missed.">            if (targetTags) {</span>
-<span class="nc" id="L145">                var modTags = mod.tags();</span>
-<span class="nc bnc" id="L146" title="All 4 branches missed.">                boolean sharesTag = modTags != null &amp;&amp; modTags.stream().anyMatch(itemTags::contains);</span>
-<span class="nc bnc" id="L147" title="All 2 branches missed.">                if (!sharesTag) continue;</span>
+            //please ignore
+<span class="nc bnc" id="L180" title="All 2 branches missed.">            if (targetTags) {</span>
+<span class="nc" id="L181">                var modTags = mod.tags();</span>
+<span class="nc bnc" id="L182" title="All 4 branches missed.">                boolean sharesTag = modTags != null &amp;&amp; modTags.stream().anyMatch(itemTags::contains);</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">                if (!sharesTag) continue;</span>
             }
 
             // PREFIX-ONLY
-<span class="nc bnc" id="L151" title="All 4 branches missed.">            if (mod.prefix() &amp;&amp; !mod.suffix()) {</span>
-<span class="nc bnc" id="L152" title="All 2 branches missed.">                if (canAddPrefix) {</span>
-<span class="nc" id="L153">                    item.getPrefix().add(rolled);</span>
-<span class="nc" id="L154">                    return;</span>
+<span class="nc bnc" id="L187" title="All 4 branches missed.">            if (mod.prefix() &amp;&amp; !mod.suffix()) {</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">                if (canAddPrefix) {</span>
+<span class="nc" id="L189">                    item.getPrefix().add(rolled);</span>
+<span class="nc" id="L190">                    return;</span>
                 }
                 continue;
             }
 
             // SUFFIX-ONLY
-<span class="nc bnc" id="L160" title="All 4 branches missed.">            if (mod.suffix() &amp;&amp; !mod.prefix()) {</span>
-<span class="nc bnc" id="L161" title="All 2 branches missed.">                if (canAddSuffix) {</span>
-<span class="nc" id="L162">                    item.getSuffix().add(rolled);</span>
-<span class="nc" id="L163">                    return;</span>
+<span class="nc bnc" id="L196" title="All 4 branches missed.">            if (mod.suffix() &amp;&amp; !mod.prefix()) {</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">                if (canAddSuffix) {</span>
+<span class="nc" id="L198">                    item.getSuffix().add(rolled);</span>
+<span class="nc" id="L199">                    return;</span>
                 }
                 continue;
             }
 
             // BOTH allowed
-<span class="nc bnc" id="L169" title="All 4 branches missed.">            if (mod.prefix() &amp;&amp; mod.suffix()) {</span>
+<span class="nc bnc" id="L205" title="All 4 branches missed.">            if (mod.prefix() &amp;&amp; mod.suffix()) {</span>
 
-<span class="nc bnc" id="L171" title="All 4 branches missed.">                if (canAddPrefix &amp;&amp; canAddSuffix) {</span>
-<span class="nc bnc" id="L172" title="All 2 branches missed.">                    if (Math.random() &lt; 0.5) {</span>
-<span class="nc" id="L173">                        item.getPrefix().add(rolled);</span>
-<span class="nc" id="L174">                    } else {</span>
-<span class="nc" id="L175">                        item.getSuffix().add(rolled);</span>
+<span class="nc bnc" id="L207" title="All 4 branches missed.">                if (canAddPrefix &amp;&amp; canAddSuffix) {</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">                    if (Math.random() &lt; 0.5) {</span>
+<span class="nc" id="L209">                        item.getPrefix().add(rolled);</span>
+                    } else {
+<span class="nc" id="L211">                        item.getSuffix().add(rolled);</span>
                     }
-<span class="nc" id="L177">                    return;</span>
+<span class="nc" id="L213">                    return;</span>
                 }
 
-<span class="nc bnc" id="L180" title="All 2 branches missed.">                if (canAddPrefix) {</span>
-<span class="nc" id="L181">                    item.getPrefix().add(rolled);</span>
-<span class="nc" id="L182">                    return;</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">                if (canAddPrefix) {</span>
+<span class="nc" id="L217">                    item.getPrefix().add(rolled);</span>
+<span class="nc" id="L218">                    return;</span>
                 }
 
-<span class="nc bnc" id="L185" title="All 2 branches missed.">                if (canAddSuffix) {</span>
-<span class="nc" id="L186">                    item.getSuffix().add(rolled);</span>
-<span class="nc" id="L187">                    return;</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">                if (canAddSuffix) {</span>
+<span class="nc" id="L222">                    item.getSuffix().add(rolled);</span>
+<span class="nc" id="L223">                    return;</span>
                 }
             }
         }
 
-<span class="nc" id="L192">        System.out.println(&quot;no valid modifiers&quot;);</span>
-<span class="nc" id="L193">    }</span>
-
-
+<span class="nc" id="L228">        System.out.println(&quot;no valid modifiers&quot;);</span>
+<span class="nc" id="L229">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

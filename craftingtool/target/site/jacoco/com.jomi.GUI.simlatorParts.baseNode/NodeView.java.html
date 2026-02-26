@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NodeView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.GUI.simlatorParts.baseNode</a> &gt; <span class="el_source">NodeView.java</span></div><h1>NodeView.java</h1><pre class="source lang-java linenums">package com.jomi.GUI.simlatorParts.baseNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.jomi.App;
+import com.jomi.GUI.simlatorParts.ConnectionView;
+import com.jomi.Handlers.Init.project.Connection;
+import com.jomi.Handlers.Init.project.Node;
+import com.jomi.Handlers.Init.project.Project;
+import com.jomi.Handlers.Item.LoadedItem;
+import com.jomi.Util.TurriHaku;
+import com.jomi.Util.NodeShit.searchAction;
+
+import javafx.application.Platform;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.*;
+
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+public abstract class NodeView extends StackPane {
+
+    private final Project project;
+    private final Node node;
+
+<span class="nc" id="L34">    private final VBox root = new VBox();</span>
+<span class="nc" id="L35">    private final HBox header = new HBox();</span>
+<span class="nc" id="L36">    private final VBox body = new VBox();</span>
+<span class="nc" id="L37">    private final VBox infoArea = new VBox();</span>
+<span class="nc" id="L38">    private final Region spacer1 = new Region();</span>
+<span class="nc" id="L39">    private final Region spacer2 = new Region();</span>
+
+<span class="nc" id="L41">    private final Button toggleButton = new Button(&quot;+&quot;);</span>
+<span class="nc" id="L42">    private final Label titleLabel = new Label();</span>
+
+    private Circle inputPort;
+    private Circle outputPort;
+
+    private double dragOffsetX;
+    private double dragOffsetY;
+
+<span class="nc" id="L50">    private boolean expanded = false;</span>
+    private List&lt;NodeSection&gt; dynamicSections;
+
+<span class="nc" id="L53">    public NodeView(Node node, Project project) {</span>
+<span class="nc" id="L54">        this.node = node;</span>
+<span class="nc" id="L55">        this.project = project;</span>
+<span class="nc" id="L56">        dynamicSections = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L58">        getStyleClass().add(&quot;node-root&quot;);</span>
+
+<span class="nc" id="L60">        header.getStyleClass().add(&quot;node-header&quot;);</span>
+
+<span class="nc" id="L62">        toggleButton.getStyleClass().add(&quot;node-toggle&quot;);</span>
+<span class="nc" id="L63">        toggleButton.setOnAction(e -&gt; toggle());</span>
+
+<span class="nc" id="L65">        titleLabel.getStyleClass().add(&quot;node-title&quot;);</span>
+
+<span class="nc" id="L67">        HBox.setHgrow(spacer1, Priority.ALWAYS);</span>
+<span class="nc" id="L68">        HBox.setHgrow(spacer2, Priority.ALWAYS);</span>
+
+<span class="nc" id="L70">        header.getChildren().addAll(toggleButton, spacer1, titleLabel, spacer2, infoArea);</span>
+
+<span class="nc" id="L72">        body.getStyleClass().add(&quot;node-body&quot;);</span>
+<span class="nc" id="L73">        body.setVisible(false);</span>
+<span class="nc" id="L74">        body.setManaged(false);</span>
+
+<span class="nc" id="L76">        root.getChildren().addAll(header, body);</span>
+<span class="nc" id="L77">        getChildren().add(root);</span>
+
+<span class="nc" id="L79">        createPorts();</span>
+<span class="nc" id="L80">        enableContextMenu();</span>
+<span class="nc" id="L81">        enableDragging();</span>
+<span class="nc" id="L82">        enablePortConnections();</span>
+<span class="nc" id="L83">    }</span>
+
+    private void toggle() {
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        expanded = !expanded;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        toggleButton.setText(expanded ? &quot;-&quot; : &quot;+&quot;);</span>
+
+<span class="nc" id="L89">        body.setVisible(expanded);</span>
+<span class="nc" id="L90">        body.setManaged(expanded);</span>
+
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (expanded) {</span>
+<span class="nc" id="L93">            body.getChildren().setAll(renderSections());</span>
+        }
+<span class="nc" id="L95">    }</span>
+
+    // shows node data
+    // determined in the node it self
+    private VBox renderSections() {
+<span class="nc" id="L100">        VBox box = new VBox(12);</span>
+<span class="nc" id="L101">        box.setFillWidth(true);</span>
+
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        for (NodeSection section : getSections()) {</span>
+
+<span class="nc" id="L105">            Label sectionTitle = new Label(section.title());</span>
+<span class="nc" id="L106">            sectionTitle.getStyleClass().add(&quot;node-section-title&quot;);</span>
+
+<span class="nc" id="L108">            VBox itemBox = new VBox(6);</span>
+
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            for (String item : section.items()) {</span>
+
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                if (item.startsWith(&quot;search:&quot;)) {</span>
+<span class="nc" id="L114">                    String key = item.substring(7);</span>
+<span class="nc" id="L115">                    itemBox.getChildren().add(renderSearchField(section.title(), key));</span>
+<span class="nc" id="L116">                    continue;</span>
+                }
+
+<span class="nc" id="L119">                Label label = new Label(item);</span>
+<span class="nc" id="L120">                label.setWrapText(true);</span>
+<span class="nc" id="L121">                label.getStyleClass().add(&quot;node-modifier&quot;);</span>
+<span class="nc" id="L122">                label.getStyleClass().add(&quot;node-item&quot;);</span>
+
+<span class="nc" id="L124">                label.setOnMouseClicked(e -&gt; onSectionItemClicked(section.title(), item));</span>
+
+<span class="nc" id="L126">                itemBox.getChildren().add(label);</span>
+<span class="nc" id="L127">            }</span>
+
+<span class="nc" id="L129">            box.getChildren().addAll(sectionTitle, itemBox);</span>
+<span class="nc" id="L130">        }</span>
+
+<span class="nc" id="L132">        return box;</span>
+    }
+
+    private VBox renderSearchField(String section, String key) {
+
+<span class="nc" id="L137">        VBox container = new VBox(4);</span>
+
+<span class="nc" id="L139">        TextField search = new TextField();</span>
+<span class="nc" id="L140">        search.setPromptText(&quot;Search &quot; + key + &quot;...&quot;);</span>
+
+<span class="nc" id="L142">        ListView&lt;String&gt; results = new ListView&lt;&gt;();</span>
+<span class="nc" id="L143">        results.setMaxHeight(150);</span>
+
+        // Load all possible entries from the node
+<span class="nc" id="L146">        List&lt;? extends searchAction&gt; all = getSearchSource(section, key);</span>
+
+        // Initial fill
+<span class="nc" id="L149">        results.getItems().setAll(</span>
+<span class="nc" id="L150">            all.stream().map(a -&gt; a.getName()).toList()</span>
+        );
+
+        // Live filtering using TurriHaku
+<span class="nc" id="L154">        search.textProperty().addListener((obs, oldV, newV) -&gt; {</span>
+<span class="nc" id="L155">            List&lt;? extends searchAction&gt; filtered = TurriHaku.search(all, newV);</span>
+<span class="nc" id="L156">            results.getItems().setAll(</span>
+<span class="nc" id="L157">                filtered.stream().map(a -&gt; a.getName()).toList()</span>
+            );
+<span class="nc" id="L159">        });</span>
+
+        // Click result
+<span class="nc" id="L162">        results.setOnMouseClicked(e -&gt; {</span>
+<span class="nc" id="L163">            String selectedName = results.getSelectionModel().getSelectedItem();</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">            if (selectedName != null) {</span>
+<span class="nc" id="L165">                onSearchResultSelected(section, key, selectedName);</span>
+<span class="nc" id="L166">                refresh();</span>
+            }
+<span class="nc" id="L168">        });</span>
+
+<span class="nc" id="L170">        container.getChildren().addAll(search, results);</span>
+<span class="nc" id="L171">        return container;</span>
+    }
+
+
+    protected List&lt;? extends searchAction&gt; getSearchSource(String section, String key) {
+<span class="nc" id="L176">        return List.of(); // default empty</span>
+    }
+
+
+
+    protected void onSearchResultSelected(String section, String key, String result) {
+        // default do nothing
+<span class="nc" id="L183">    }</span>
+
+
+    protected List&lt;NodeSection&gt; getSections() {
+<span class="nc" id="L187">        return dynamicSections;</span>
+    }
+
+    public Label getTitLabel() {
+<span class="nc" id="L191">        return titleLabel;</span>
+    }
+
+    private void createPorts() {
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        if (node.getInputPort()) {</span>
+<span class="nc" id="L196">            inputPort = new Circle(6, Color.DODGERBLUE);</span>
+<span class="nc" id="L197">            inputPort.setCursor(Cursor.HAND);</span>
+<span class="nc" id="L198">            getChildren().add(inputPort);</span>
+        }
+
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        if (node.getOutputPort()) {</span>
+<span class="nc" id="L202">            outputPort = new Circle(6, Color.ORANGE);</span>
+<span class="nc" id="L203">            outputPort.setCursor(Cursor.HAND);</span>
+<span class="nc" id="L204">            getChildren().add(outputPort);</span>
+        }
+<span class="nc" id="L206">    }</span>
+
+    /**
+     * Called when a section item is clicked.
+     * Subclasses may override this to handle selection logic.
+     */
+    protected void onSectionItemClicked(String sectionTitle, String itemText) {
+        // default: do nothing
+<span class="nc" id="L214">    }</span>
+
+    public void replaceSectionItem(String section, String oldItem, String newItem) {
+
+<span class="nc" id="L218">        List&lt;NodeSection&gt; updated = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        for (NodeSection sec : dynamicSections) {</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            if (sec.title().equals(section)) {</span>
+
+<span class="nc" id="L223">                List&lt;String&gt; items = new ArrayList&lt;&gt;(sec.items());</span>
+<span class="nc" id="L224">                int index = items.indexOf(oldItem);</span>
+
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                if (index &gt;= 0) {</span>
+<span class="nc" id="L227">                    items.set(index, newItem);</span>
+                }
+
+<span class="nc" id="L230">                updated.add(new NodeSection(sec.title(), items));</span>
+<span class="nc" id="L231">            } else {</span>
+<span class="nc" id="L232">                updated.add(sec);</span>
+            }
+<span class="nc" id="L234">        }</span>
+
+<span class="nc" id="L236">        dynamicSections = updated;</span>
+<span class="nc" id="L237">    }</span>
+
+
+
+
+    @Override
+    protected void layoutChildren() {
+<span class="nc" id="L244">        super.layoutChildren();</span>
+
+<span class="nc" id="L246">        double w = getWidth();</span>
+<span class="nc" id="L247">        double headerHeight = header.getHeight();</span>
+<span class="nc" id="L248">        double y = headerHeight / 2;</span>
+
+<span class="nc bnc" id="L250" title="All 2 branches missed.">        if (inputPort != null) {</span>
+<span class="nc" id="L251">            inputPort.setLayoutX(-15);</span>
+<span class="nc" id="L252">            inputPort.setLayoutY(y);</span>
+        }
+
+<span class="nc bnc" id="L255" title="All 2 branches missed.">        if (outputPort != null) {</span>
+<span class="nc" id="L256">            outputPort.setLayoutX(w + 15);</span>
+<span class="nc" id="L257">            outputPort.setLayoutY(y);</span>
+        }
+<span class="nc" id="L259">    }</span>
+
+    private void enableDragging() {
+<span class="nc" id="L262">        setOnMousePressed(e -&gt; {</span>
+<span class="nc bnc" id="L263" title="All 2 branches missed.">            if (e.getButton() != MouseButton.PRIMARY) return;</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">            if (e.getTarget() instanceof Circle) return;</span>
+
+<span class="nc" id="L266">            dragOffsetX = e.getSceneX() - getLayoutX();</span>
+<span class="nc" id="L267">            dragOffsetY = e.getSceneY() - getLayoutY();</span>
+<span class="nc" id="L268">        });</span>
+
+<span class="nc" id="L270">        setOnMouseDragged(e -&gt; {</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            if (e.getButton() != MouseButton.PRIMARY) return;</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">            if (e.getTarget() instanceof Circle) return;</span>
+
+<span class="nc" id="L274">            double newX = e.getSceneX() - dragOffsetX;</span>
+<span class="nc" id="L275">            double newY = e.getSceneY() - dragOffsetY;</span>
+
+<span class="nc" id="L277">            setLayoutX(newX);</span>
+<span class="nc" id="L278">            setLayoutY(newY);</span>
+
+<span class="nc" id="L280">            node.setxPos(newX);</span>
+<span class="nc" id="L281">            node.setyPos(newY);</span>
+<span class="nc" id="L282">        });</span>
+<span class="nc" id="L283">    }</span>
+
+    private void enableContextMenu() {
+<span class="nc" id="L286">        ContextMenu menu = new ContextMenu();</span>
+
+<span class="nc" id="L288">        MenuItem deleteNodeItem = new MenuItem(&quot;Delete Node&quot;);</span>
+<span class="nc" id="L289">        MenuItem editItem = new MenuItem(&quot;Edit Node&quot;);</span>
+<span class="nc" id="L290">        MenuItem deleteConnectionItem = new MenuItem(&quot;Delete Connections&quot;);</span>
+
+<span class="nc" id="L292">        editItem.setOnAction(e -&gt; edit());</span>
+<span class="nc" id="L293">        deleteNodeItem.setOnAction(e -&gt; deleteNode());</span>
+<span class="nc" id="L294">        deleteConnectionItem.setOnAction(e -&gt; deleteConnections());</span>
+
+<span class="nc" id="L296">        menu.getItems().addAll(editItem, deleteNodeItem, deleteConnectionItem);</span>
+
+<span class="nc" id="L298">        setOnContextMenuRequested(e -&gt; menu.show(this, e.getSceneX(), e.getSceneY()));</span>
+<span class="nc" id="L299">    }</span>
+
+    protected abstract void edit();
+
+    private void deleteNode() {
+<span class="nc" id="L304">        project.removeNodeAndConnection(node);</span>
+<span class="nc" id="L305">        App.getInstance().getProjectManager().saveProject(project);</span>
+<span class="nc" id="L306">        App.getInstance().getGui().showSimulator();</span>
+<span class="nc" id="L307">    }</span>
+
+    private void deleteConnections() {
+<span class="nc" id="L310">        project.removeConnectionsOf(node);</span>
+<span class="nc" id="L311">        App.getInstance().getGui().showSimulator();</span>
+<span class="nc" id="L312">    }</span>
+
+    private void enablePortConnections() {
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        if (outputPort == null) return;</span>
+
+<span class="nc" id="L317">        outputPort.setOnMouseReleased(e -&gt; {</span>
+<span class="nc" id="L318">            double mouseX = e.getSceneX();</span>
+<span class="nc" id="L319">            double mouseY = e.getSceneY();</span>
+
+<span class="nc" id="L321">            Pane parent = (Pane) getParent();</span>
+
+<span class="nc bnc" id="L323" title="All 2 branches missed.">            for (var child : parent.getChildren()) {</span>
+<span class="nc bnc" id="L324" title="All 6 branches missed.">                if (child instanceof NodeView other</span>
+                        &amp;&amp; other != this
+                        &amp;&amp; other.inputPort != null
+<span class="nc bnc" id="L327" title="All 2 branches missed.">                        &amp;&amp; other.isMouseNearInput(mouseX, mouseY, 50)) {</span>
+
+<span class="nc" id="L329">                    Connection connection = new Connection(</span>
+<span class="nc" id="L330">                            node.getId(),</span>
+                            true,
+<span class="nc" id="L332">                            other.node.getId(),</span>
+                            true
+                    );
+
+<span class="nc" id="L336">                    project.addConnection(connection);</span>
+
+<span class="nc" id="L338">                    Platform.runLater(() -&gt; {</span>
+<span class="nc" id="L339">                        ConnectionView cv = new ConnectionView(outputPort, other.getInputPort(), connection, project);</span>
+<span class="nc" id="L340">                        parent.getChildren().add(cv);</span>
+<span class="nc" id="L341">                        cv.toBack();</span>
+<span class="nc" id="L342">                    });</span>
+                    
+                }
+<span class="nc" id="L345">            }</span>
+<span class="nc" id="L346">        });</span>
+<span class="nc" id="L347">    }</span>
+
+    public boolean isMouseNearInput(double sceneX, double sceneY, double radius) {
+<span class="nc bnc" id="L350" title="All 2 branches missed.">        if (inputPort == null) return false;</span>
+
+<span class="nc" id="L352">        var bounds = inputPort.localToScene(inputPort.getBoundsInLocal());</span>
+<span class="nc" id="L353">        double cx = (bounds.getMinX() + bounds.getMaxX()) / 2;</span>
+<span class="nc" id="L354">        double cy = (bounds.getMinY() + bounds.getMaxY()) / 2;</span>
+
+<span class="nc" id="L356">        double dx = sceneX - cx;</span>
+<span class="nc" id="L357">        double dy = sceneY - cy;</span>
+
+<span class="nc bnc" id="L359" title="All 2 branches missed.">        return Math.sqrt(dx * dx + dy * dy) &lt;= radius;</span>
+    }
+
+    public void setInfo(String text) {
+<span class="nc" id="L363">        infoArea.getChildren().clear();</span>
+<span class="nc" id="L364">        Label label = new Label(text);</span>
+<span class="nc" id="L365">        label.getStyleClass().add(&quot;node-info&quot;);</span>
+<span class="nc" id="L366">        infoArea.getChildren().add(label);</span>
+<span class="nc" id="L367">    }</span>
+
+    public void applyRarityColor(String rarity) {
+<span class="nc bnc" id="L370" title="All 5 branches missed.">        String color = switch (rarity.trim().toLowerCase()) {</span>
+<span class="nc" id="L371">            case &quot;normal&quot; -&gt; &quot;#3a3a3a&quot;;</span>
+<span class="nc" id="L372">            case &quot;magic&quot; -&gt; &quot;#4b6cff&quot;;</span>
+<span class="nc" id="L373">            case &quot;rare&quot; -&gt; &quot;#b8860b&quot;;</span>
+<span class="nc" id="L374">            case &quot;basecurrency&quot; -&gt; &quot;#412e00&quot;;</span>
+<span class="nc" id="L375">            default -&gt; &quot;#ff0000&quot;;</span>
+        };
+
+<span class="nc" id="L378">        header.setStyle(</span>
+                &quot;-fx-background-color: &quot; + color + &quot;;&quot; +
+                &quot;-fx-background-radius: 12;&quot; +
+                &quot;-fx-padding: 6 10;&quot;
+        );
+<span class="nc" id="L383">    }</span>
+
+    public LoadedItem execute(LoadedItem item) {
+<span class="nc" id="L386">        return item;</span>
+    }
+
+<span class="nc" id="L389">    public Circle getInputPort() { return inputPort; }</span>
+<span class="nc" id="L390">    public Circle getOutputPort() { return outputPort; }</span>
+<span class="nc" id="L391">    public Node getNode() { return node; }</span>
+
+    public void setTitle(String title) {
+<span class="nc" id="L394">        titleLabel.setText(title);</span>
+<span class="nc" id="L395">    }</span>
+
+    public void refresh() {
+<span class="nc" id="L398">        body.getChildren().setAll(renderSections());</span>
+<span class="nc" id="L399">    }</span>
+
+    protected Project getProject() {
+<span class="nc" id="L402">        return project;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

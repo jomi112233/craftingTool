@@ -66,63 +66,72 @@ public class SideBar extends VBox {
 <span class="nc" id="L66">            canvas.addNode(node);</span>
 <span class="nc" id="L67">        });</span>
 
+<span class="nc" id="L69">        Button addIteratorNode = new Button(&quot;Iterator Node&quot;);</span>
+<span class="nc" id="L70">        addIteratorNode.prefWidth(120);</span>
+
+<span class="nc" id="L72">        addIteratorNode.setOnAction(e -&gt; {</span>
+<span class="nc" id="L73">            Node node = new Node(&quot;iterator&quot;, 200, 200, true, true);</span>
+<span class="nc" id="L74">            project.addNode(node);</span>
+<span class="nc" id="L75">            canvas.addNode(node);</span>
+<span class="nc" id="L76">        });</span>
 
 
 
-<span class="nc" id="L72">        Button save = new Button(&quot;Save&quot;);</span>
-<span class="nc" id="L73">        save.setOnAction(e -&gt; {</span>
-<span class="nc" id="L74">            App.getInstance().getProjectManager().saveProject(project);</span>
-<span class="nc" id="L75">        });</span>
+
+<span class="nc" id="L81">        Button save = new Button(&quot;Save&quot;);</span>
+<span class="nc" id="L82">        save.setOnAction(e -&gt; {</span>
+<span class="nc" id="L83">            App.getInstance().getProjectManager().saveProject(project);</span>
+<span class="nc" id="L84">        });</span>
 
         
-<span class="nc" id="L78">        Button load = new Button(&quot;Load&quot;);</span>
-<span class="nc" id="L79">        load.setOnAction(e -&gt; {</span>
-<span class="nc" id="L80">            ProjectActions.loadProject();</span>
-<span class="nc" id="L81">        });</span>
+<span class="nc" id="L87">        Button load = new Button(&quot;Load&quot;);</span>
+<span class="nc" id="L88">        load.setOnAction(e -&gt; {</span>
+<span class="nc" id="L89">            ProjectActions.loadProject();</span>
+<span class="nc" id="L90">        });</span>
 
-<span class="nc" id="L83">        Button runButton = new Button(&quot;Run Simulation&quot;);</span>
-<span class="nc" id="L84">        runButton.setOnAction(e -&gt; {</span>
+<span class="nc" id="L92">        Button runButton = new Button(&quot;Run Simulation&quot;);</span>
+<span class="nc" id="L93">        runButton.setOnAction(e -&gt; {</span>
             try {
                 // Run branching simulation
-<span class="nc" id="L87">                List&lt;LoadedItem&gt; results = SimulationRunner.run(project, canvas.getNodeViewMap());</span>
-<span class="nc" id="L88">                System.out.println(&quot;Simulation complete! Branches: &quot; + results.size());</span>
+<span class="nc" id="L96">                List&lt;LoadedItem&gt; results = SimulationRunner.run(project, canvas.getNodeViewMap());</span>
+<span class="nc" id="L97">                System.out.println(&quot;Simulation complete! Branches: &quot; + results.size());</span>
 
                 // Save each result (optional)
-<span class="nc" id="L91">                int index = 1;</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">                for (LoadedItem item : results) {</span>
-<span class="nc" id="L93">                    project.setFinalSimulatedItem(item); // or your own save logic</span>
-<span class="nc" id="L94">                    App.getInstance().getProjectManager().saveFinalItem(project, item, index);</span>
-<span class="nc" id="L95">                    index++;</span>
-                }
+<span class="nc" id="L100">                int index = 1;</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">                for (LoadedItem item : results) {</span>
+<span class="nc" id="L102">                    project.setFinalSimulatedItem(item); // or your own save logic</span>
+<span class="nc" id="L103">                    App.getInstance().getProjectManager().saveFinalItem(project, item, index);</span>
+<span class="nc" id="L104">                    index++;</span>
+<span class="nc" id="L105">                }</span>
 
                 // Show popup
-<span class="nc" id="L99">                Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
-<span class="nc" id="L100">                alert.setHeaderText(&quot;Simulation Complete&quot;);</span>
-<span class="nc" id="L101">                alert.setContentText(</span>
-<span class="nc" id="L102">                    &quot;Generated &quot; + results.size() + &quot; final items.\n&quot; +</span>
+<span class="nc" id="L108">                Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L109">                alert.setHeaderText(&quot;Simulation Complete&quot;);</span>
+<span class="nc" id="L110">                alert.setContentText(</span>
+<span class="nc" id="L111">                    &quot;Generated &quot; + results.size() + &quot; final items.\n&quot; +</span>
                     &quot;Each end node produced its own result.&quot;
                 );
-<span class="nc" id="L105">                alert.show();</span>
+<span class="nc" id="L114">                alert.show();</span>
 
-<span class="nc" id="L107">            } catch (Exception ex) {</span>
-<span class="nc" id="L108">                ex.printStackTrace();</span>
+<span class="nc" id="L116">            } catch (Exception ex) {</span>
+<span class="nc" id="L117">                ex.printStackTrace();</span>
 
-<span class="nc" id="L110">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
-<span class="nc" id="L111">                alert.setHeaderText(&quot;Simulation Failed&quot;);</span>
-<span class="nc" id="L112">                alert.setContentText(ex.getMessage());</span>
-<span class="nc" id="L113">                alert.show();</span>
-            }
-<span class="nc" id="L115">        });</span>
-
-
+<span class="nc" id="L119">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L120">                alert.setHeaderText(&quot;Simulation Failed&quot;);</span>
+<span class="nc" id="L121">                alert.setContentText(ex.getMessage());</span>
+<span class="nc" id="L122">                alert.show();</span>
+<span class="nc" id="L123">            }</span>
+<span class="nc" id="L124">        });</span>
 
 
 
 
-<span class="nc" id="L122">        save.setPrefWidth(120);</span>
-<span class="nc" id="L123">        load.setPrefWidth(120);</span>
 
-<span class="nc" id="L125">        getChildren().addAll(addNode, addBasicCurrencyNode, addStartNode, addEndNode, save, load, runButton);</span>
-<span class="nc" id="L126">    }</span>
+
+<span class="nc" id="L131">        save.setPrefWidth(120);</span>
+<span class="nc" id="L132">        load.setPrefWidth(120);</span>
+
+<span class="nc" id="L134">        getChildren().addAll(addNode, addStartNode, addBasicCurrencyNode, addIteratorNode , addEndNode, save, load, runButton);</span>
+<span class="nc" id="L135">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

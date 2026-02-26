@@ -77,7 +77,7 @@ public class ModRoller {
     // ------------------------------------------------------------
     // Existing: Weighted random mod roller
     // ------------------------------------------------------------
-    public static RolledMod rollRandomTier(String itemClass, int itemLevel, ModType type) {
+    public static RolledMod rollRandomTier(String itemClass, int itemLevel, int minModifierLevel, ModType type) {
 
         var mods = ModRegistry.getItemByClass(itemClass);
         if (mods == null || mods.isEmpty()) {
@@ -100,7 +100,11 @@ public class ModRoller {
 
         var entries = filteredMods.stream()
             .flatMap(mod -> mod.tiers().stream()
-                .filter(tier -> tier.ilvl() <= itemLevel)
+                .filter(tier -> 
+                    tier.ilvl() <= itemLevel &&
+                    tier.ilvl() >= minModifierLevel
+                )
+
                 .map(tier -> new Entry(mod, tier)))
             .toList();
 

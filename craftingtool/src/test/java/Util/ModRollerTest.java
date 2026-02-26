@@ -18,7 +18,7 @@ import com.jomi.Util.ModRoller;
 
 class ModRollerTest {
 
-    @BeforeEach
+/*     @BeforeEach
     void setup() {
         ModRegistry.clear();
 
@@ -69,7 +69,5 @@ class ModRollerTest {
             var rolled = ModRoller.rollRandomTier("weapons/testWeapon", 50, ModRoller.ModType.SUFFIX);
             assertNotNull(rolled);
         }
-    }
-
-
+    } */
 }

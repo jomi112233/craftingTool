@@ -1,0 +1,158 @@
+{
+  "id" : "f8a6e5b4-aa40-411a-b80a-0f651cb254ca",
+  "name" : "testi",
+  "itemType" : "weapons/wand",
+  "createdAt" : "2026-02-26T17:11:20.4067959",
+  "lastModifiedAt" : "2026-02-26T17:11:20.4077937",
+  "nodes" : [ {
+    "id" : "58a40653-604c-4ecf-ac61-5c263e520615",
+    "type" : "start",
+    "xPos" : 66.0,
+    "yPos" : 451.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : false,
+    "outputPort" : true,
+    "actions" : [ ]
+  }, {
+    "id" : "92367ee8-a04d-41af-897d-7d4a5c4429ec",
+    "type" : "basic",
+    "xPos" : 571.0,
+    "yPos" : 138.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "transmutation_orb" ]
+  }, {
+    "id" : "277fa03d-424e-4cd2-9a25-e078b05abc06",
+    "type" : "basic",
+    "xPos" : 1035.0,
+    "yPos" : 131.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "augmentation_orb" ]
+  }, {
+    "id" : "6125646c-0b3d-4a75-8b81-ff5b58400640",
+    "type" : "basic",
+    "xPos" : 1998.0,
+    "yPos" : 117.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "exalted_orb", "greater_exaltation" ]
+  }, {
+    "id" : "78d980fe-ef4e-4096-aef7-a00be916a514",
+    "type" : "basic",
+    "xPos" : 1500.0,
+    "yPos" : 120.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "regal_orb" ]
+  }, {
+    "id" : "b63f7017-053c-4794-bdb1-9da048a04f89",
+    "type" : "basic",
+    "xPos" : 2389.0,
+    "yPos" : 121.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "exalted_orb" ]
+  }, {
+    "id" : "762a5758-a272-4237-9ad6-2a0913cdfcc9",
+    "type" : "end",
+    "xPos" : 2930.0,
+    "yPos" : 270.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  }, {
+    "id" : "17195595-f71a-42fb-aa7f-aeb2cf2c33eb",
+    "type" : "basic",
+    "xPos" : 608.0,
+    "yPos" : 550.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : true,
+    "actions" : [ "transmutation_orb" ]
+  }, {
+    "id" : "6641af1a-66f5-4a3b-8bda-ad7ad56952e9",
+    "type" : "end",
+    "xPos" : 1245.0,
+    "yPos" : 558.0,
+    "iterator" : false,
+    "active" : false,
+    "forcedTarget" : [ ],
+    "inputPort" : true,
+    "outputPort" : false,
+    "actions" : [ ]
+  } ],
+  "connections" : [ {
+    "fromNodeId" : "58a40653-604c-4ecf-ac61-5c263e520615",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "63d7da9b-0807-4f81-ae04-63e536dc87e8",
+    "toNodeID" : "92367ee8-a04d-41af-897d-7d4a5c4429ec"
+  }, {
+    "fromNodeId" : "92367ee8-a04d-41af-897d-7d4a5c4429ec",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "b06e60e6-a77d-491e-b9f8-167c0308dfbe",
+    "toNodeID" : "277fa03d-424e-4cd2-9a25-e078b05abc06"
+  }, {
+    "fromNodeId" : "277fa03d-424e-4cd2-9a25-e078b05abc06",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "e9bf8d44-2ee9-473d-94d8-124d89353dad",
+    "toNodeID" : "78d980fe-ef4e-4096-aef7-a00be916a514"
+  }, {
+    "fromNodeId" : "78d980fe-ef4e-4096-aef7-a00be916a514",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "35ddbb6b-6d6c-4da2-8441-4ffb4195e0f2",
+    "toNodeID" : "6125646c-0b3d-4a75-8b81-ff5b58400640"
+  }, {
+    "fromNodeId" : "6125646c-0b3d-4a75-8b81-ff5b58400640",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "bd6345fb-5391-4f95-a296-16114765f409",
+    "toNodeID" : "b63f7017-053c-4794-bdb1-9da048a04f89"
+  }, {
+    "fromNodeId" : "b63f7017-053c-4794-bdb1-9da048a04f89",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "f8777eff-1442-4061-906b-56145efd2a52",
+    "toNodeID" : "762a5758-a272-4237-9ad6-2a0913cdfcc9"
+  }, {
+    "fromNodeId" : "58a40653-604c-4ecf-ac61-5c263e520615",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "8a01e5d6-dd29-458f-805b-ebe822fd4bf3",
+    "toNodeID" : "17195595-f71a-42fb-aa7f-aeb2cf2c33eb"
+  }, {
+    "fromNodeId" : "17195595-f71a-42fb-aa7f-aeb2cf2c33eb",
+    "fromIsOutput" : true,
+    "toIsInput" : true,
+    "connectionID" : "dd16e6a7-f3b1-4b6e-b18f-8fb2c46fb840",
+    "toNodeID" : "6641af1a-66f5-4a3b-8bda-ad7ad56952e9"
+  } ],
+  "allNodeIds" : [ "58a40653-604c-4ecf-ac61-5c263e520615", "92367ee8-a04d-41af-897d-7d4a5c4429ec", "277fa03d-424e-4cd2-9a25-e078b05abc06", "6125646c-0b3d-4a75-8b81-ff5b58400640", "78d980fe-ef4e-4096-aef7-a00be916a514", "b63f7017-053c-4794-bdb1-9da048a04f89", "762a5758-a272-4237-9ad6-2a0913cdfcc9", "17195595-f71a-42fb-aa7f-aeb2cf2c33eb", "6641af1a-66f5-4a3b-8bda-ad7ad56952e9" ],
+  "projectFolder" : "file:///C:/Users/micoj/Desktop/Coding%20stuff/craftingTool/data/saveState/itemData/f8a6e5b4-aa40-411a-b80a-0f651cb254ca/"
+}

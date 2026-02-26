@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectActions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Util</a> &gt; <span class="el_source">ProjectActions.java</span></div><h1>ProjectActions.java</h1><pre class="source lang-java linenums"><span class="nc" id="L1">package com.jomi.Util;</span>
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectActions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Util</a> &gt; <span class="el_source">ProjectActions.java</span></div><h1>ProjectActions.java</h1><pre class="source lang-java linenums">package com.jomi.Util;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -36,12 +36,12 @@ import javafx.stage.Window;
 
 
 
-    public record ProjectCreationData(String name, String itemType, int itemLevel) { }
+<span class="nc" id="L39">    public record ProjectCreationData(String name, String itemType, int itemLevel) { }</span>
 
     public static void createNewProject() {
 
         // Record to carry dialog results
-        record ProjectCreationData(String name, String itemType, int itemLevel, String itemRarity) { }
+<span class="nc" id="L44">        record ProjectCreationData(String name, String itemType, int itemLevel, String itemRarity) { }</span>
 
 <span class="nc" id="L46">        Dialog&lt;ProjectCreationData&gt; dialog = new Dialog&lt;&gt;();</span>
 <span class="nc" id="L47">        dialog.setTitle(&quot;Create Project&quot;);</span>
@@ -65,11 +65,11 @@ import javafx.stage.Window;
 <span class="nc" id="L65">        raritySelector.setPromptText(&quot;Select rarity&quot;);</span>
 
 <span class="nc" id="L67">        VBox content = new VBox(</span>
-<span class="nc" id="L68">            10,</span>
-<span class="nc" id="L69">            new Label(&quot;Project Name:&quot;), nameField,</span>
-<span class="nc" id="L70">            new Label(&quot;Item Type:&quot;), itemTypeSelector,</span>
-<span class="nc" id="L71">            new Label(&quot;Item Level:&quot;), itemLevelField,</span>
-<span class="nc" id="L72">            new Label(&quot;Item Rarity:&quot;), raritySelector</span>
+            10,
+            new Label(&quot;Project Name:&quot;), nameField,
+            new Label(&quot;Item Type:&quot;), itemTypeSelector,
+            new Label(&quot;Item Level:&quot;), itemLevelField,
+            new Label(&quot;Item Rarity:&quot;), raritySelector
         );
 
 <span class="nc" id="L75">        dialog.getDialogPane().setContent(content);</span>
@@ -80,7 +80,7 @@ import javafx.stage.Window;
 <span class="nc" id="L80">                return new ProjectCreationData(</span>
 <span class="nc" id="L81">                    nameField.getText(),</span>
 <span class="nc" id="L82">                    itemTypeSelector.getValue(),</span>
-<span class="nc" id="L83">                    level,</span>
+                    level,
 <span class="nc" id="L84">                    raritySelector.getValue()</span>
                 );
             }
@@ -100,7 +100,7 @@ import javafx.stage.Window;
                 // Create item files with user selections
 <span class="nc" id="L101">                Path projectFolder = project.getProjectFolder();</span>
 <span class="nc" id="L102">                LoadedItem item = ItemRegistry.createNewItem(</span>
-<span class="nc" id="L103">                    projectFolder,</span>
+                    projectFolder,
 <span class="nc" id="L104">                    data.itemLevel(),</span>
 <span class="nc" id="L105">                    data.itemRarity(),</span>
 <span class="nc" id="L106">                    data.itemType() // used as loadedItemClass</span>
@@ -125,7 +125,7 @@ import javafx.stage.Window;
 
 <span class="nc" id="L126">            } catch (Exception e) {</span>
 <span class="nc" id="L127">                System.err.println(&quot;Failed to create new project: &quot; + e.getMessage());</span>
-            }
+<span class="nc" id="L128">            }</span>
 <span class="nc" id="L129">        });</span>
 <span class="nc" id="L130">    }</span>
 
@@ -143,7 +143,7 @@ import javafx.stage.Window;
         );
 
 <span class="nc" id="L145">        chooser.getExtensionFilters().add(</span>
-<span class="nc" id="L146">            new FileChooser.ExtensionFilter(&quot;Project Files (*.json)&quot;, &quot;*.json&quot;)</span>
+            new FileChooser.ExtensionFilter(&quot;Project Files (*.json)&quot;, &quot;*.json&quot;)
         );
 
 <span class="nc" id="L149">        Window window = App.getInstance().getGui().getStage();</span>
@@ -160,7 +160,7 @@ import javafx.stage.Window;
 <span class="nc bnc" id="L160" title="All 2 branches missed.">            if (loaded != null) {</span>
 <span class="nc" id="L161">                App.getInstance().getGui().showSimulator();</span>
 <span class="nc" id="L162">                System.out.println(&quot;Loaded project: &quot; + name);</span>
-<span class="nc" id="L163">            } else {</span>
+            } else {
 <span class="nc" id="L164">                System.err.println(&quot;Failed to load project: &quot; + name);</span>
             }
         }

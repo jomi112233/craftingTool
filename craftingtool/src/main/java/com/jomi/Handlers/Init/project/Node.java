@@ -4,10 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.jomi.Util.ModRoller;
+
 public class Node {
     private String id;
     private String type;
     private double xPos, yPos;
+    private boolean iterator;
+    private boolean active;
+
+    private List<ModRoller.RolledMod> forcedTarget = new ArrayList<>();
+
     private boolean inputPort;
     private boolean outputPort;
 
@@ -27,6 +34,38 @@ public class Node {
         this.inputPort = input;
         this.outputPort = output;
     }
+
+
+
+    public boolean isIterator() {
+        return iterator;
+    }
+
+    public void setIterator(boolean iterator) {
+        this.iterator = iterator;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public List<ModRoller.RolledMod> getForcedTarget() {
+        return forcedTarget;
+    }
+
+    public void clearForcedTarget() {
+        forcedTarget.clear();
+    }
+
+    public void setForcedTarget(List<ModRoller.RolledMod> forcedtarget) {
+        this.forcedTarget.clear();
+        this.forcedTarget = forcedtarget;
+    }
+
 
     public void addActionA(String action) {
         actions.add(action);

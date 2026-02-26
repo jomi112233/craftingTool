@@ -8,29 +8,29 @@ import com.jomi.Handlers.Init.basicCurrency.Orb;
 import com.jomi.Handlers.Init.basicCurrency.OrbFile;
 
 <span class="nc" id="L10">public class OrbRegistry {</span>
-<span class="fc" id="L11">    private static final Map&lt;String, Orb&gt; ORBS = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L11">    private static final Map&lt;String, Orb&gt; ORBS = new HashMap&lt;&gt;();</span>
 
     public static void registerAll(OrbFile file) {
-<span class="fc bfc" id="L14" title="All 2 branches covered.">        for (Orb orb : file.orbs()) {</span>
-<span class="fc" id="L15">            ORBS.put(orb.id(), orb);</span>
-        }
-<span class="fc" id="L17">    }</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        for (Orb orb : file.orbs()) {</span>
+<span class="nc" id="L15">            ORBS.put(orb.id(), orb);</span>
+<span class="nc" id="L16">        }</span>
+<span class="nc" id="L17">    }</span>
 
     public static Orb get(String id) {
-<span class="fc" id="L20">        return ORBS.get(id);</span>
+<span class="nc" id="L20">        return ORBS.get(id);</span>
     }
 
 
     public static int size() { 
-<span class="fc" id="L25">        return ORBS.size(); </span>
+<span class="nc" id="L25">        return ORBS.size(); </span>
     }
 
     public static void clear() {
-<span class="fc" id="L29">        ORBS.clear();</span>
-<span class="fc" id="L30">    }</span>
+<span class="nc" id="L29">        ORBS.clear();</span>
+<span class="nc" id="L30">    }</span>
 
     public static Collection&lt;Orb&gt; getAll() {
-<span class="fc" id="L33">        return ORBS.values();</span>
+<span class="nc" id="L33">        return ORBS.values();</span>
     }
 
 }

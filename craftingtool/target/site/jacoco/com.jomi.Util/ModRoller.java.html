@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ModRoller.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Util</a> &gt; <span class="el_source">ModRoller.java</span></div><h1>ModRoller.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package com.jomi.Util;</span>
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ModRoller.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.Util</a> &gt; <span class="el_source">ModRoller.java</span></div><h1>ModRoller.java</h1><pre class="source lang-java linenums">package com.jomi.Util;
 
 import java.util.List;
 import java.util.Random;
@@ -19,9 +19,9 @@ import com.jomi.Handlers.registry.ModRegistry;
         ModTier tier
     ) {
 
-<span class="fc" id="L22">        public RolledMod {</span>
-<span class="fc" id="L23">            tags = List.copyOf(tags);</span>
-<span class="fc" id="L24">        }</span>
+<span class="nc" id="L22">        public RolledMod {</span>
+<span class="nc" id="L23">            tags = List.copyOf(tags);</span>
+<span class="nc" id="L24">        }</span>
 
         public int ilvl() {
 <span class="nc" id="L27">            return tier.ilvl();</span>
@@ -30,8 +30,8 @@ import com.jomi.Handlers.registry.ModRegistry;
         @Override
         public String toString() {
 <span class="nc" id="L32">            return &quot;RolledMod{ id=&quot; + modId +</span>
-<span class="nc" id="L33">                &quot;, name=&quot; + name +</span>
-<span class="nc" id="L34">                &quot;, tags=&quot; + tags +</span>
+                &quot;, name=&quot; + name +
+                &quot;, tags=&quot; + tags +
 <span class="nc" id="L35">                &quot;, tier=&quot; + tier.tier() +</span>
 <span class="nc" id="L36">                &quot;, stats=&quot; + tier.stats() +</span>
                 &quot; }&quot;;
@@ -42,13 +42,13 @@ import com.jomi.Handlers.registry.ModRegistry;
     // ------------------------------------------------------------
     // ModType: used for random rolling
     // ------------------------------------------------------------
-<span class="fc" id="L45">    public enum ModType {</span>
-<span class="fc" id="L46">        PREFIX,</span>
-<span class="fc" id="L47">        SUFFIX,</span>
-<span class="fc" id="L48">        BOTH</span>
+<span class="nc" id="L45">    public enum ModType {</span>
+<span class="nc" id="L46">        PREFIX,</span>
+<span class="nc" id="L47">        SUFFIX,</span>
+<span class="nc" id="L48">        BOTH</span>
     }
 
-<span class="fc" id="L51">    private static final Random random = new Random();</span>
+<span class="nc" id="L51">    private static final Random random = new Random();</span>
 
 
     // ------------------------------------------------------------
@@ -63,13 +63,13 @@ import com.jomi.Handlers.registry.ModRegistry;
 <span class="nc" id="L63">            .findFirst()</span>
 <span class="nc" id="L64">            .orElseThrow(() -&gt; new IllegalStateException(</span>
 <span class="nc" id="L65">                &quot;No valid tier for mod &quot; + mod.id() + &quot; at ilvl &quot; + itemLevel</span>
-<span class="nc" id="L66">            ));</span>
+            ));
 
 <span class="nc" id="L68">        return new RolledMod(</span>
 <span class="nc" id="L69">            mod.id(),</span>
 <span class="nc" id="L70">            mod.name(),</span>
 <span class="nc" id="L71">            mod.tags(),</span>
-<span class="nc" id="L72">            tier</span>
+            tier
         );
     }
 
@@ -77,60 +77,64 @@ import com.jomi.Handlers.registry.ModRegistry;
     // ------------------------------------------------------------
     // Existing: Weighted random mod roller
     // ------------------------------------------------------------
-    public static RolledMod rollRandomTier(String itemClass, int itemLevel, ModType type) {
+    public static RolledMod rollRandomTier(String itemClass, int itemLevel, int minModifierLevel, ModType type) {
 
-<span class="fc" id="L82">        var mods = ModRegistry.getItemByClass(itemClass);</span>
-<span class="pc bpc" id="L83" title="2 of 4 branches missed.">        if (mods == null || mods.isEmpty()) {</span>
+<span class="nc" id="L82">        var mods = ModRegistry.getItemByClass(itemClass);</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">        if (mods == null || mods.isEmpty()) {</span>
 <span class="nc" id="L84">            throw new IllegalArgumentException(&quot;No mods registered for itemClass: &quot; + itemClass);</span>
         }
 
-<span class="fc" id="L87">        var filteredMods = mods.stream()</span>
-<span class="pc bpc" id="L88" title="1 of 3 branches missed.">            .filter(mod -&gt; switch (type) {</span>
-<span class="fc" id="L89">                case PREFIX -&gt; mod.prefix();</span>
-<span class="fc" id="L90">                case SUFFIX -&gt; mod.suffix();</span>
+<span class="nc" id="L87">        var filteredMods = mods.stream()</span>
+<span class="nc bnc" id="L88" title="All 3 branches missed.">            .filter(mod -&gt; switch (type) {</span>
+<span class="nc" id="L89">                case PREFIX -&gt; mod.prefix();</span>
+<span class="nc" id="L90">                case SUFFIX -&gt; mod.suffix();</span>
 <span class="nc" id="L91">                case BOTH   -&gt; true;</span>
-<span class="fc" id="L92">            })</span>
-<span class="fc" id="L93">            .toList();</span>
+            })
+<span class="nc" id="L93">            .toList();</span>
 
-<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (filteredMods.isEmpty()) {</span>
-<span class="fc" id="L96">            throw new IllegalStateException(&quot;No mods of type &quot; + type + &quot; for itemClass &quot; + itemClass);</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (filteredMods.isEmpty()) {</span>
+<span class="nc" id="L96">            throw new IllegalStateException(&quot;No mods of type &quot; + type + &quot; for itemClass &quot; + itemClass);</span>
         }
 
-        record Entry (Mod mod, ModTier tier) { }
+<span class="nc" id="L99">        record Entry (Mod mod, ModTier tier) { }</span>
 
-<span class="fc" id="L101">        var entries = filteredMods.stream()</span>
-<span class="fc" id="L102">            .flatMap(mod -&gt; mod.tiers().stream()</span>
-<span class="fc bfc" id="L103" title="All 2 branches covered.">                .filter(tier -&gt; tier.ilvl() &lt;= itemLevel)</span>
-<span class="fc" id="L104">                .map(tier -&gt; new Entry(mod, tier)))</span>
-<span class="fc" id="L105">            .toList();</span>
+<span class="nc" id="L101">        var entries = filteredMods.stream()</span>
+<span class="nc" id="L102">            .flatMap(mod -&gt; mod.tiers().stream()</span>
+<span class="nc" id="L103">                .filter(tier -&gt; </span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">                    tier.ilvl() &lt;= itemLevel &amp;&amp;</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">                    tier.ilvl() &gt;= minModifierLevel</span>
+                )
 
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if (entries.isEmpty()) {</span>
-<span class="nc" id="L108">            throw new IllegalStateException(</span>
-<span class="nc" id="L109">                &quot;No eligible tiers for itemClass &quot; + itemClass +</span>
-<span class="nc" id="L110">                &quot; at item level &quot; + itemLevel +</span>
-<span class="nc" id="L111">                &quot; for type &quot; + type</span>
+<span class="nc" id="L108">                .map(tier -&gt; new Entry(mod, tier)))</span>
+<span class="nc" id="L109">            .toList();</span>
+
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (entries.isEmpty()) {</span>
+<span class="nc" id="L112">            throw new IllegalStateException(</span>
+                &quot;No eligible tiers for itemClass &quot; + itemClass +
+                &quot; at item level &quot; + itemLevel +
+                &quot; for type &quot; + type
             );
         }
 
-<span class="fc" id="L115">        int totalWeight = entries.stream()</span>
-<span class="fc" id="L116">            .mapToInt(e -&gt; e.tier.weight())</span>
-<span class="fc" id="L117">            .sum();</span>
+<span class="nc" id="L119">        int totalWeight = entries.stream()</span>
+<span class="nc" id="L120">            .mapToInt(e -&gt; e.tier.weight())</span>
+<span class="nc" id="L121">            .sum();</span>
 
-<span class="fc" id="L119">        int roll = random.nextInt(totalWeight);</span>
+<span class="nc" id="L123">        int roll = random.nextInt(totalWeight);</span>
 
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        for (Entry e : entries) {</span>
-<span class="fc" id="L122">            roll -= e.tier.weight();</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">            if (roll &lt; 0) {</span>
-<span class="fc" id="L124">                return new RolledMod(</span>
-<span class="fc" id="L125">                    e.mod.id(),</span>
-<span class="fc" id="L126">                    e.mod.name(),</span>
-<span class="fc" id="L127">                    e.mod.tags(),</span>
-<span class="fc" id="L128">                    e.tier</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        for (Entry e : entries) {</span>
+<span class="nc" id="L126">            roll -= e.tier.weight();</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (roll &lt; 0) {</span>
+<span class="nc" id="L128">                return new RolledMod(</span>
+<span class="nc" id="L129">                    e.mod.id(),</span>
+<span class="nc" id="L130">                    e.mod.name(),</span>
+<span class="nc" id="L131">                    e.mod.tags(),</span>
+                    e.tier
                 );
             }
-        }
+<span class="nc" id="L135">        }</span>
 
-<span class="nc" id="L133">        throw new IllegalStateException(&quot;Weighted roll failed for itemClass: &quot; + itemClass);</span>
+<span class="nc" id="L137">        throw new IllegalStateException(&quot;Weighted roll failed for itemClass: &quot; + itemClass);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

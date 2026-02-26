@@ -29,14 +29,13 @@ public class OrbLoaderTest {
 
         assertNotNull(file);
         assertEquals("basic", file.currencyType());
-        assertEquals(6, file.orbs().size());
+        assertEquals(17, file.orbs().size());
 
-        var chaos = file.orbs().get(4);
-        assertEquals("chaos_orb", chaos.id());
-        assertEquals("chaos orb", chaos.name());
-        assertEquals("rare", chaos.minRarity());
-        assertEquals("rare", chaos.newRarity());
-        assertEquals(1, chaos.removeModifierCount());
+        var chaos = file.orbs().get(0);
+        assertEquals("transmutation_orb", chaos.id());
+        assertEquals("orb of transmutation", chaos.name());
+        assertEquals("magic", chaos.newRarity());
+        assertEquals(0, chaos.removeModifierCount());
         assertEquals(1, chaos.addedModifierCount());
 
 

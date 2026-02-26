@@ -26,7 +26,7 @@ import com.jomi.Handlers.Item.LoadedItem;
 <span class="fc" id="L26">            mapper.writeValue(path.toFile(), item);</span>
 <span class="fc" id="L27">        } catch (IOException e) {</span>
 <span class="fc" id="L28">            throw new RuntimeException(&quot;Failed to save item to: &quot; + path, e);</span>
-        }
+<span class="fc" id="L29">        }</span>
 <span class="fc" id="L30">    }</span>
 
     public static LoadedItem createNewItem(Path projectFolder,
@@ -51,10 +51,5 @@ import com.jomi.Handlers.Item.LoadedItem;
 <span class="fc" id="L51">            throw new RuntimeException(&quot;Failed to create new item in: &quot; + projectFolder, e);</span>
         }
     }
-
-
-
-
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

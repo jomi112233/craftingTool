@@ -1,0 +1,22 @@
+{
+  "itemLevel" : 81,
+  "itemRarity" : "Normal",
+  "loadedItemClass" : "weapons/wand",
+  "prefix" : [ {
+    "modId" : "inc_spell_dmg",
+    "name" : "% increased Spell Damage",
+    "tags" : [ "Damage", "Caster" ],
+    "tier" : {
+      "tier" : 2,
+      "ilvl" : 70,
+      "weight" : 100,
+      "stats" : {
+        "spell_inc" : {
+          "min" : 90.0,
+          "max" : 104.0
+        }
+      }
+    }
+  } ],
+  "suffix" : [ ]
+}

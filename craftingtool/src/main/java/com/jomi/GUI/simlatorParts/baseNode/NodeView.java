@@ -1,5 +1,6 @@
 package com.jomi.GUI.simlatorParts.baseNode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jomi.App;
@@ -47,10 +48,12 @@ public abstract class NodeView extends StackPane {
     private double dragOffsetY;
 
     private boolean expanded = false;
+    private List<NodeSection> dynamicSections;
 
     public NodeView(Node node, Project project) {
         this.node = node;
         this.project = project;
+        dynamicSections = new ArrayList<>();
 
         getStyleClass().add("node-root");
 
@@ -106,14 +109,13 @@ public abstract class NodeView extends StackPane {
 
             for (String item : section.items()) {
 
-                // ⭐ Detect inline search fields
+
                 if (item.startsWith("search:")) {
                     String key = item.substring(7);
                     itemBox.getChildren().add(renderSearchField(section.title(), key));
                     continue;
                 }
 
-                // Normal clickable item
                 Label label = new Label(item);
                 label.setWrapText(true);
                 label.getStyleClass().add("node-modifier");
@@ -180,8 +182,10 @@ public abstract class NodeView extends StackPane {
         // default do nothing
     }
 
-    /** Subclasses now only provide data */
-    protected abstract List<NodeSection> getSections();
+
+    protected List<NodeSection> getSections() {
+        return dynamicSections;
+    }
 
     public Label getTitLabel() {
         return titleLabel;
@@ -208,6 +212,31 @@ public abstract class NodeView extends StackPane {
     protected void onSectionItemClicked(String sectionTitle, String itemText) {
         // default: do nothing
     }
+
+    public void replaceSectionItem(String section, String oldItem, String newItem) {
+
+        List<NodeSection> updated = new ArrayList<>();
+
+        for (NodeSection sec : dynamicSections) {
+            if (sec.title().equals(section)) {
+
+                List<String> items = new ArrayList<>(sec.items());
+                int index = items.indexOf(oldItem);
+
+                if (index >= 0) {
+                    items.set(index, newItem);
+                }
+
+                updated.add(new NodeSection(sec.title(), items));
+            } else {
+                updated.add(sec);
+            }
+        }
+
+        dynamicSections = updated;
+    }
+
+
 
 
     @Override

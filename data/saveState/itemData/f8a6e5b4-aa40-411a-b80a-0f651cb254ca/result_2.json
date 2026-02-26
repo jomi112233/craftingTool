@@ -1,0 +1,22 @@
+{
+  "itemLevel" : 81,
+  "itemRarity" : "magic",
+  "loadedItemClass" : "weapons/wand",
+  "prefix" : [ ],
+  "suffix" : [ {
+    "modId" : "plus_levels_all_spells",
+    "name" : "+# to Level of all Spell Skills",
+    "tags" : [ "Caster", "Gem" ],
+    "tier" : {
+      "tier" : 4,
+      "ilvl" : 5,
+      "weight" : 200,
+      "stats" : {
+        "all_spell_levels" : {
+          "min" : 1.0,
+          "max" : 1.0
+        }
+      }
+    }
+  } ]
+}

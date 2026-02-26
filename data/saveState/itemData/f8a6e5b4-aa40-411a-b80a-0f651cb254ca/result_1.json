@@ -1,0 +1,97 @@
+{
+  "itemLevel" : 81,
+  "itemRarity" : "rare",
+  "loadedItemClass" : "weapons/wand",
+  "prefix" : [ {
+    "modId" : "gain_extra_fire_dmg",
+    "name" : "Gain % of Damage as Extra Fire Damage",
+    "tags" : [ "Damage", "Fire", "Elemental" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 80,
+      "weight" : 500,
+      "stats" : {
+        "gain_extra_fire" : {
+          "min" : 28.0,
+          "max" : 30.0
+        }
+      }
+    }
+  }, {
+    "modId" : "inc_lightning_dmg",
+    "name" : "% increased Lightning Damage",
+    "tags" : [ "Damage", "Elemental", "Lightning" ],
+    "tier" : {
+      "tier" : 7,
+      "ilvl" : 8,
+      "weight" : 500,
+      "stats" : {
+        "lightning_inc" : {
+          "min" : 35.0,
+          "max" : 44.0
+        }
+      }
+    }
+  }, {
+    "modId" : "inc_spell_phys_dmg",
+    "name" : "% increased Spell Physical Damage",
+    "tags" : [ "Damage", "Physical" ],
+    "tier" : {
+      "tier" : 6,
+      "ilvl" : 16,
+      "weight" : 500,
+      "stats" : {
+        "spell_phys_inc" : {
+          "min" : 45.0,
+          "max" : 54.0
+        }
+      }
+    }
+  } ],
+  "suffix" : [ {
+    "modId" : "inc_mana_regen_rate",
+    "name" : "% increased Mana Regeneration Rate",
+    "tags" : [ "Mana" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 79,
+      "weight" : 1000,
+      "stats" : {
+        "mana_regen_inc" : {
+          "min" : 60.0,
+          "max" : 69.0
+        }
+      }
+    }
+  }, {
+    "modId" : "flat_intelligence",
+    "name" : "+# to Intelligence",
+    "tags" : [ "Attribute" ],
+    "tier" : {
+      "tier" : 1,
+      "ilvl" : 74,
+      "weight" : 1000,
+      "stats" : {
+        "int_flat" : {
+          "min" : 31.0,
+          "max" : 33.0
+        }
+      }
+    }
+  }, {
+    "modId" : "plus_levels_chaos_spells",
+    "name" : "+# to Level of all Chaos Spell Skills",
+    "tags" : [ "Caster", "Chaos", "Gem" ],
+    "tier" : {
+      "tier" : 5,
+      "ilvl" : 2,
+      "weight" : 1000,
+      "stats" : {
+        "chaos_spell_levels" : {
+          "min" : 1.0,
+          "max" : 1.0
+        }
+      }
+    }
+  } ]
+}

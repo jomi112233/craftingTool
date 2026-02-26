@@ -2,7 +2,9 @@ package com.jomi.GUI.simlatorParts.Nodes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.jomi.App;
 import com.jomi.GUI.simlatorParts.baseNode.NodeSection;
 import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.Init.basicCurrency.Orb;
@@ -13,98 +15,209 @@ import com.jomi.Handlers.Item.LoadedItem;
 import com.jomi.Handlers.registry.Omenregistry;
 import com.jomi.Handlers.registry.OrbRegistry;
 import com.jomi.Util.craftingAction.BasicCurrencyAction;
+import com.jomi.Util.NodeShit.searchAction;
 
 public class BasicCurrencyNode extends NodeView {
+
+    private List<NodeSection> sections = new ArrayList<>();
 
     public BasicCurrencyNode(Node node, Project project) {
         super(node, project);
         setTitle("Basic Currency");
+        buildSections();
         refresh();
     }
 
-    /**
-     * NEW: Instead of building JavaFX UI, we return structured data.
-     */
-    @Override
-    protected List<NodeSection> getSections() {
+    // ---------------------------------------------------------
+    // BUILD SECTIONS (StartNode-style)
+    // ---------------------------------------------------------
+    private void buildSections() {
 
         Node data = getNode();
         List<String> actions = data.getActions();
 
-        List<NodeSection> sections = new ArrayList<>();
-
-        // SECTION 1 — Selected actions
+        List<String> currencyItems = new ArrayList<>();
         if (!actions.isEmpty()) {
-
-            List<String> selectedItems = new ArrayList<>();
-
-            // First action = currency
-            selectedItems.add("Currency: " + actions.get(0));
-
-            // Remaining actions = omens
-            for (int i = 1; i < actions.size(); i++) {
-                selectedItems.add("Omen: " + actions.get(i));
-            }
-
-            sections.add(new NodeSection("Selected", selectedItems));
+            currencyItems.add("• " + actions.get(0));
         }
+        currencyItems.add("add");
 
-        // SECTION 2 — Dropdown options
-        if (actions.isEmpty()) {
-            // No currency selected → show currency list
-            List<String> currencyList = OrbRegistry.getAll().stream()
-                    .map(Orb::id)
-                    .toList();
-
-            sections.add(new NodeSection("Select Currency", currencyList));
-
-        } else {
-            // Currency selected → show omens
-            List<String> omenList = Omenregistry.getAll().stream()
-                    .map(Omen::id)
-                    .toList();
-
-            sections.add(new NodeSection("Add Omen", omenList));
+        List<String> omenItems = new ArrayList<>();
+        for (int i = 1; i < actions.size(); i++) {
+            omenItems.add("• " + actions.get(i));
         }
+        omenItems.add("add");
 
+        sections = new ArrayList<>();
+        sections.add(new NodeSection("Currency", currencyItems));
+        sections.add(new NodeSection("Omen", omenItems));
+    }
+
+    @Override
+    protected List<NodeSection> getSections() {
         return sections;
     }
 
-    /**
-     * NodeView will render the section items as labels.
-     * But we still need to handle clicks on items.
-     */
+    // ---------------------------------------------------------
+    // CLICK HANDLING
+    // ---------------------------------------------------------
     @Override
     protected void onSectionItemClicked(String sectionTitle, String itemText) {
 
-        Node data = getNode();
+        String cleaned = itemText.trim().toLowerCase();
 
-        if (sectionTitle.equals("Select Currency")) {
-            data.setAction(itemText);
-            refresh();
-            return;
+        if (cleaned.equals("add")) {
+            replaceSectionItem(sectionTitle, itemText, "search:" + sectionTitle.toLowerCase());
+        } else {
+            removeItem(sectionTitle, itemText);
         }
 
-        if (sectionTitle.equals("Add Omen")) {
-            data.setAction(itemText);
-            refresh();
-        }
+        refresh();
     }
 
+    private void removeItem(String section, String itemText) {
+
+        Node data = getNode();
+        List<String> actions = new ArrayList<>(data.getActions());
+        String cleaned = itemText.replace("•", "").trim();
+
+        if (section.equals("Currency")) {
+            actions.clear();
+
+        }
+
+        if (section.equals("Omen")) {
+            actions.removeIf(a -> a.equalsIgnoreCase(cleaned));
+        }
+
+        data.setActions(actions);
+        buildSections();
+        App.getInstance().getProjectManager().saveProject(getProject());
+    }
+
+    // ---------------------------------------------------------
+    // SEARCH RESULT SELECTED
+    // ---------------------------------------------------------
+    @Override
+    protected void onSearchResultSelected(String section, String key, String result) {
+
+        Node data = getNode();
+        List<String> actions = new ArrayList<>(data.getActions());
+
+        if (section.equals("Currency")) {
+
+            Orb orb = OrbRegistry.getAll().stream()
+                .filter(o -> o.getName().equalsIgnoreCase(result))
+                .findFirst()
+                .orElse(null);
+
+            actions.clear();
+            actions.add(orb.getid());
+        }
+
+        if (section.equals("Omen")) {
+            Omen omen = Omenregistry.getAll().stream()
+                .filter(o -> o.getName().equalsIgnoreCase(result))
+                .findFirst()
+                .orElse(null);
+            actions.add(omen.id());
+        }
+
+        data.setActions(actions);
+        
+        buildSections();
+        refresh();
+        App.getInstance().getProjectManager().saveProject(getProject());
+    }
+
+    // ---------------------------------------------------------
+    // SEARCH SOURCE
+    // ---------------------------------------------------------
+    @Override
+    protected List<? extends searchAction> getSearchSource(String section, String key) {
+
+        if (section.equalsIgnoreCase("Currency")) {
+            return OrbRegistry.getAll().stream().toList();
+        }
+
+        if (section.equalsIgnoreCase("Omen")) {
+
+            List<String> actions = getNode().getActions();
+
+            if (actions.isEmpty()) {
+                return List.of();
+            }
+
+            // The first action is the orb ID
+            String orbId = actions.get(0);
+
+            // Look up the orb
+            Orb orb = OrbRegistry.get(orbId);
+            if (orb == null) {
+                return List.of();
+            }
+
+            String omenTarget = orb.omenTarget();
+
+            return Omenregistry.getAll().stream()
+                    .filter(o -> o.usedWith().equalsIgnoreCase(omenTarget))
+                    .filter(o -> !actions.contains(o.id())) // prevent duplicates
+                    .collect(Collectors.toMap(
+                            Omen::id,
+                            o -> o,
+                            (a, b) -> a
+                    ))
+                    .values()
+                    .stream()
+                    .toList();
+        }
+
+        return List.of();
+    }
+
+
+
+    // ---------------------------------------------------------
+    // REPLACE SECTION ITEM (StartNode-style)
+    // ---------------------------------------------------------
+    @Override
+    public void replaceSectionItem(String section, String oldItem, String newItem) {
+
+        List<NodeSection> updated = new ArrayList<>();
+
+        for (NodeSection sec : sections) {
+            if (sec.title().equals(section)) {
+
+                List<String> items = new ArrayList<>(sec.items());
+                int index = items.indexOf(oldItem);
+
+                if (index >= 0) {
+                    items.set(index, newItem);
+                }
+
+                updated.add(new NodeSection(section, items));
+            } else {
+                updated.add(sec);
+            }
+        }
+
+        sections = updated;
+    }
+
+    // ---------------------------------------------------------
+    // EXECUTION
+    // ---------------------------------------------------------
     @Override
     public LoadedItem execute(LoadedItem item) {
 
         List<String> actions = getNode().getActions();
 
         if (actions.isEmpty()) {
-            return item; // nothing to do
+            return item;
         }
 
-        // First action = currency
-        String orbId = actions.get(0);
-        Orb orb = OrbRegistry.get(orbId);
+        Orb orb = OrbRegistry.get(actions.get(0));
 
-        // Remaining actions = omens
         List<Omen> omens = new ArrayList<>();
         for (int i = 1; i < actions.size(); i++) {
             Omen o = Omenregistry.get(actions.get(i));
@@ -112,7 +225,6 @@ public class BasicCurrencyNode extends NodeView {
         }
 
         BasicCurrencyAction.apply(item, orb, omens);
-
         return item;
     }
 

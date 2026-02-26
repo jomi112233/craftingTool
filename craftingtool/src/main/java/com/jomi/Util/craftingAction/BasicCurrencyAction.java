@@ -17,75 +17,108 @@ public class BasicCurrencyAction {
     private static final int SUFFIX_CAP = 3;
 
     public static void apply(LoadedItem item, Orb orb, List<Omen> omens) {
+        if (!orb.allowedRarity().stream()
+            .anyMatch(r -> r.equalsIgnoreCase(item.getItemRarity()))) {
 
-    if (!item.getItemRarity().equalsIgnoreCase(orb.minRarity())) {
-        throw new IllegalStateException(
-            "Item rarity " + item.getItemRarity() +
-            " does not meet minimum rarity " + orb.minRarity() +
-            " for currency " + orb.id()
-        );
-    }
-
-    if (orb.newRarity() != null &&
-        !orb.newRarity().equalsIgnoreCase(item.getItemRarity())) {
-
-        item.setItemRarity(orb.newRarity());
-    }
+            throw new IllegalStateException(
+                "Item rarity " + item.getItemRarity() +
+                " is not allowed for currency " + orb.id()
+            );
+        }
 
 
-    for (int i = 0; i < orb.removeModifierCount(); i++) {
-        removeRandomModifier(item);
-    }
 
-    // combine omen effects
-    String finalTargetAffix = "BOTH";
-    boolean finalTargetTags = false;
-    int extraMods = 0;
+        if (orb.newRarity() != null &&
+            !orb.newRarity().equalsIgnoreCase(item.getItemRarity())) {
 
-    if (omens != null) {
-        for (Omen omen : omens) {
+            item.setItemRarity(orb.newRarity());
+        }
 
-            // Only apply omens that match the orb
-            if (!omen.usedWith().equalsIgnoreCase(orb.id())) continue;
 
-            // Forced prefix/suffix
-            if (!omen.targetAffix().equalsIgnoreCase("BOTH")) {
-                finalTargetAffix = omen.targetAffix();
+        // combine omen effects
+        String finalTargetAffix = "BOTH";
+        boolean finalTargetTags = false;
+        int extraMods = 0;
+
+        if (omens != null) {
+            for (Omen omen : omens) {
+
+                // Only apply omens that match the orb
+                if (!omen.usedWith().equalsIgnoreCase(orb.omenTarget())) continue;
+
+                // Forced prefix/suffix
+                if (!omen.targetAffix().equalsIgnoreCase("BOTH")) {
+                    finalTargetAffix = omen.targetAffix();
+                }
+
+                // Tag targeting
+                if (omen.targetTags() != null && omen.targetTags()) {
+                    finalTargetTags = true;
+                }
+
+                // Extra modifiers
+                extraMods += omen.addExtraModifiers();
             }
+        }
 
-            // Tag targeting
-            if (omen.targetTags() != null && omen.targetTags()) {
-                finalTargetTags = true;
-            }
+        for (int i = 0; i < orb.removeModifierCount(); i++) {
+            removeRandomModifier(item, finalTargetAffix);
+        }
 
-            // Extra modifiers
-            extraMods += omen.addExtraModifiers();
+
+        for (int i = 0; i < orb.addedModifierCount(); i++) {
+            addModifier(item, orb, finalTargetAffix, finalTargetTags);
+        }
+
+        for (int i = 0; i < extraMods; i++) {
+            addModifier(item, orb, finalTargetAffix, finalTargetTags);
         }
     }
 
-    for (int i = 0; i < orb.addedModifierCount(); i++) {
-        addModifier(item, finalTargetAffix, finalTargetTags);
-    }
 
-    for (int i = 0; i < extraMods; i++) {
-        addModifier(item, finalTargetAffix, finalTargetTags);
-    }
-}
-
-
-    private static void removeRandomModifier(LoadedItem item) {
+    private static void removeRandomModifier(LoadedItem item, String targetAffix) {
         var prefix = item.getPrefix();
         var suffix = item.getSuffix();
 
-        int total = prefix.size() + suffix.size();
-        if (total == 0) return;
+        boolean hasPrefix = !prefix.isEmpty();
+        boolean hasSuffix = !suffix.isEmpty();
 
-        int roll = (int)(Math.random() * total);
+        if (!hasPrefix && !hasSuffix) {
+            return;
+        }
 
-        if (roll < prefix.size()) {
-            prefix.remove(roll);
-        } else {
-            suffix.remove(roll - prefix.size());
+        switch (targetAffix.toUpperCase()) {
+
+            case "PREFIX" -> {
+                if (hasPrefix) {
+                    prefix.remove((int)(Math.random() * prefix.size()));
+                    return;
+                }
+                System.out.println("no valid prefix modifiers");
+                return;
+                
+            }
+
+            case "SUFFIX" -> {
+                if (hasSuffix) {
+                    suffix.remove((int)(Math.random() * suffix.size()));
+                    return;
+                }
+                System.out.println("no valid suffix modifiers");
+                return;
+            
+            }
+
+            default -> { // BOTH
+                if (hasPrefix && hasSuffix) {
+                    if (Math.random() < 0.5) {
+                        prefix.remove((int)(Math.random() * prefix.size()));
+                    } else {
+                        suffix.remove((int)(Math.random() * suffix.size()));
+                    }
+                    return;
+                }
+            }
         }
     }
 
@@ -93,6 +126,7 @@ public class BasicCurrencyAction {
 
     private static void addModifier(
             LoadedItem item,
+            Orb orb,
             String targetAffix,
             boolean targetTags
     ) {
@@ -127,6 +161,7 @@ public class BasicCurrencyAction {
             ModRoller.RolledMod rolled = ModRoller.rollRandomTier(
                 item.getLoadedItemClass(),
                 item.getItemLevel(),
+                orb.minModifierLevel(),
                 type
             );
 
@@ -141,6 +176,7 @@ public class BasicCurrencyAction {
             if (duplicate) continue;
 
             // Tag targeting not working correctly
+            //please ignore
             if (targetTags) {
                 var modTags = mod.tags();
                 boolean sharesTag = modTags != null && modTags.stream().anyMatch(itemTags::contains);
@@ -191,6 +227,4 @@ public class BasicCurrencyAction {
 
         System.out.println("no valid modifiers");
     }
-
-
 }

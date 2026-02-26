@@ -66,6 +66,15 @@ public class SideBar extends VBox {
             canvas.addNode(node);
         });
 
+        Button addIteratorNode = new Button("Iterator Node");
+        addIteratorNode.prefWidth(120);
+
+        addIteratorNode.setOnAction(e -> {
+            Node node = new Node("iterator", 200, 200, true, true);
+            project.addNode(node);
+            canvas.addNode(node);
+        });
+
 
 
 
@@ -122,6 +131,6 @@ public class SideBar extends VBox {
         save.setPrefWidth(120);
         load.setPrefWidth(120);
 
-        getChildren().addAll(addNode, addBasicCurrencyNode, addStartNode, addEndNode, save, load, runButton);
+        getChildren().addAll(addNode, addStartNode, addBasicCurrencyNode, addIteratorNode , addEndNode, save, load, runButton);
     }
 }

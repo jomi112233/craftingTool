@@ -21,19 +21,16 @@ public class EndNode extends NodeView {
     @Override
     protected List<NodeSection> getSections() {
 
-        // No final item yet → show waiting message
         if (finalItem == null) {
             return List.of(
                 new NodeSection("Waiting", List.of("Run simulation to see final item."))
             );
         }
 
-        // Build prefix list
         List<String> prefixItems = finalItem.getPrefix().stream()
                 .map(this::formatMod)
                 .toList();
 
-        // Build suffix list
         List<String> suffixItems = finalItem.getSuffix().stream()
                 .map(this::formatMod)
                 .toList();
@@ -57,9 +54,11 @@ public class EndNode extends NodeView {
 
     @Override
     public LoadedItem execute(LoadedItem item) {
-        this.finalItem = item;   // store final item for UI display
-        refresh();               // update UI
-        return item;             // return item to simulation runner
+        this.finalItem = item;
+        refresh();
+        applyRarityColor(finalItem.getItemRarity());
+        setInfo(String.valueOf(finalItem.getItemLevel()));
+        return item;      
     }
 
     @Override

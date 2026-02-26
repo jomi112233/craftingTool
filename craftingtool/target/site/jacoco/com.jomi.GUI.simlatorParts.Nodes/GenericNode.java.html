@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenericNode.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">craftingtool</a> &gt; <a href="index.source.html" class="el_package">com.jomi.GUI.simlatorParts.Nodes</a> &gt; <span class="el_source">GenericNode.java</span></div><h1>GenericNode.java</h1><pre class="source lang-java linenums">package com.jomi.GUI.simlatorParts.Nodes;
 
-import com.jomi.GUI.simlatorParts.NodeView;
+import java.util.List;
+
+import com.jomi.GUI.simlatorParts.baseNode.NodeSection;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.Init.project.Node;
 import com.jomi.Handlers.Init.project.Project;
-
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import com.jomi.Handlers.Item.LoadedItem;
 
 public class GenericNode extends NodeView {
 
     public GenericNode(Node node, Project project) {
-<span class="nc" id="L13">        super(node, project);</span>
-<span class="nc" id="L14">    }</span>
+<span class="nc" id="L14">        super(node, project);</span>
+<span class="nc" id="L15">        setTitle(&quot;Generic Node&quot;);</span>
+<span class="nc" id="L16">    }</span>
 
     @Override
-    protected VBox buildContent() {
-<span class="nc" id="L18">        VBox box = new VBox();</span>
-<span class="nc" id="L19">        box.getChildren().add(new Label(&quot;No content&quot;));</span>
-<span class="nc" id="L20">        return box;</span>
+    protected List&lt;NodeSection&gt; getSections() {
+<span class="nc" id="L20">        return List.of(</span>
+<span class="nc" id="L21">            new NodeSection(&quot;Info&quot;, List.of(</span>
+                &quot;This is a generic node.&quot;,
+                &quot;It doesn't do anything.&quot;,
+                &quot;But it looks cool.&quot;
+            ))
+        );
+    }
+
+    @Override
+    protected void onSectionItemClicked(String section, String item) {
+        // Generic node has no actions
+<span class="nc" id="L32">    }</span>
+
+    @Override
+    public LoadedItem execute(LoadedItem item) {
+<span class="nc" id="L36">        return item; // does nothing</span>
     }
 
     @Override
     protected void edit() {
-<span class="nc" id="L25">        System.out.println(&quot;StartNode has no editable fields.&quot;);</span>
-<span class="nc" id="L26">    }</span>
-
+        // No editable fields
+<span class="nc" id="L42">    }</span>
 }
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -7,15 +7,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 <span class="nc" id="L8">public class OmenLoader {</span>
 
-<span class="nc" id="L10">    private static final ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L10">    private static final ObjectMapper mapper = new ObjectMapper();</span>
 
     public static OmenFile loadFromFile(Path path) {
         try {
-<span class="nc bnc" id="L14" title="All 2 branches missed.">            if (!Files.exists(path)) {</span>
+<span class="pc bpc" id="L14" title="1 of 2 branches missed.">            if (!Files.exists(path)) {</span>
 <span class="nc" id="L15">                throw new RuntimeException(&quot;Omen file does not exist: &quot; + path);</span>
             }
 
-<span class="nc" id="L18">            return mapper.readValue(path.toFile(), OmenFile.class);</span>
+<span class="fc" id="L18">            return mapper.readValue(path.toFile(), OmenFile.class);</span>
 
 <span class="nc" id="L20">        } catch (Exception e) {</span>
 <span class="nc" id="L21">            throw new RuntimeException(&quot;Failed to load Omen File from file system: &quot; + path);</span>

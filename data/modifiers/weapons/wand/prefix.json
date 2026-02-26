@@ -1,0 +1,176 @@
+{
+    "itemClass": "weapons/wand",
+    "mods" : [
+    {
+        "id": "inc_chaos_dmg",
+        "prefix": true,
+        "name": "% increased Chaos Damage",
+        "tags": ["Damage", "Chaos"],
+        "tiers": [
+            { "tier": 8, "ilvl": 2,  "weight": 500, "stats": { "chaos_inc": { "min": 25,  "max": 34  } } },
+            { "tier": 7, "ilvl": 8,  "weight": 500, "stats": { "chaos_inc": { "min": 35,  "max": 44  } } },
+            { "tier": 6, "ilvl": 16, "weight": 500, "stats": { "chaos_inc": { "min": 45,  "max": 54  } } },
+            { "tier": 5, "ilvl": 33, "weight": 400, "stats": { "chaos_inc": { "min": 55,  "max": 64  } } },
+            { "tier": 4, "ilvl": 46, "weight": 300, "stats": { "chaos_inc": { "min": 65,  "max": 74  } } },
+            { "tier": 3, "ilvl": 60, "weight": 200, "stats": { "chaos_inc": { "min": 75,  "max": 89  } } },
+            { "tier": 2, "ilvl": 70, "weight": 100, "stats": { "chaos_inc": { "min": 90,  "max": 104 } } },
+            { "tier": 1, "ilvl": 81, "weight": 50,  "stats": { "chaos_inc": { "min": 105, "max": 119 } } }
+        ]
+    },
+    {
+        "id": "inc_cold_dmg",
+        "prefix": true,
+        "name": "% increased Cold Damage",
+        "tags": ["Damage", "Elemental", "Cold"],
+        "tiers": [
+            { "tier": 8, "ilvl": 2,  "weight": 500, "stats": { "cold_inc": { "min": 25,  "max": 34  } } },
+            { "tier": 7, "ilvl": 8,  "weight": 500, "stats": { "cold_inc": { "min": 35,  "max": 44  } } },
+            { "tier": 6, "ilvl": 16, "weight": 500, "stats": { "cold_inc": { "min": 45,  "max": 54  } } },
+            { "tier": 5, "ilvl": 33, "weight": 400, "stats": { "cold_inc": { "min": 55,  "max": 64  } } },
+            { "tier": 4, "ilvl": 46, "weight": 300, "stats": { "cold_inc": { "min": 65,  "max": 74  } } },
+            { "tier": 3, "ilvl": 60, "weight": 200, "stats": { "cold_inc": { "min": 75,  "max": 89  } } },
+            { "tier": 2, "ilvl": 70, "weight": 100, "stats": { "cold_inc": { "min": 90,  "max": 104 } } },
+            { "tier": 1, "ilvl": 81, "weight": 50,  "stats": { "cold_inc": { "min": 105, "max": 119 } } }
+        ]
+    },
+    {
+        "id": "inc_fire_dmg",
+        "prefix": true,
+        "name": "% increased Fire Damage",
+        "tags": ["Damage", "Elemental", "Fire"],
+        "tiers": [
+            { "tier": 8, "ilvl": 2,  "weight": 500, "stats": { "fire_inc": { "min": 25,  "max": 34  } } },
+            { "tier": 7, "ilvl": 8,  "weight": 500, "stats": { "fire_inc": { "min": 35,  "max": 44  } } },
+            { "tier": 6, "ilvl": 16, "weight": 500, "stats": { "fire_inc": { "min": 45,  "max": 54  } } },
+            { "tier": 5, "ilvl": 33, "weight": 400, "stats": { "fire_inc": { "min": 55,  "max": 64  } } },
+            { "tier": 4, "ilvl": 46, "weight": 300, "stats": { "fire_inc": { "min": 65,  "max": 74  } } },
+            { "tier": 3, "ilvl": 60, "weight": 200, "stats": { "fire_inc": { "min": 75,  "max": 89  } } },
+            { "tier": 2, "ilvl": 70, "weight": 100, "stats": { "fire_inc": { "min": 90,  "max": 104 } } },
+            { "tier": 1, "ilvl": 81, "weight": 50,  "stats": { "fire_inc": { "min": 105, "max": 119 } } }
+        ]
+    },
+    {
+        "id": "inc_lightning_dmg",
+        "prefix": true,
+        "name": "% increased Lightning Damage",
+        "tags": ["Damage", "Elemental", "Lightning"],
+        "tiers": [
+            { "tier": 8, "ilvl": 2,  "weight": 500, "stats": { "lightning_inc": { "min": 25,  "max": 34  } } },
+            { "tier": 7, "ilvl": 8,  "weight": 500, "stats": { "lightning_inc": { "min": 35,  "max": 44  } } },
+            { "tier": 6, "ilvl": 16, "weight": 500, "stats": { "lightning_inc": { "min": 45,  "max": 54  } } },
+            { "tier": 5, "ilvl": 33, "weight": 400, "stats": { "lightning_inc": { "min": 55,  "max": 64  } } },
+            { "tier": 4, "ilvl": 46, "weight": 300, "stats": { "lightning_inc": { "min": 65,  "max": 74  } } },
+            { "tier": 3, "ilvl": 60, "weight": 200, "stats": { "lightning_inc": { "min": 75,  "max": 89  } } },
+            { "tier": 2, "ilvl": 70, "weight": 100, "stats": { "lightning_inc": { "min": 90,  "max": 104 } } },
+            { "tier": 1, "ilvl": 81, "weight": 50,  "stats": { "lightning_inc": { "min": 105, "max": 119 } } }
+        ]
+    },
+    {
+        "id": "inc_spell_dmg",
+        "prefix": true,
+        "name": "% increased Spell Damage",
+        "tags": ["Damage", "Caster"],
+        "tiers": [
+            { "tier": 8, "ilvl": 1,  "weight": 1000, "stats": { "spell_inc": { "min": 25,  "max": 34  } } },
+            { "tier": 7, "ilvl": 8,  "weight": 1000, "stats": { "spell_inc": { "min": 35,  "max": 44  } } },
+            { "tier": 6, "ilvl": 16, "weight": 1000, "stats": { "spell_inc": { "min": 45,  "max": 54  } } },
+            { "tier": 5, "ilvl": 33, "weight": 600,  "stats": { "spell_inc": { "min": 55,  "max": 64  } } },
+            { "tier": 4, "ilvl": 46, "weight": 400,  "stats": { "spell_inc": { "min": 65,  "max": 74  } } },
+            { "tier": 3, "ilvl": 60, "weight": 200,  "stats": { "spell_inc": { "min": 75,  "max": 89  } } },
+            { "tier": 2, "ilvl": 70, "weight": 100,  "stats": { "spell_inc": { "min": 90,  "max": 104 } } },
+            { "tier": 1, "ilvl": 80, "weight": 50,   "stats": { "spell_inc": { "min": 105, "max": 119 } } }
+        ]
+    },
+    {
+        "id": "inc_spell_dmg_mana",
+        "prefix": true,
+        "name": "% increased Spell Damage, +# to maximum Mana",
+        "tags": ["Damage", "Caster", "Mana"],
+        "tiers": [
+            { "tier": 7, "ilvl": 2,  "weight": 1000, "stats": { "spell_inc": { "min": 15, "max": 19 }, "mana_flat": { "min": 17, "max": 20 } } },
+            { "tier": 6, "ilvl": 11, "weight": 1000, "stats": { "spell_inc": { "min": 20, "max": 24 }, "mana_flat": { "min": 21, "max": 24 } } },
+            { "tier": 5, "ilvl": 23, "weight": 1000, "stats": { "spell_inc": { "min": 25, "max": 29 }, "mana_flat": { "min": 25, "max": 28 } } },
+            { "tier": 4, "ilvl": 38, "weight": 600,  "stats": { "spell_inc": { "min": 30, "max": 34 }, "mana_flat": { "min": 29, "max": 33 } } },
+            { "tier": 3, "ilvl": 46, "weight": 400,  "stats": { "spell_inc": { "min": 35, "max": 39 }, "mana_flat": { "min": 34, "max": 37 } } },
+            { "tier": 2, "ilvl": 60, "weight": 200,  "stats": { "spell_inc": { "min": 40, "max": 44 }, "mana_flat": { "min": 38, "max": 41 } } },
+            { "tier": 1, "ilvl": 80, "weight": 100,  "stats": { "spell_inc": { "min": 45, "max": 49 }, "mana_flat": { "min": 42, "max": 45 } } }
+        ]
+    },
+    {
+        "id": "inc_spell_phys_dmg",
+        "prefix": true,
+        "name": "% increased Spell Physical Damage",
+        "tags": ["Damage", "Physical"],
+        "tiers": [
+            { "tier": 8, "ilvl": 2,  "weight": 500, "stats": { "spell_phys_inc": { "min": 25,  "max": 34  } } },
+            { "tier": 7, "ilvl": 8,  "weight": 500, "stats": { "spell_phys_inc": { "min": 35,  "max": 44  } } },
+            { "tier": 6, "ilvl": 16, "weight": 500, "stats": { "spell_phys_inc": { "min": 45,  "max": 54  } } },
+            { "tier": 5, "ilvl": 33, "weight": 400, "stats": { "spell_phys_inc": { "min": 55,  "max": 64  } } },
+            { "tier": 4, "ilvl": 46, "weight": 300, "stats": { "spell_phys_inc": { "min": 65,  "max": 74  } } },
+            { "tier": 3, "ilvl": 60, "weight": 200, "stats": { "spell_phys_inc": { "min": 75,  "max": 89  } } },
+            { "tier": 2, "ilvl": 70, "weight": 100, "stats": { "spell_phys_inc": { "min": 90,  "max": 104 } } },
+            { "tier": 1, "ilvl": 81, "weight": 50,  "stats": { "spell_phys_inc": { "min": 105, "max": 119 } } }
+        ]
+    },
+    {
+        "id": "flat_mana",
+        "prefix": false,
+        "name": "+# to maximum Mana",
+        "tags": ["Mana"],
+        "tiers": [
+            { "tier": 11, "ilvl": 1,  "weight": 1000, "stats": { "mana_flat": { "min": 10,  "max": 14  } } },
+            { "tier": 10, "ilvl": 6,  "weight": 1000, "stats": { "mana_flat": { "min": 15,  "max": 24  } } },
+            { "tier": 9,  "ilvl": 16, "weight": 1000, "stats": { "mana_flat": { "min": 25,  "max": 34  } } },
+            { "tier": 8,  "ilvl": 25, "weight": 1000, "stats": { "mana_flat": { "min": 35,  "max": 54  } } },
+            { "tier": 7,  "ilvl": 33, "weight": 1000, "stats": { "mana_flat": { "min": 55,  "max": 64  } } },
+            { "tier": 6,  "ilvl": 38, "weight": 1000, "stats": { "mana_flat": { "min": 65,  "max": 79  } } },
+            { "tier": 5,  "ilvl": 46, "weight": 1000, "stats": { "mana_flat": { "min": 80,  "max": 89  } } },
+            { "tier": 4,  "ilvl": 54, "weight": 1000, "stats": { "mana_flat": { "min": 90,  "max": 104 } } },
+            { "tier": 3,  "ilvl": 60, "weight": 1000, "stats": { "mana_flat": { "min": 105, "max": 124 } } },
+            { "tier": 2,  "ilvl": 65, "weight": 1000, "stats": { "mana_flat": { "min": 125, "max": 149 } } },
+            { "tier": 1,  "ilvl": 70, "weight": 1000, "stats": { "mana_flat": { "min": 150, "max": 164 } } }
+        ]
+    },
+    {
+        "id": "gain_extra_cold_dmg",
+        "prefix": true,
+        "name": "Gain % of Damage as Extra Cold Damage",
+        "tags": ["Damage", "Cold", "Elemental"],
+        "tiers": [
+            { "tier": 6, "ilvl": 5,  "weight": 500, "stats": { "gain_extra_cold": { "min": 13, "max": 15 } } },
+            { "tier": 5, "ilvl": 16, "weight": 500, "stats": { "gain_extra_cold": { "min": 16, "max": 18 } } },
+            { "tier": 4, "ilvl": 33, "weight": 500, "stats": { "gain_extra_cold": { "min": 19, "max": 21 } } },
+            { "tier": 3, "ilvl": 46, "weight": 500, "stats": { "gain_extra_cold": { "min": 22, "max": 24 } } },
+            { "tier": 2, "ilvl": 60, "weight": 500, "stats": { "gain_extra_cold": { "min": 25, "max": 27 } } },
+            { "tier": 1, "ilvl": 80, "weight": 500, "stats": { "gain_extra_cold": { "min": 28, "max": 30 } } }
+        ]
+    },
+    {
+        "id": "gain_extra_fire_dmg",
+        "prefix": true,
+        "name": "Gain % of Damage as Extra Fire Damage",
+        "tags": ["Damage", "Fire", "Elemental"],
+        "tiers": [
+            { "tier": 6, "ilvl": 5,  "weight": 500, "stats": { "gain_extra_fire": { "min": 13, "max": 15 } } },
+            { "tier": 5, "ilvl": 16, "weight": 500, "stats": { "gain_extra_fire": { "min": 16, "max": 18 } } },
+            { "tier": 4, "ilvl": 33, "weight": 500, "stats": { "gain_extra_fire": { "min": 19, "max": 21 } } },
+            { "tier": 3, "ilvl": 46, "weight": 500, "stats": { "gain_extra_fire": { "min": 22, "max": 24 } } },
+            { "tier": 2, "ilvl": 60, "weight": 500, "stats": { "gain_extra_fire": { "min": 25, "max": 27 } } },
+            { "tier": 1, "ilvl": 80, "weight": 500, "stats": { "gain_extra_fire": { "min": 28, "max": 30 } } }
+        ]
+    },
+    {
+        "id": "gain_extra_lightning_dmg",
+        "prefix": true,
+        "name": "Gain % of Damage as Extra Lightning Damage",
+        "tags": ["Damage", "Lightning"],
+        "tiers": [
+            { "tier": 6, "ilvl": 5,  "weight": 500, "stats": { "gain_extra_lightning": { "min": 13, "max": 15 } } },
+            { "tier": 5, "ilvl": 16, "weight": 500, "stats": { "gain_extra_lightning": { "min": 16, "max": 18 } } },
+            { "tier": 4, "ilvl": 33, "weight": 500, "stats": { "gain_extra_lightning": { "min": 19, "max": 21 } } },
+            { "tier": 3, "ilvl": 46, "weight": 500, "stats": { "gain_extra_lightning": { "min": 22, "max": 24 } } },
+            { "tier": 2, "ilvl": 60, "weight": 500, "stats": { "gain_extra_lightning": { "min": 25, "max": 27 } } },
+            { "tier": 1, "ilvl": 80, "weight": 500, "stats": { "gain_extra_lightning": { "min": 28, "max": 30 } } }
+        ]
+    } ]
+}

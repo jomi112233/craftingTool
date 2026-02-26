@@ -22,13 +22,13 @@ import java.util.List;
                     try {
 <span class="fc" id="L23">                        ModFile mf = mapper.readValue(p.toFile(), ModFile.class);</span>
 <span class="fc" id="L24">                        result.add(mf);</span>
-<span class="pc" id="L25">                    } catch (Exception e) {</span>
+<span class="nc" id="L25">                    } catch (Exception e) {</span>
 <span class="nc" id="L26">                        System.err.println(&quot;Failed to parse &quot; + p + &quot;: &quot; + e.getMessage());</span>
-                    }
+<span class="fc" id="L27">                    }</span>
 <span class="fc" id="L28">                });</span>
 <span class="nc" id="L29">        } catch (Exception e) {</span>
 <span class="nc" id="L30">            throw new RuntimeException(&quot;Failed to load folder: &quot; + folder, e);</span>
-        }
+<span class="fc" id="L31">        }</span>
 
 <span class="fc" id="L33">        return result;</span>
     }

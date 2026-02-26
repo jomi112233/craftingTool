@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jomi.GUI.simlatorParts.ConnectionView;
-import com.jomi.GUI.simlatorParts.NodeView;
+import com.jomi.GUI.simlatorParts.baseNode.NodeView;
 import com.jomi.Handlers.registry.NodeRegister;
 
 import javafx.application.Platform;
@@ -39,106 +39,115 @@ public class NodeCanvas {
 
 <span class="nc" id="L40">        rootLayer.setPrefSize(width, height);</span>
 <span class="nc" id="L41">        rootLayer.getChildren().addAll(</span>
-<span class="nc" id="L42">            gridLayer,</span>
-<span class="nc" id="L43">            connectionLayer,</span>
-<span class="nc" id="L44">            nodeLayer,</span>
-<span class="nc" id="L45">            simulatorObjectLayer</span>
+            gridLayer,
+            connectionLayer,
+            nodeLayer,
+            simulatorObjectLayer
         );
 
 <span class="nc" id="L48">        drawGrid();</span>
 
-        // Load nodes
-<span class="nc bnc" id="L51" title="All 2 branches missed.">        for (Node node : project.getNodes()) {</span>
-<span class="nc" id="L52">            addNode(node);</span>
-        }
 
-        // Load connections
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        for (Connection c : project.getConnections()) {</span>
-<span class="nc" id="L57">            drawConnection(c);</span>
-        }
-<span class="nc" id="L59">    }</span>
-    
+<span class="nc" id="L51">        drawNodes();</span>
+<span class="nc" id="L52">        drawConnections();     </span>
+<span class="nc" id="L53">    }</span>
+
+
+    public void drawNodes() {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for (Node node : project.getNodes()) {</span>
+<span class="nc" id="L58">            addNode(node);</span>
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">    }</span>
+
+    public void drawConnections() {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        for (Connection c : project.getConnections()) {</span>
+<span class="nc" id="L64">            drawConnection(c);</span>
+<span class="nc" id="L65">        }</span>
+<span class="nc" id="L66">    }</span>
+
 
     public Pane getRootLayer() {
-<span class="nc" id="L63">        return rootLayer;</span>
+<span class="nc" id="L70">        return rootLayer;</span>
     }
 
     public double getWorldWidth() {
-<span class="nc" id="L67">        return width;</span>
+<span class="nc" id="L74">        return width;</span>
     }
 
     public double getWorldHeight() {
-<span class="nc" id="L71">        return height;</span>
+<span class="nc" id="L78">        return height;</span>
     }
+
+    
 
     //not used really currently
     private void drawGrid() {
-<span class="nc" id="L76">        Canvas grid = new Canvas(width, height);</span>
-<span class="nc" id="L77">        GraphicsContext gc = grid.getGraphicsContext2D();</span>
+<span class="nc" id="L85">        Canvas grid = new Canvas(width, height);</span>
+<span class="nc" id="L86">        GraphicsContext gc = grid.getGraphicsContext2D();</span>
 
-<span class="nc" id="L79">        gc.setStroke(Color.rgb(255, 255, 255, 0));</span>
-<span class="nc" id="L80">        gc.setLineWidth(1);</span>
+<span class="nc" id="L88">        gc.setStroke(Color.rgb(255, 255, 255, 0));</span>
+<span class="nc" id="L89">        gc.setLineWidth(1);</span>
 
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (int x = 0; x &lt; width; x += GRID_SIZE) {</span>
-<span class="nc" id="L83">            gc.strokeLine(x, 0, x, height);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        for (int x = 0; x &lt; width; x += GRID_SIZE) {</span>
+<span class="nc" id="L92">            gc.strokeLine(x, 0, x, height);</span>
         }
 
-<span class="nc bnc" id="L86" title="All 2 branches missed.">        for (int y = 0; y &lt; height; y += GRID_SIZE) {</span>
-<span class="nc" id="L87">            gc.strokeLine(0, y, width, y);</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        for (int y = 0; y &lt; height; y += GRID_SIZE) {</span>
+<span class="nc" id="L96">            gc.strokeLine(0, y, width, y);</span>
         }
 
-<span class="nc" id="L90">        grid.setMouseTransparent(true);</span>
-<span class="nc" id="L91">        gridLayer.getChildren().add(grid);</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L99">        grid.setMouseTransparent(true);</span>
+<span class="nc" id="L100">        gridLayer.getChildren().add(grid);</span>
+<span class="nc" id="L101">    }</span>
 
     private NodeView findNodeViewById(String id) {
-<span class="nc bnc" id="L95" title="All 2 branches missed.">        for (var child : nodeLayer.getChildren()) {</span>
-<span class="nc bnc" id="L96" title="All 4 branches missed.">            if (child instanceof NodeView view &amp;&amp; view.getNode().getId().equals(id)) {</span>
-<span class="nc" id="L97">                return view;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        for (var child : nodeLayer.getChildren()) {</span>
+<span class="nc bnc" id="L105" title="All 4 branches missed.">            if (child instanceof NodeView view &amp;&amp; view.getNode().getId().equals(id)) {</span>
+<span class="nc" id="L106">                return view;</span>
             }
-        }
-<span class="nc" id="L100">        return null;</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">        return null;</span>
     }
 
     public void drawConnection(Connection c) {
-<span class="nc" id="L104">        NodeView fromNode = findNodeViewById(c.getFromNodeId());</span>
-<span class="nc" id="L105">        NodeView toNode   = findNodeViewById(c.getToNodeID());</span>
+<span class="nc" id="L113">        NodeView fromNode = findNodeViewById(c.getFromNodeId());</span>
+<span class="nc" id="L114">        NodeView toNode   = findNodeViewById(c.getToNodeID());</span>
 
-<span class="nc bnc" id="L107" title="All 4 branches missed.">        if (fromNode == null || toNode == null) {</span>
-<span class="nc" id="L108">            return;</span>
+<span class="nc bnc" id="L116" title="All 4 branches missed.">        if (fromNode == null || toNode == null) {</span>
+<span class="nc" id="L117">            return;</span>
         }
 
-<span class="nc bnc" id="L111" title="All 2 branches missed.">        var fromPort = c.isFromIsOutput()</span>
-<span class="nc" id="L112">                ? fromNode.getOutputPort()</span>
-<span class="nc" id="L113">                : fromNode.getInputPort();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        var fromPort = c.isFromIsOutput()</span>
+<span class="nc" id="L121">                ? fromNode.getOutputPort()</span>
+<span class="nc" id="L122">                : fromNode.getInputPort();</span>
 
-<span class="nc bnc" id="L115" title="All 2 branches missed.">        var toPort = c.isToIsInput()</span>
-<span class="nc" id="L116">                ? toNode.getInputPort()</span>
-<span class="nc" id="L117">                : toNode.getOutputPort();</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        var toPort = c.isToIsInput()</span>
+<span class="nc" id="L125">                ? toNode.getInputPort()</span>
+<span class="nc" id="L126">                : toNode.getOutputPort();</span>
 
-<span class="nc" id="L119">        ConnectionView line = new ConnectionView(fromPort, toPort, c, project);</span>
-<span class="nc" id="L120">        connectionLayer.getChildren().add(line);</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L128">        ConnectionView line = new ConnectionView(fromPort, toPort, c, project);</span>
+<span class="nc" id="L129">        connectionLayer.getChildren().add(line);</span>
+<span class="nc" id="L130">    }</span>
 
     public void addNode(Node node) {
-<span class="nc" id="L124">        NodeView view = NodeRegister.createNodeView(node, project);</span>
-<span class="nc" id="L125">        nodeLayer.getChildren().add(view);</span>
+<span class="nc" id="L133">        NodeView view = NodeRegister.createNodeView(node, project);</span>
+<span class="nc" id="L134">        nodeLayer.getChildren().add(view);</span>
 
-<span class="nc" id="L127">        nodeViewMap.put(node.getId(), view);   // &lt;-- FIX</span>
+<span class="nc" id="L136">        nodeViewMap.put(node.getId(), view);   // &lt;-- FIX</span>
 
-<span class="nc" id="L129">        Platform.runLater(() -&gt; {</span>
-<span class="nc" id="L130">            view.setLayoutX(node.getxPos());</span>
-<span class="nc" id="L131">            view.setLayoutY(node.getyPos());</span>
-<span class="nc" id="L132">        });</span>
-<span class="nc" id="L133">    }</span>
+<span class="nc" id="L138">        Platform.runLater(() -&gt; {</span>
+<span class="nc" id="L139">            view.setLayoutX(node.getxPos());</span>
+<span class="nc" id="L140">            view.setLayoutY(node.getyPos());</span>
+<span class="nc" id="L141">        });</span>
+<span class="nc" id="L142">    }</span>
 
 
     public void addSimulatorObject(javafx.scene.Node obj) {
-<span class="nc" id="L137">        simulatorObjectLayer.getChildren().add(obj);</span>
-<span class="nc" id="L138">    }</span>
+<span class="nc" id="L146">        simulatorObjectLayer.getChildren().add(obj);</span>
+<span class="nc" id="L147">    }</span>
 
     public Map&lt;String, NodeView&gt; getNodeViewMap() {
-<span class="nc" id="L141">        return nodeViewMap;</span>
+<span class="nc" id="L150">        return nodeViewMap;</span>
     }
 
 }
